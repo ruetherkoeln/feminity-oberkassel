@@ -42,7 +42,10 @@ nav .cont{max-width:1400px;margin:0 auto;display:flex;justify-content:space-betw
 .hero-img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center 15%;filter:brightness(.7)}
 .hero-content{position:relative;z-index:2;text-align:center;color:var(--cream);padding:2rem;padding-bottom:12vh;width:100%}
 .hero-logo{max-width:600px;margin:0 auto 2rem}
-.hero-content p{font-size:1.5rem;margin-bottom:3rem;text-shadow:0 2px 10px rgba(0,0,0,.8)}
+.hero-content p{margin-bottom:3rem;text-shadow:0 2px 10px rgba(0,0,0,.8)}
+.hero-line1{display:block;font-size:2rem;font-weight:600;letter-spacing:.05em;margin-bottom:.5rem}
+.hero-line2{display:block;font-size:1.6rem;font-weight:400;margin-bottom:.5rem}
+.hero-line3{display:block;font-size:1rem;font-weight:300;opacity:.9}
 .btn{display:inline-block;padding:1.25rem 3rem;border-radius:50px;font-weight:600;text-decoration:none;cursor:pointer;border:2px solid}
 .btn-primary{background:var(--gold);color:var(--black);border-color:var(--gold)}
 .btn-primary:hover{background:#D4AF37;transform:scale(1.05)}
@@ -148,7 +151,11 @@ footer a:hover{color:var(--gold)}
   <img src="Jule_Cover.jpg" class="hero-img">
   <div class="hero-content">
     <img src="Logo.png" class="hero-logo">
-    <p>Exklusiver Luxus & Lifestyle – Ihr Friseur und Beautyhealth-Salon im Herzen von Oberkassel – im Me&All Hotel Oberkassel</p>
+    <p>
+      <span class="hero-line1">Health, Luxus &amp; Lifestyle</span>
+      <span class="hero-line2">Ihr Friseur und Beautyhealth-Salon im Herzen von Oberkassel</span>
+      <span class="hero-line3">im Me&amp;All Hotel Oberkassel (Tiefgarage/Aufzug bis in den Salon!)</span>
+    </p>
     <a href='#' class="btn btn-primary" onclick='wahanda.openOnlineBookingWidget("https://buchung.treatwell.de/ort/516512/menue/");return false;'>Jetzt Termin buchen</a>
   </div>
 </section>

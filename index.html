@@ -455,25 +455,28 @@ document.addEventListener('click',function(e){
 <!-- Floating Action Button: Ab April -->
 <a href="#leistungen" style="
   position:fixed;
-  bottom:2rem;
-  right:2rem;
+  bottom:30vh;
+  right:-10px;
   z-index:9999;
   background:var(--gold);
   color:var(--black);
   text-decoration:none;
-  padding:1rem 1.5rem;
-  border-radius:50px;
+  padding:1rem 1.4rem 1rem 1.2rem;
+  border-radius:4px 4px 4px 4px;
   font-family:'Montserrat',sans-serif;
-  font-weight:700;
-  font-size:.85rem;
+  font-weight:800;
+  font-size:.8rem;
   text-align:center;
-  box-shadow:0 6px 24px rgba(0,0,0,.25);
-  line-height:1.4;
-  max-width:160px;
+  box-shadow:3px 4px 12px rgba(0,0,0,.35), -1px -1px 0 rgba(0,0,0,.08);
+  line-height:1.5;
+  max-width:150px;
+  transform:rotate(6deg);
   transition:transform .2s,box-shadow .2s;
-" onmouseover="this.style.transform='scale(1.07)';this.style.boxShadow='0 10px 32px rgba(0,0,0,.35)'"
-   onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 6px 24px rgba(0,0,0,.25)'">
-  🌟 Ab April:<br>Liposan &amp; NAD Drips!
+  border-top:3px solid rgba(255,255,255,.4);
+  letter-spacing:.03em;
+" onmouseover="this.style.transform='rotate(3deg) scale(1.06)';this.style.boxShadow='5px 8px 20px rgba(0,0,0,.4)'"
+   onmouseout="this.style.transform='rotate(6deg)';this.style.boxShadow='3px 4px 12px rgba(0,0,0,.35)'">
+  🌟 Ab April:<br>Liposan &amp;<br>NAD Drips!
 </a>
 
 </body>

@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "bewerten.feminity-oberkassel.de"
+        }
+      ],
+      "destination": "https://www.google.com/maps/search/Feminity+by+Jule+D%C3%BCsseldorf",
+      "permanent": true
+    }
+  ]
+}

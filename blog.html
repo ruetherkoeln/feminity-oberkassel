@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beauty Blog | Feminity by Jule – Düsseldorf-Oberkassel</title>
+<meta name="description" content="Der Beauty Blog von Feminity by Jule: Tipps & Trends, Behandlungen erklärt, Team-Stories und aktuelle News aus unserem Beauty Space in Düsseldorf-Oberkassel.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://feminity-oberkassel.de/blog.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Beauty Blog | Feminity by Jule">
+<meta property="og:description" content="Beauty-Tipps, Behandlungen, Team-Stories und News aus dem Feminity by Jule Beauty Space in Düsseldorf-Oberkassel.">
+<meta property="og:url" content="https://feminity-oberkassel.de/blog.html">
+<meta property="og:image" content="https://feminity-oberkassel.de/Salon.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://buchung.treatwell.de/common/venue-menu/javascript/widget-button.js?v1"></script>
+<script>(function(){var l=document.createElement("link");l.href="https://buchung.treatwell.de/common/venue-menu/css/widget-button.css";l.rel="stylesheet";document.head.appendChild(l);})();</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--cream:#F9F7F4;--gold:#C9A74A;--black:#0A0A0A}
+html{scroll-behavior:smooth}
+body{font-family:'Montserrat',sans-serif;background:var(--cream);color:var(--black)}
+h1,h2,h3{font-family:'Cormorant Garamond',serif}
+img{max-width:100%;height:auto;display:block}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;background:rgba(10,10,10,.95);z-index:1000;padding:1rem 2rem}
+nav .cont{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+.logo-nav{height:40px}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--cream);text-decoration:none;font-size:.875rem}
+.nav-links a:hover{color:var(--gold)}
+.nav-links a.active{color:var(--gold)}
+.nav-cta{background:var(--gold);color:var(--black)!important;padding:.75rem 1.75rem;border-radius:50px;font-weight:600}
+
+/* HAMBURGER */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:25px;height:2px;background:var(--cream);transition:all .3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* MOBILE MENU */
+.mobile-menu{display:none;position:fixed;top:64px;left:0;width:100%;background:rgba(10,10,10,.98);z-index:999;padding:2rem;flex-direction:column;gap:1.5rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:var(--cream);text-decoration:none;font-size:1.1rem}
+.mobile-menu .mobile-cta{background:var(--gold);color:var(--black)!important;padding:1rem 2rem;border-radius:50px;font-weight:600;text-align:center;margin-top:.5rem}
+
+/* HERO */
+.blog-hero{background:var(--black);padding:8rem 2rem 4rem;text-align:center}
+.blog-hero h1{font-size:clamp(3rem,8vw,5rem);color:var(--cream);margin-bottom:1rem}
+.blog-hero p{color:rgba(249,247,244,.7);font-size:1rem;max-width:600px;margin:0 auto}
+.hero-gold-line{display:block;width:60px;height:2px;background:var(--gold);margin:1.5rem auto}
+
+/* FILTER */
+.filter-bar{background:#fff;padding:1.5rem 2rem;border-bottom:1px solid #EDE7DD;position:sticky;top:64px;z-index:99}
+.filter-bar .inner{max-width:1400px;margin:0 auto;display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+.filter-btn{padding:.5rem 1.5rem;border-radius:50px;border:2px solid #EDE7DD;background:transparent;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:600;cursor:pointer;transition:all .2s;color:var(--black)}
+.filter-btn:hover,.filter-btn.active{background:var(--gold);border-color:var(--gold);color:var(--black)}
+
+/* BLOG GRID */
+.blog-section{padding:5rem 2rem}
+.blog-grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:2.5rem}
+
+/* CARD */
+.blog-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.08);transition:transform .3s,box-shadow .3s;text-decoration:none;color:var(--black);display:flex;flex-direction:column}
+.blog-card:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(0,0,0,.15)}
+.blog-card-img{width:100%;height:240px;object-fit:cover;background:linear-gradient(135deg,#EDE7DD,#C9A74A20)}
+.blog-card-img-placeholder{width:100%;height:240px;display:flex;align-items:center;justify-content:center;font-size:3rem;background:linear-gradient(135deg,#F9F7F4,#EDE7DD)}
+.blog-card-body{padding:2rem;flex:1;display:flex;flex-direction:column}
+.blog-category{display:inline-block;background:rgba(201,167,74,.15);color:var(--gold);font-size:.7rem;font-weight:700;padding:.3rem .9rem;border-radius:20px;margin-bottom:1rem;letter-spacing:.1em;text-transform:uppercase}
+.blog-card h3{font-size:1.5rem;margin-bottom:.75rem;line-height:1.3}
+.blog-card p{font-size:.9rem;line-height:1.8;color:#555;flex:1}
+.blog-card-footer{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid #EDE7DD;font-size:.8rem;color:#888}
+.blog-read-more{color:var(--gold);font-weight:600;font-size:.85rem;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;margin-top:1rem}
+.blog-read-more::after{content:'→';transition:transform .2s}
+.blog-card:hover .blog-read-more::after{transform:translateX(4px)}
+
+/* NEWSLETTER */
+.newsletter{background:var(--black);padding:5rem 2rem;text-align:center}
+.newsletter h2{color:var(--cream);font-size:clamp(2rem,5vw,3rem);margin-bottom:1rem}
+.newsletter p{color:rgba(249,247,244,.7);margin-bottom:2rem}
+.newsletter-form{display:flex;gap:1rem;max-width:500px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+.newsletter-form input{flex:1;min-width:240px;padding:1rem 1.5rem;border-radius:50px;border:none;font-family:'Montserrat',sans-serif;font-size:.9rem}
+.newsletter-form button{background:var(--gold);color:var(--black);border:none;padding:1rem 2rem;border-radius:50px;font-family:'Montserrat',sans-serif;font-weight:700;cursor:pointer;font-size:.9rem}
+
+/* FOOTER */
+footer{background:var(--black);color:var(--cream);padding:5rem 2rem 2rem}
+footer a{color:var(--cream);text-decoration:none}
+footer a:hover{color:var(--gold)}
+.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:4rem;margin-bottom:4rem;max-width:1400px;margin-left:auto;margin-right:auto}
+.footer-logo{height:50px;margin-bottom:1.5rem;filter:brightness(0) invert(1)}
+.footer-bottom{text-align:center;padding-top:2.5rem;border-top:1px solid rgba(255,255,255,.1);font-size:.875rem;opacity:.7;max-width:1400px;margin:0 auto}
+
+@media(max-width:968px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .blog-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+  nav{padding:.75rem 1.25rem}
+  .logo-nav{height:32px}
+  .blog-grid{grid-template-columns:1fr}
+  .blog-section{padding:3rem 1rem}
+  footer{padding:3rem 1rem 1.5rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="cont">
+    <a href="index.html"><img src="Logo.png" class="logo-nav" alt="Feminity by Jule Logo"></a>
+    <ul class="nav-links">
+      <li><a href="index.html#home">Home</a></li>
+      <li><a href="index.html#salon">Salon</a></li>
+      <li><a href="index.html#team">Team</a></li>
+      <li><a href="index.html#leistungen">Leistungen</a></li>
+      <li><a href="index.html#kontakt">Kontakt</a></li>
+      <li><a href="blog.html" class="active">Blog</a></li>
+      <li><a href="impressum.html">Impressum</a></li>
+      <li><a href='#' class="nav-cta" onclick='wahanda.openOnlineBookingWidget("https://buchung.treatwell.de/ort/516512/menue/");return false;'>Termin</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#home" onclick="closeMenu()">Home</a>
+  <a href="index.html#salon" onclick="closeMenu()">Salon</a>
+  <a href="index.html#team" onclick="closeMenu()">Team</a>
+  <a href="index.html#leistungen" onclick="closeMenu()">Leistungen</a>
+  <a href="index.html#kontakt" onclick="closeMenu()">Kontakt</a>
+  <a href="blog.html" onclick="closeMenu()">Blog</a>
+  <a href="impressum.html" onclick="closeMenu()">Impressum</a>
+  <a href='#' class="mobile-cta" onclick='closeMenu();wahanda.openOnlineBookingWidget("https://buchung.treatwell.de/ort/516512/menue/");return false;'>Jetzt Termin buchen</a>
+</div>
+
+<!-- HERO -->
+<section class="blog-hero">
+  <h1>Beauty Blog</h1>
+  <span class="hero-gold-line"></span>
+  <p>Tipps & Trends, Behandlungen erklärt, Team-Stories und News direkt aus unserem Beauty Space in Düsseldorf-Oberkassel.</p>
+</section>
+
+<!-- FILTER -->
+<div class="filter-bar">
+  <div class="inner">
+    <button class="filter-btn active" onclick="filterPosts('all', this)">Alle</button>
+    <button class="filter-btn" onclick="filterPosts('news', this)">News & Angebote</button>
+    <button class="filter-btn" onclick="filterPosts('behandlungen', this)">Behandlungen</button>
+    <button class="filter-btn" onclick="filterPosts('tipps', this)">Beauty-Tipps</button>
+    <button class="filter-btn" onclick="filterPosts('team', this)">Team-Stories</button>
+  </div>
+</div>
+
+<!-- BLOG POSTS -->
+<section class="blog-section">
+  <div class="blog-grid" id="blogGrid">
+
+    <a class="blog-card" href="blog/liposan-nad-drips.html" data-category="news behandlungen">
+      <div class="blog-card-img-placeholder">✨</div>
+      <div class="blog-card-body">
+        <span class="blog-category">News & Behandlungen</span>
+        <h3>Ab April: Liposan & NAD+ Drips bei Feminity by Jule</h3>
+        <p>Wir erweitern unser Angebot um zwei exklusive Beauty Drip-Behandlungen. Was steckt hinter Liposan und NAD+ – und warum sind diese Infusionen der neue Beauty-Trend?</p>
+        <span class="blog-read-more">Weiterlesen</span>
+        <div class="blog-card-footer">
+          <span>April 2026</span>
+          <span>5 Min Lesezeit</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="blog-card" href="blog/was-ist-green-peel.html" data-category="behandlungen">
+      <div class="blog-card-img-placeholder">🌿</div>
+      <div class="blog-card-body">
+        <span class="blog-category">Behandlungen erklärt</span>
+        <h3>Green Peel® – Die Kräuterschälkur für strahlende Haut</h3>
+        <p>Was steckt hinter der legendären Green Peel® Behandlung? Wir erklären, wie die intensive Kräuterkur wirkt, für wen sie geeignet ist und was du danach erwartest.</p>
+        <span class="blog-read-more">Weiterlesen</span>
+        <div class="blog-card-footer">
+          <span>März 2026</span>
+          <span>4 Min Lesezeit</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="blog-card" href="blog/balayage-guide.html" data-category="tipps behandlungen">
+      <div class="blog-card-img-placeholder">💛</div>
+      <div class="blog-card-body">
+        <span class="blog-category">Beauty-Tipps</span>
+        <h3>Balayage Guide: Alles über den natürlichsten Look des Jahres</h3>
+        <p>Balayage ist mehr als ein Trend – es ist eine Technik. Nicky Rouge erklärt, warum freihändig aufgetragene Farbe so viel natürlicher wirkt und was dich bei uns erwartet.</p>
+        <span class="blog-read-more">Weiterlesen</span>
+        <div class="blog-card-footer">
+          <span>März 2026</span>
+          <span>6 Min Lesezeit</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="blog-card" href="blog/jule-story.html" data-category="team">
+      <div class="blog-card-img-placeholder">🌟</div>
+      <div class="blog-card-body">
+        <span class="blog-category">Team-Story</span>
+        <h3>Jules Geschichte: Von der Leidenschaft zum Beauty Space</h3>
+        <p>Wie wird man Master Beautician, PMU-Expertin und Inhaberin eines eigenen Beauty Spaces? Jule erzählt ihren Weg – ehrlich, persönlich und voller Inspiration.</p>
+        <span class="blog-read-more">Weiterlesen</span>
+        <div class="blog-card-footer">
+          <span>Februar 2026</span>
+          <span>7 Min Lesezeit</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="blog-card" href="blog/pmu-fakten.html" data-category="behandlungen tipps">
+      <div class="blog-card-img-placeholder">💄</div>
+      <div class="blog-card-body">
+        <span class="blog-category">Behandlungen erklärt</span>
+        <h3>Permanent Make-up: 5 Fakten, die du kennen solltest</h3>
+        <p>PMU ist nicht gleich PMU. Wir räumen mit den häufigsten Mythen auf und erklären, warum zertifizierte Expertise bei dieser Behandlung entscheidend ist.</p>
+        <span class="blog-read-more">Weiterlesen</span>
+        <div class="blog-card-footer">
+          <span>Februar 2026</span>
+          <span>5 Min Lesezeit</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="blog-card" href="blog/nicky-curls.html" data-category="team tipps">
+      <div class="blog-card-img-placeholder">🌀</div>
+      <div class="blog-card-body">
+        <span class="blog-category">Team-Story & Tipps</span>
+        <h3>Nicky über Locken: „Jede Locke hat ihre eigene Persönlichkeit"</h3>
+        <p>Nicky Rouge ist Spezialistin für Locken und natürliche Haarstrukturen. Im Interview verrät sie ihre Philosophie und warum Curl Couture so viel mehr ist als ein Schnitt.</p>
+        <span class="blog-read-more">Weiterlesen</span>
+        <div class="blog-card-footer">
+          <span>Januar 2026</span>
+          <span>5 Min Lesezeit</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+  <h2>Bleib auf dem Laufenden</h2>
+  <p>Neue Beiträge, exklusive Angebote und Beauty-News direkt in dein Postfach.</p>
+  <div class="newsletter-form">
+    <input type="email" placeholder="Deine E-Mail-Adresse">
+    <button type="button">Anmelden</button>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <img src="Logo.png" class="footer-logo" alt="Feminity by Jule Logo">
+      <p style="margin-bottom:1.5rem">Beauty Space für Haare, Haut und Wohlbefinden in Düsseldorf-Oberkassel.</p>
+    </div>
+    <div>
+      <h4 style="color:var(--gold);margin-bottom:1rem">STANDORT</h4>
+      <p>Hansaallee 1a<br>40549 Düsseldorf<br><br>Mo–Fr: 10–19 Uhr<br>Sa: 10–18 Uhr</p>
+    </div>
+    <div>
+      <h4 style="color:var(--gold);margin-bottom:1rem">KONTAKT</h4>
+      <p><a href="tel:+4917687438736">+49 176 87438736</a><br><a href="mailto:jule@feminity-jule.de">jule@feminity-jule.de</a></p>
+    </div>
+    <div>
+      <h4 style="color:var(--gold);margin-bottom:1rem">LINKS</h4>
+      <p><a href="index.html">Home</a><br><a href="index.html#team">Team</a><br><a href="index.html#leistungen">Leistungen</a><br><a href="blog.html">Blog</a><br><a href="impressum.html">Impressum</a></p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Feminity by Jule • Inhaberin: Julrine Domingos • <a href="impressum.html">Impressum & Datenschutz</a></p>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(){
+  document.getElementById('hamburger').classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+function closeMenu(){
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+document.addEventListener('click',function(e){
+  var nav=document.querySelector('nav');
+  var menu=document.getElementById('mobileMenu');
+  if(!nav.contains(e.target)&&!menu.contains(e.target)){closeMenu();}
+});
+
+function filterPosts(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.blog-card').forEach(card => {
+    if (cat === 'all' || card.dataset.category.includes(cat)) {
+      card.style.display = 'flex';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+</script>
+
+</body>
+</html>

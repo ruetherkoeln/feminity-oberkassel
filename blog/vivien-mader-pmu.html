@@ -76,6 +76,10 @@ nav .cont{max-width:1400px;margin:0 auto;display:flex;justify-content:space-betw
 
 .hero-image-wrap{max-width:700px;margin:0 auto 0;padding:0 2rem}
 .hero-image-wrap img{width:100%;border-radius:16px 16px 0 0;display:block}
+.hero-image-wrap img[data-error]{display:none}
+.hero-img-placeholder{display:none;background:linear-gradient(135deg,#1a1a1a,#2a2a2a);border-radius:16px 16px 0 0;height:320px;align-items:center;justify-content:center;flex-direction:column;gap:1rem}
+.hero-img-placeholder.visible{display:flex}
+.hero-img-placeholder p{color:rgba(249,247,244,.4);font-size:.85rem}
 
 .post-body{max-width:780px;margin:0 auto;padding:5rem 2rem}
 .post-body p{font-size:1.05rem;line-height:1.9;color:#333;margin-bottom:1.5rem}
@@ -158,7 +162,12 @@ footer a:hover{color:var(--gold)}
     <span>Von Jule</span>
   </div>
   <div class="hero-image-wrap">
-    <img src="images/vivien-mader-pmu.jpg" alt="Vivien Mader – PMU exklusiv in Düsseldorf, 17. & 18. April bei Feminity by Jule">
+    <img src="images/vivien-mader-pmu.jpg" alt="Vivien Mader – PMU exklusiv in Düsseldorf, 17. & 18. April bei Feminity by Jule"
+         onerror="this.setAttribute('data-error','1');this.nextElementSibling.classList.add('visible')">
+    <div class="hero-img-placeholder">
+      <span style="font-size:3rem">💄</span>
+      <p>Vivien Mader · 17. &amp; 18. April · Düsseldorf</p>
+    </div>
   </div>
 </section>
 

@@ -83,6 +83,10 @@ nav .cont{max-width:1400px;margin:0 auto;display:flex;justify-content:space-betw
 .post-body ul li{font-size:1.05rem;line-height:1.9;color:#333;margin-bottom:.5rem}
 .highlight-box{background:linear-gradient(135deg,#F9F7F4,#EDE7DD);border-left:4px solid var(--gold);padding:2rem;border-radius:0 12px 12px 0;margin:2.5rem 0}
 .highlight-box p{margin:0;font-style:italic;font-size:1.1rem;color:#444}
+.notice-box{background:#fff8ec;border:2px solid var(--gold);border-radius:12px;padding:2rem 2.5rem;margin:2.5rem 0;display:flex;gap:1.25rem;align-items:flex-start}
+.notice-box .notice-icon{font-size:1.75rem;flex-shrink:0;margin-top:.1rem}
+.notice-box .notice-content h4{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.95rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);margin-bottom:.6rem}
+.notice-box .notice-content p{margin:0;font-size:.95rem;line-height:1.75;color:#333}
 .cta-box{background:var(--black);padding:3rem;border-radius:12px;text-align:center;margin:4rem 0}
 .cta-box h3{color:var(--cream);font-size:1.8rem;margin-bottom:1rem}
 .cta-box p{color:rgba(249,247,244,.7);margin-bottom:2rem}
@@ -158,6 +162,14 @@ footer a:hover{color:var(--gold)}
 
   <p>Schönheit kommt von innen, und das meinen wir bei Feminity by Jule ganz wörtlich. Ab April erweitern wir unser Beauty Drip-Angebot um eine neue Infusion, die in der Beauty-Welt gerade für Aufsehen sorgt: <strong>NAD+</strong>.</p>
 
+  <div class="notice-box">
+    <div class="notice-icon">⚗️</div>
+    <div class="notice-content">
+      <h4>Wichtiger Hinweis zur Buchung</h4>
+      <p>Unsere NAD+ Infusionen werden ausschließlich in klinischer Qualität aus Deutschland bezogen und für jeden Termin individuell hergestellt. Bitte beachte: Termine für NAD+ Infusionen müssen <strong>mindestens 4 Tage im Voraus</strong> gebucht werden.</p>
+    </div>
+  </div>
+
   <div class="highlight-box">
     <p>„Wir wollen unseren Gästen nicht nur äußerliche Schönheit ermöglichen, sondern echtes Wohlbefinden von innen heraus. NAD+ ist dafür die perfekte Ergänzung." (Jule)</p>
   </div>
@@ -188,7 +200,7 @@ footer a:hover{color:var(--gold)}
 
   <div class="cta-box">
     <h3>Neugierig geworden?</h3>
-    <p>Buche jetzt ein Beratungsgespräch oder direkt deine erste Drip-Behandlung. Wir freuen uns auf dich!</p>
+    <p>Buche jetzt ein Beratungsgespräch oder direkt deine erste Drip-Behandlung. Bitte beachte: NAD+ Termine bitte <strong>mindestens 4 Tage im Voraus</strong> buchen. Wir freuen uns auf dich!</p>
     <a href='#' class="btn btn-primary" onclick='wahanda.openOnlineBookingWidget("https://buchung.treatwell.de/ort/516512/menue/");return false;'>Jetzt Termin buchen</a>
   </div>
 </article>

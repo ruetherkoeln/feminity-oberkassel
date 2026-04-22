@@ -23,18 +23,41 @@
 <meta name="twitter:description" content="Dein Beauty Space für Haare, Haut und Wohlbefinden in Düsseldorf-Oberkassel. Haarmode, PMU, Gesichtsbehandlungen &amp; Beauty Drips.">
 <meta name="twitter:image" content="https://feminity-oberkassel.de/Salon.jpg">
 
-<!-- LocalBusiness Schema -->
+<!-- WebSite Schema (Brand-SERP Signal) -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "BeautySalon",
+  "@type": "WebSite",
+  "@id": "https://feminity-oberkassel.de/#website",
+  "url": "https://feminity-oberkassel.de/",
   "name": "Feminity by Jule",
-  "description": "Feminity by Jule ist dein Beauty Space für Haare, Haut und Wohlbefinden in Düsseldorf-Oberkassel. Wir bieten Haarmode, Gesichts- und Hautbehandlungen, Permanent Make-up sowie Beauty Drips an.",
-  "url": "https://feminity-oberkassel.de",
+  "alternateName": ["Feminity Oberkassel", "Feminity by Jule Düsseldorf"],
+  "inLanguage": "de-DE",
+  "publisher": {"@id": "https://feminity-oberkassel.de/#organization"}
+}
+</script>
+
+<!-- Organization / LocalBusiness Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": ["BeautySalon", "HairSalon", "LocalBusiness"],
+  "@id": "https://feminity-oberkassel.de/#organization",
+  "name": "Feminity by Jule",
+  "alternateName": "Feminity Oberkassel",
+  "legalName": "Groom&Glow UG (haftungsbeschränkt)",
+  "description": "Feminity by Jule ist ein exklusiver Beauty Space für Haare, Haut und Wohlbefinden in Düsseldorf-Oberkassel. Haarmode, Gesichts- und Hautbehandlungen, Permanent Make-up (PMU) sowie Beauty Drips – im Me&All Hotel, Hansaallee 1a.",
+  "url": "https://feminity-oberkassel.de/",
   "telephone": "+4917687438736",
   "email": "40549@feminity-oberkassel.de",
-  "image": "https://feminity-oberkassel.de/Salon.jpg",
+  "image": [
+    "https://feminity-oberkassel.de/Salon.jpg",
+    "https://feminity-oberkassel.de/Jule_Cover.jpg"
+  ],
+  "logo": "https://feminity-oberkassel.de/Logo.png",
   "priceRange": "€€€",
+  "currenciesAccepted": "EUR",
+  "paymentAccepted": "Cash, Credit Card, Debit Card",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Hansaallee 1a",
@@ -48,6 +71,10 @@
     "latitude": 51.2238,
     "longitude": 6.7524
   },
+  "areaServed": [
+    {"@type": "City", "name": "Düsseldorf"},
+    {"@type": "AdministrativeArea", "name": "Nordrhein-Westfalen"}
+  ],
   "openingHoursSpecification": [
     {
       "@type": "OpeningHoursSpecification",
@@ -62,7 +89,65 @@
       "closes": "18:00"
     }
   ],
-  "hasMap": "https://maps.google.com/?q=Hansaallee+1a,+40549+Düsseldorf"
+  "hasMap": "https://maps.google.com/?q=Hansaallee+1a,+40549+Düsseldorf",
+  "contactPoint": [{
+    "@type": "ContactPoint",
+    "telephone": "+4917687438736",
+    "email": "40549@feminity-oberkassel.de",
+    "contactType": "customer service",
+    "availableLanguage": ["de", "en"],
+    "areaServed": "DE"
+  }],
+  "sameAs": [
+    "https://www.instagram.com/feminityoberkassel/",
+    "https://buchung.treatwell.de/ort/516512/menue/"
+  ],
+  "employee": [
+    {"@id": "https://feminity-oberkassel.de/#person-jule"},
+    {"@id": "https://feminity-oberkassel.de/#person-nicky"}
+  ],
+  "makesOffer": [
+    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Balayage", "serviceType": "Haarfarbe"}, "price": "185", "priceCurrency": "EUR"},
+    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Hollywood Cut", "serviceType": "Haarschnitt"}, "price": "120", "priceCurrency": "EUR"},
+    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Curl Couture", "serviceType": "Locken-Styling"}, "price": "89", "priceCurrency": "EUR"},
+    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Green Peel®", "serviceType": "Gesichtsbehandlung"}, "price": "215", "priceCurrency": "EUR"},
+    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Permanent Make-up (PMU)", "serviceType": "Permanent Make-up"}, "priceSpecification": {"@type": "PriceSpecification", "price": "Auf Anfrage"}},
+    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Beauty Drips", "serviceType": "Infusionsbehandlung"}, "price": "150", "priceCurrency": "EUR"},
+    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "NAD+ Drip", "serviceType": "Infusionsbehandlung"}}
+  ]
+  /* TODO: AggregateRating aktivieren, sobald Google-Business-Profil aktiv ist und echte Bewertungen vorliegen:
+  ,"aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": "0"
+  }
+  */
+}
+</script>
+
+<!-- Person Schemas (Team) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://feminity-oberkassel.de/#person-jule",
+  "name": "Jule",
+  "jobTitle": "Master Beautician, MUA",
+  "worksFor": {"@id": "https://feminity-oberkassel.de/#organization"},
+  "image": "https://feminity-oberkassel.de/Jule.jpg",
+  "knowsAbout": ["Beauty", "Permanent Make-up", "Gesichtsbehandlungen", "Make-up Artistry", "Beauty Drips"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://feminity-oberkassel.de/#person-nicky",
+  "name": "Nicky Rouge",
+  "jobTitle": "Master Hair Stylist",
+  "worksFor": {"@id": "https://feminity-oberkassel.de/#organization"},
+  "image": "https://feminity-oberkassel.de/Nicky.jpg",
+  "knowsAbout": ["Balayage", "Color Expertise", "English Cut", "Haarschnitt", "Locken-Styling", "Hochsteckfrisuren"]
 }
 </script>
 
@@ -150,6 +235,22 @@
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Bei Feminity by Jule in Düsseldorf-Oberkassel erstellen wir individuelle Hochsteckfrisuren für besondere Anlässe wie Hochzeiten, Galas oder Firmenfeiern. Unsere Haarstylistin Nicky Rouge berät Sie gerne. Termin buchbar über Treatwell oder direkt im Salon an der Hansaallee 1a."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Wo finde ich Rezensionen zu Feminity by Jule?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Bewertungen zu Feminity by Jule sind über das Treatwell-Profil einsehbar, wo Gäste nach einer Buchung Feedback hinterlassen. Wir arbeiten aktuell daran, auch das Google-Business-Profil offiziell freizuschalten. Nach Ihrem Besuch freuen wir uns über eine persönliche Bewertung – direkt im Salon oder online."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Wer ist Ansprechpartnerin bei Feminity by Jule?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ansprechpartnerin und im Impressum verantwortlich für Feminity by Jule (Groom&Glow UG, haftungsbeschränkt) ist Julrine Domingos. Kontakt: 40549@feminity-oberkassel.de."
       }
     }
   ]
@@ -427,6 +528,57 @@ footer a:hover{color:var(--gold)}
         <h3>Was ist Permanent Make-up (PMU)?</h3>
         <p>Permanent Make-up (PMU) ist eine dauerhafte Schminktechnik, bei der Pigmente präzise in die Haut eingebracht werden. Bei Feminity by Jule werden PMU-Behandlungen für Augen und Lippen von zertifizierten Expertinnen in Düsseldorf-Oberkassel durchgeführt.</p>
       </div>
+      <div class="faq-item">
+        <h3>Wo finde ich Rezensionen zu Feminity by Jule?</h3>
+        <p>Bewertungen zu Feminity by Jule sind über das Treatwell-Profil einsehbar, wo Gäste nach einer Buchung Feedback hinterlassen. Wir arbeiten aktuell daran, auch das Google-Business-Profil offiziell freizuschalten. Nach Ihrem Besuch freuen wir uns über eine persönliche Bewertung – direkt im Salon oder online.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Wer ist Ansprechpartnerin bei Feminity by Jule?</h3>
+        <p>Ansprechpartnerin und im Impressum verantwortlich für Feminity by Jule (Groom&amp;Glow UG, haftungsbeschränkt) ist Julrine Domingos. Kontakt: <a href="mailto:40549@feminity-oberkassel.de" style="color:var(--gold)">40549@feminity-oberkassel.de</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Blog Preview (starkes internes Linking zu noch nicht indexierten Blogposts) -->
+<section class="section" id="magazin" style="background:#fff">
+  <div class="container">
+    <h2>Aus dem Magazin</h2>
+    <p class="lead">Stories, Techniken und Behandlungs-News aus dem Salon</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-top:3rem">
+      <a href="blog/nicky-geometric-bob.html" style="display:block;background:#F9F7F4;border-radius:12px;padding:2rem;text-decoration:none;color:var(--black);box-shadow:0 4px 15px rgba(0,0,0,.06);transition:transform .2s">
+        <span style="display:inline-block;background:rgba(201,167,74,.15);color:var(--gold);font-size:.7rem;font-weight:700;padding:.3rem .9rem;border-radius:20px;margin-bottom:1rem;letter-spacing:.1em;text-transform:uppercase">Hair</span>
+        <h3 style="font-size:1.3rem;margin-bottom:.75rem;line-height:1.3">Geometric Bob: Der mathematische Haarschnitt</h3>
+        <p style="font-size:.9rem;color:#555;line-height:1.7">Nicky Rouge erklärt ihre Präzisionstechnik für den Bob-Haarschnitt.</p>
+      </a>
+      <a href="blog/liposan-nad-drips.html" style="display:block;background:#F9F7F4;border-radius:12px;padding:2rem;text-decoration:none;color:var(--black);box-shadow:0 4px 15px rgba(0,0,0,.06);transition:transform .2s">
+        <span style="display:inline-block;background:rgba(201,167,74,.15);color:var(--gold);font-size:.7rem;font-weight:700;padding:.3rem .9rem;border-radius:20px;margin-bottom:1rem;letter-spacing:.1em;text-transform:uppercase">Beauty Drips</span>
+        <h3 style="font-size:1.3rem;margin-bottom:.75rem;line-height:1.3">NAD+ Drip ab April: Energie &amp; Anti-Aging</h3>
+        <p style="font-size:.9rem;color:#555;line-height:1.7">Unser neues Drip-Angebot – hochkonzentrierte Infusion für Zellschutz und mehr Energie.</p>
+      </a>
+      <a href="blog/was-ist-liposana3.html" style="display:block;background:#F9F7F4;border-radius:12px;padding:2rem;text-decoration:none;color:var(--black);box-shadow:0 4px 15px rgba(0,0,0,.06);transition:transform .2s">
+        <span style="display:inline-block;background:rgba(201,167,74,.15);color:var(--gold);font-size:.7rem;font-weight:700;padding:.3rem .9rem;border-radius:20px;margin-bottom:1rem;letter-spacing:.1em;text-transform:uppercase">Body</span>
+        <h3 style="font-size:1.3rem;margin-bottom:.75rem;line-height:1.3">LIPOSANA3: Frequenztechnologie erklärt</h3>
+        <p style="font-size:.9rem;color:#555;line-height:1.7">Wie Frequenztherapie bei nicht-invasiver Körperformung funktioniert.</p>
+      </a>
+      <a href="blog/balayage-guide.html" style="display:block;background:#F9F7F4;border-radius:12px;padding:2rem;text-decoration:none;color:var(--black);box-shadow:0 4px 15px rgba(0,0,0,.06);transition:transform .2s">
+        <span style="display:inline-block;background:rgba(201,167,74,.15);color:var(--gold);font-size:.7rem;font-weight:700;padding:.3rem .9rem;border-radius:20px;margin-bottom:1rem;letter-spacing:.1em;text-transform:uppercase">Hair</span>
+        <h3 style="font-size:1.3rem;margin-bottom:.75rem;line-height:1.3">Balayage Guide: Der natürlichste Look</h3>
+        <p style="font-size:.9rem;color:#555;line-height:1.7">Warum freihändig aufgetragene Farbe so natürlich wirkt.</p>
+      </a>
+      <a href="blog/was-ist-green-peel.html" style="display:block;background:#F9F7F4;border-radius:12px;padding:2rem;text-decoration:none;color:var(--black);box-shadow:0 4px 15px rgba(0,0,0,.06);transition:transform .2s">
+        <span style="display:inline-block;background:rgba(201,167,74,.15);color:var(--gold);font-size:.7rem;font-weight:700;padding:.3rem .9rem;border-radius:20px;margin-bottom:1rem;letter-spacing:.1em;text-transform:uppercase">Skin</span>
+        <h3 style="font-size:1.3rem;margin-bottom:.75rem;line-height:1.3">Green Peel®: Die Kräuterschälkur</h3>
+        <p style="font-size:.9rem;color:#555;line-height:1.7">Natürliche Hauterneuerung durch pflanzliche Wirkstoffe.</p>
+      </a>
+      <a href="blog/vivien-mader-pmu.html" style="display:block;background:#F9F7F4;border-radius:12px;padding:2rem;text-decoration:none;color:var(--black);box-shadow:0 4px 15px rgba(0,0,0,.06);transition:transform .2s">
+        <span style="display:inline-block;background:rgba(201,167,74,.15);color:var(--gold);font-size:.7rem;font-weight:700;padding:.3rem .9rem;border-radius:20px;margin-bottom:1rem;letter-spacing:.1em;text-transform:uppercase">PMU</span>
+        <h3 style="font-size:1.3rem;margin-bottom:.75rem;line-height:1.3">Vivien Mader PMU – exklusiv zu Gast</h3>
+        <p style="font-size:.9rem;color:#555;line-height:1.7">Powder Brows und Lip Blush – limitierte Termine bei Feminity.</p>
+      </a>
+    </div>
+    <div style="text-align:center;margin-top:3rem">
+      <a href="blog.html" class="btn btn-primary">Alle Artikel ansehen</a>
     </div>
   </div>
 </section>
@@ -473,7 +625,7 @@ footer a:hover{color:var(--gold)}
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2026 Groom&amp;Glow UG (haftungsbeschränkt) • Ansprechpartnerin: Julrine Domingos • <a href="impressum.html">Impressum & Datenschutz</a></p>
+    <p>© 2026 <span itemprop="legalName">Groom&amp;Glow UG (haftungsbeschränkt)</span> • Ansprechpartnerin: <span itemprop="contact">Julrine Domingos</span> • <a href="impressum.html">Impressum &amp; Datenschutz</a></p>
   </div>
 </footer>
 

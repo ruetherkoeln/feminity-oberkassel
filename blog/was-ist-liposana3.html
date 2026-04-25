@@ -132,6 +132,10 @@ footer a:hover{color:var(--gold)}
   ]
 }
 </script>
+<!-- Klaro Consent Manager -->
+<link rel="stylesheet" href="../klaro/klaro.min.css">
+<script defer src="../klaro/klaro-no-css.js"></script>
+<script defer src="../klaro-config.js"></script>
 </head>
 <body>
 
@@ -146,7 +150,7 @@ footer a:hover{color:var(--gold)}
       <li><a href="../index.html#kontakt">Kontakt</a></li>
       <li><a href="../blog.html" class="active">Blog</a></li>
       <li><a href="../impressum.html">Impressum</a></li>
-      <li><a href='#' class="nav-cta" onclick='wahanda.openOnlineBookingWidget("https://buchung.treatwell.de/ort/516512/menue/");return false;'>Termin</a></li>
+      <li><a href='#' class="nav-cta" onclick="return handleBookingClick();">Termin</a></li>
     </ul>
     <div class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
   </div>
@@ -157,7 +161,7 @@ footer a:hover{color:var(--gold)}
   <a href="../index.html#leistungen" onclick="closeMenu()">Leistungen</a>
   <a href="../blog.html" onclick="closeMenu()">Blog</a>
   <a href="../index.html#kontakt" onclick="closeMenu()">Kontakt</a>
-  <a href='#' class="mobile-cta" onclick='closeMenu();wahanda.openOnlineBookingWidget("https://buchung.treatwell.de/ort/516512/menue/");return false;'>Jetzt Termin buchen</a>
+  <a href='#' class="mobile-cta" onclick="return handleBookingClick(closeMenu);">Jetzt Termin buchen</a>
 </div>
 
 <section class="post-hero">
@@ -233,7 +237,7 @@ footer a:hover{color:var(--gold)}
   <div class="cta-box">
     <h3>Neugierig geworden?</h3>
     <p>Vereinbare jetzt deine Schnupper-Sitzung und erlebe LIPOSANA3 selbst. Wir freuen uns auf dich in Düsseldorf-Oberkassel!</p>
-    <a href='#' class="btn btn-primary" onclick='wahanda.openOnlineBookingWidget("https://buchung.treatwell.de/ort/516512/menue/");return false;'>Jetzt Termin buchen</a>
+    <a href='#' class="btn btn-primary" onclick="return handleBookingClick();">Jetzt Termin buchen</a>
   </div>
 </article>
 

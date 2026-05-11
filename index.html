@@ -354,7 +354,9 @@ footer a:hover{color:var(--gold)}
 /* ── TABLET (max 968px) ── */
 @media (max-width:968px){
   .nav-links{display:none}
-  .hamburger{display:flex}
+  .hamburger{display:flex;position:absolute;right:1.25rem;top:50%;transform:translateY(-50%)}
+  nav .cont{justify-content:center;position:relative}
+  .logo-nav{filter:brightness(1.3)}
   .image-grid,.services-grid{grid-template-columns:repeat(2,1fr)}
   .team-grid{grid-template-columns:repeat(2,1fr);gap:2rem}
   .hero-logo{max-width:400px}

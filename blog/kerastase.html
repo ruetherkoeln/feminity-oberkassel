@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kérastase ist da: Premium-Haarpflege jetzt bei Feminity | Feminity by Jule</title>
+    <meta name="description" content="Die Kérastase Produktlinie ist eingetroffen – ab sofort bei Feminity in Düsseldorf-Oberkassel erhältlich. Premium-Haarpflege zur Anwendung im Salon und für zuhause.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://buchung.treatwell.de/common/venue-menu/css/widget-button.css" rel="stylesheet">
+
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{--cream:#F9F7F4;--gold:#C9A74A;--black:#0A0A0A}
+        html{scroll-behavior:smooth}
+        body{font-family:'Montserrat',sans-serif;background:var(--cream);color:var(--black)}
+        h1,h2,h3{font-family:'Cormorant Garamond',serif}
+        img{max-width:100%;height:auto;display:block}
+
+        nav{position:fixed;top:0;width:100%;background:rgba(10,10,10,.95);z-index:1000;padding:1rem 2rem}
+        nav .cont{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+        .logo-nav{height:40px}
+        .nav-links{display:flex;gap:2rem;list-style:none}
+        .nav-links a{color:var(--cream);text-decoration:none;font-size:.875rem}
+        .nav-links a:hover,.nav-links a.active{color:var(--gold)}
+        .nav-cta{background:var(--gold);color:var(--black)!important;padding:.75rem 1.75rem;border-radius:50px;font-weight:600}
+
+        .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+        .hamburger span{display:block;width:25px;height:2px;background:var(--cream);transition:all .3s}
+        .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+        .hamburger.open span:nth-child(2){opacity:0}
+        .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+        .mobile-menu{display:none;position:fixed;top:64px;left:0;width:100%;background:rgba(10,10,10,.98);z-index:999;padding:2rem;flex-direction:column;gap:1.5rem}
+        .mobile-menu.open{display:flex}
+        .mobile-menu a{color:var(--cream);text-decoration:none;font-size:1.1rem}
+        .mobile-menu .mobile-cta{background:var(--gold);color:var(--black)!important;padding:1rem 2rem;border-radius:50px;font-weight:600;text-align:center;margin-top:.5rem}
+
+        .post-hero{background:var(--black);padding:8rem 2rem 5rem;text-align:center}
+        .post-category{display:inline-block;background:rgba(201,167,74,.2);color:var(--gold);font-size:.75rem;font-weight:700;padding:.4rem 1.2rem;border-radius:20px;margin-bottom:1.5rem;letter-spacing:.1em;text-transform:uppercase}
+        .post-hero h1{font-size:clamp(2.5rem,6vw,4rem);color:var(--cream);max-width:800px;margin:0 auto 1.5rem;line-height:1.2}
+        .post-meta{color:rgba(249,247,244,.5);font-size:.85rem;display:flex;gap:2rem;justify-content:center;flex-wrap:wrap}
+        .hero-emoji{font-size:4rem;margin-bottom:1.5rem;display:block}
+
+        .post-hero-img{width:100%;height:480px;object-fit:cover;object-position:center top}
+
+        .post-body{max-width:780px;margin:0 auto;padding:5rem 2rem}
+        .post-body p{font-size:1.05rem;line-height:1.9;color:#333;margin-bottom:1.5rem}
+        .post-body h2{font-size:2rem;margin:3rem 0 1.5rem;color:var(--black)}
+        .post-body h3{font-size:1.4rem;font-family:'Montserrat',sans-serif;font-weight:600;margin:2rem 0 1rem;color:var(--black)}
+        .post-body ul{margin:0 0 1.5rem 1.5rem}
+        .post-body ul li{font-size:1.05rem;line-height:1.9;color:#333;margin-bottom:.5rem}
+
+        .highlight-box{background:linear-gradient(135deg,#F9F7F4,#EDE7DD);border-left:4px solid var(--gold);padding:2rem;border-radius:0 12px 12px 0;margin:2.5rem 0}
+        .highlight-box p{margin:0;font-style:italic;font-size:1.1rem;color:#444}
+
+        .cta-box{background:var(--black);padding:3rem;border-radius:12px;text-align:center;margin:4rem 0}
+        .cta-box h3{color:var(--cream);font-size:1.8rem;margin-bottom:1rem}
+        .cta-box p{color:rgba(249,247,244,.7);margin-bottom:2rem}
+
+        .btn{display:inline-block;padding:1.1rem 2.5rem;border-radius:50px;font-weight:600;text-decoration:none;cursor:pointer;border:2px solid}
+        .btn-primary{background:var(--gold);color:var(--black);border-color:var(--gold)}
+        .btn-primary:hover{background:#D4AF37}
+
+        .back-link{display:inline-flex;align-items:center;gap:.5rem;color:var(--gold);text-decoration:none;font-size:.9rem;font-weight:600;margin-bottom:3rem}
+        .back-link:hover{opacity:.8}
+
+        .related{background:#fff;padding:5rem 2rem}
+        .related .inner{max-width:1400px;margin:0 auto}
+        .related h2{font-size:2.5rem;margin-bottom:3rem;text-align:center}
+        .related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem}
+        .related-card{background:var(--cream);border-radius:12px;padding:2rem;text-decoration:none;color:var(--black);transition:transform .2s}
+        .related-card:hover{transform:translateY(-4px)}
+        .related-card .cat{color:var(--gold);font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.75rem}
+        .related-card h3{font-size:1.3rem;line-height:1.4}
+
+        footer{background:var(--black);color:var(--cream);padding:5rem 2rem 2rem}
+        footer a{color:var(--cream);text-decoration:none}
+        footer a:hover{color:var(--gold)}
+        .footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:4rem;margin-bottom:4rem;max-width:1400px;margin-left:auto;margin-right:auto}
+        .footer-logo{height:50px;margin-bottom:1.5rem;filter:brightness(0) invert(1)}
+        .footer-bottom{text-align:center;padding-top:2.5rem;border-top:1px solid rgba(255,255,255,.1);font-size:.875rem;opacity:.7;max-width:1400px;margin:0 auto}
+
+        @media(max-width:968px){.nav-links{display:none}.hamburger{display:flex}}
+        @media(max-width:600px){nav{padding:.75rem 1.25rem}.logo-nav{height:32px}.post-hero-img{height:300px}.post-body{padding:3rem 1rem}.footer-grid{grid-template-columns:1fr}footer{padding:3rem 1rem 1.5rem}}
+    </style>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Kérastase ist da: Premium-Haarpflege jetzt bei Feminity",
+        "datePublished": "2026-05-31",
+        "dateModified": "2026-05-31",
+        "author": {"@type": "Person", "name": "Jule", "url": "https://feminity-oberkassel.de/#team"},
+        "publisher": {"@type": "Organization", "name": "Feminity by Jule", "url": "https://feminity-oberkassel.de"},
+        "url": "https://feminity-oberkassel.de/blog/kerastase.html",
+        "image": "https://feminity-oberkassel.de/blog/images/kerastase.jpg",
+        "keywords": ["Kérastase", "Haarpflege", "Salon", "Düsseldorf", "Oberkassel", "Blond Absolu", "Chroma Absolu", "Curl Manifesto", "Première", "Genesis", "Nutritive"]
+    }
+    </script>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+    <div class="cont">
+        <a href="../index.html"><img src="../Logo.png" alt="Feminity by Jule Logo" class="logo-nav"></a>
+        <ul class="nav-links">
+            <li><a href="../index.html#home">Home</a></li>
+            <li><a href="../index.html#salon">Salon</a></li>
+            <li><a href="../index.html#team">Team</a></li>
+            <li><a href="../index.html#leistungen">Leistungen</a></li>
+            <li><a href="../index.html#kontakt">Kontakt</a></li>
+            <li><a href="../blog.html" class="active">Blog</a></li>
+            <li><a href="../impressum.html">Impressum</a></li>
+        </ul>
+        <a href="https://buchung.treatwell.de" class="nav-cta" target="_blank" rel="noopener">Termin</a>
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="../index.html#home" onclick="closeMenu()">Home</a>
+    <a href="../index.html#salon" onclick="closeMenu()">Salon</a>
+    <a href="../index.html#team" onclick="closeMenu()">Team</a>
+    <a href="../index.html#leistungen" onclick="closeMenu()">Leistungen</a>
+    <a href="../index.html#kontakt" onclick="closeMenu()">Kontakt</a>
+    <a href="../blog.html" onclick="closeMenu()">Blog</a>
+    <a href="../impressum.html" onclick="closeMenu()">Impressum</a>
+    <a href="https://buchung.treatwell.de" class="mobile-cta" onclick="closeMenu()" target="_blank" rel="noopener">Termin buchen</a>
+</div>
+
+<!-- HERO -->
+<div class="post-hero">
+    <span class="hero-emoji">💛</span>
+    <span class="post-category">News &amp; Produkte</span>
+    <h1>Kérastase ist da: Premium-Haarpflege jetzt bei Feminity</h1>
+    <div class="post-meta">
+        <span>Mai 2026</span>
+        <span>4 Min Lesezeit</span>
+        <span>Von Jule</span>
+    </div>
+</div>
+
+<!-- HERO IMAGE -->
+<!-- Hero-Bild folgt: blog/images/kerastase.jpg (sobald als Datei geliefert, hier <img ... class="post-hero-img"> einsetzen) -->
+
+<!-- ARTIKEL -->
+<div class="post-body">
+    <a href="../blog.html" class="back-link">← Zurück zum Blog</a>
+
+    <p>Es ist soweit: Die <strong>Kérastase</strong> Produktlinie ist eingetroffen und ab sofort bei uns im Salon verfügbar – zur Anwendung während deines Termins und zum Mitnehmen für zuhause. Damit holen wir eine der renommiertesten Marken der professionellen Haarpflege nach Düsseldorf-Oberkassel, exklusiv erhältlich über autorisierte Salons wie unseren.</p>
+
+    <h2>Warum Kérastase?</h2>
+    <p>Kérastase steht seit Jahrzehnten für Luxus-Haarpflege auf wissenschaftlicher Basis. Jede Formulierung ist auf ein konkretes Haarbedürfnis abgestimmt und enthält hochkonzentrierte Wirkstoffe, die wir im Salon individuell auf dein Haar abstimmen. Das Ergebnis ist eine Pflege, die spürbar über das hinausgeht, was frei verkäufliche Produkte leisten können.</p>
+
+    <div class="highlight-box">
+        <p>„Professionelle Haarpflege beginnt mit der richtigen Diagnose. Genau deshalb gibt es Kérastase bei uns im Salon – wir finden gemeinsam heraus, was dein Haar wirklich braucht."</p>
+    </div>
+
+    <h2>Diese Linien erwarten dich</h2>
+    <p>Wir starten mit einer kuratierten Auswahl der gefragtesten Kérastase Linien – für jedes Haarbedürfnis die passende Pflege:</p>
+    <ul>
+        <li><strong>Blond Absolu:</strong> Neutralisierung von Gelbstich, Pflege und Reparatur für blondiertes, gesträhntes und graues Haar – mit Bain Lumière, Cicaflash und Masque Ultra-Violet.</li>
+        <li><strong>Chroma Absolu:</strong> Schutz und Glanz für coloriertes Haar – die Farbe bleibt länger intensiv, das Haar geschmeidig.</li>
+        <li><strong>Curl Manifesto:</strong> Definition, Feuchtigkeit und Sprungkraft für lockiges und welliges Haar.</li>
+        <li><strong>Première:</strong> Reparatur bei Haarbruch und Spliss – baut die innere Faser sichtbar wieder auf.</li>
+        <li><strong>Genesis:</strong> Kräftigung des Ansatzes und sichtbar weniger Haarbruch durch Reibung – für Haar, das zu Haarausfall neigt.</li>
+        <li><strong>Nutritive:</strong> Intensive Feuchtigkeit für trockenes und strapaziertes Haar – ideal nach Sonne, Hitze oder häufigem Styling.</li>
+    </ul>
+    <p>Welche Linie zu dir passt, finden wir gemeinsam heraus. Genau hier liegt der Vorteil der Salon-Verfügbarkeit: Wir analysieren dein Haar und deine Kopfhaut und stellen daraus eine Pflegeroutine zusammen, die wirklich zu dir passt.</p>
+
+    <h2>Im Salon erleben, zuhause weiterpflegen</h2>
+    <p>Das Beste an professioneller Haarpflege entfaltet sich in zwei Schritten. Im Salon erlebst du die Kérastase Rituale während deiner Behandlung – vom Bain über die Pflegemaske bis zum abschließenden Treatment. Für zuhause stellen wir dir die passenden Produkte zusammen, damit das Ergebnis lange erhalten bleibt und sich dein Haar von Termin zu Termin verbessert.</p>
+    <p>So wird Pflege zur Routine, die sich sehen lässt: gesünderes, kräftigeres und glänzenderes Haar im Alltag.</p>
+
+    <div class="highlight-box">
+        <p>„Ein gut beratenes Pflegeritual hält, was es verspricht – und dein Haar sieht von Besuch zu Besuch besser aus."</p>
+    </div>
+
+    <h2>Ab sofort verfügbar</h2>
+    <p>Die gesamte Auswahl ist ab sofort bei uns erhältlich. Du kannst dich bei deinem nächsten Termin beraten lassen, die Produkte direkt erleben und mitnehmen – oder einfach im Salon vorbeischauen.</p>
+
+    <!-- CALL TO ACTION -->
+    <div class="cta-box">
+        <h3>Lust auf deine persönliche Kérastase Routine?</h3>
+        <p>Buche jetzt einen Termin für eine persönliche Haar- und Pflegeberatung – oder komm direkt bei uns in Düsseldorf-Oberkassel vorbei. Wir freuen uns auf dich.</p>
+        <a href="https://buchung.treatwell.de" class="btn btn-primary" target="_blank" rel="noopener">Jetzt Termin buchen</a>
+    </div>
+</div>
+
+<!-- VERWANDTE BEITRÄGE -->
+<section class="related">
+    <div class="inner">
+        <h2>Weitere Beiträge</h2>
+        <div class="related-grid">
+            <a href="browlifting.html" class="related-card">
+                <div class="cat">Behandlungen erklärt</div>
+                <h3>Brow Lamination: Perfekte Brauen ohne tägliches Styling</h3>
+            </a>
+            <a href="was-ist-green-peel.html" class="related-card">
+                <div class="cat">Behandlungen erklärt</div>
+                <h3>Green Peel® – Die Kräuterschälkur für strahlende Haut</h3>
+            </a>
+            <a href="was-ist-liposana3.html" class="related-card">
+                <div class="cat">Behandlungen erklärt</div>
+                <h3>LIPOSANA3 – Körperformung mit Frequenztechnologie</h3>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-grid">
+        <div>
+            <img src="../Logo.png" alt="Feminity by Jule" class="footer-logo">
+            <p>Beauty Space für Haare, Haut und Wohlbefinden in Düsseldorf-Oberkassel.</p>
+        </div>
+        <div>
+            <h4 style="margin-bottom:1rem;font-size:1.1rem;">STANDORT</h4>
+            <p>Hansaallee 1a<br>40549 Düsseldorf<br><br>Mo–Fr: 10–19 Uhr<br>Sa: 10–18 Uhr</p>
+        </div>
+        <div>
+            <h4 style="margin-bottom:1rem;font-size:1.1rem;">KONTAKT</h4>
+            <p><a href="tel:+4917687438736">+49 176 87438736</a><br><a href="mailto:40549@feminity-oberkassel.de">40549@feminity-oberkassel.de</a></p>
+        </div>
+        <div>
+            <h4 style="margin-bottom:1rem;font-size:1.1rem;">LINKS</h4>
+            <p><a href="../index.html">Home</a><br><a href="../blog.html">Blog</a><br><a href="../impressum.html">Impressum</a></p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2026 Groom&amp;Glow UG (haftungsbeschränkt) • Ansprechpartnerin: Julrine Domingos • <a href="../impressum.html">Impressum &amp; Datenschutz</a></p>
+    </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script>
+function toggleMenu(){
+    document.getElementById('hamburger').classList.toggle('open');
+    document.getElementById('mobileMenu').classList.toggle('open');
+}
+function closeMenu(){
+    document.getElementById('hamburger').classList.remove('open');
+    document.getElementById('mobileMenu').classList.remove('open');
+}
+document.addEventListener('click',function(e){
+    var nav=document.querySelector('nav');
+    var menu=document.getElementById('mobileMenu');
+    if(!nav.contains(e.target)&&!menu.contains(e.target)){
+        closeMenu();
+    }
+});
+</script>
+
+</body>
+</html>

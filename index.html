@@ -316,6 +316,10 @@ nav .cont{max-width:1400px;margin:0 auto;display:flex;justify-content:space-betw
 h2{font-size:clamp(2.5rem,6vw,4.5rem);margin-bottom:2rem;text-align:center}
 .lead{font-size:1.25rem;text-align:center;max-width:800px;margin:0 auto 4rem}
 .salon-img{width:100%;max-height:600px;object-fit:cover;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.salon-split{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:3rem;margin-top:3rem}
+.salon-block h3{font-size:1.75rem;margin-bottom:1.25rem;text-align:center}
+.salon-block p{margin:1.5rem 0 0;line-height:1.8;color:var(--black)}
+.salon-block img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.2)}
 
 /* TEAM */
 .team-section{background:linear-gradient(135deg,#F9F7F4,#EDE7DD)}
@@ -448,8 +452,17 @@ gtag('config', 'G-V5ZLVNKNZG');
   <div class="container">
     <h2>Unser Salon</h2>
     <p class="lead">Im Herzen von Düsseldorf-Oberkassel – Me and All Hotel, Hansaallee 1a</p>
-    <p style="text-align:center;max-width:800px;margin:0 auto 3rem;font-size:1.05rem;line-height:1.8;color:var(--black)">Dies ist der Behandlungsraum für Kosmetik. Hier warten einige der spannendsten Anwendungen der Branche auf Euch. In Kürze folgt hier ein Update mit breaking-News-Charakter. Wollt Ihr alle Neuigkeiten auf Euer Telefon bekommen? Registriert Euch schnell mit Email unter unserem Blog!</p>
-    <img src="Salon.jpg" class="salon-img" alt="Feminity by Jule Salon – Beauty Space in Düsseldorf-Oberkassel" loading="lazy">
+    <div class="salon-split">
+      <div class="salon-block">
+        <h3>Hair — Masterclass Cut, Color and Extensions</h3>
+        <img src="salonspiegel.jpg" alt="Hair-Bereich mit Salonspiegel bei Feminity by Jule in Düsseldorf-Oberkassel" loading="lazy">
+      </div>
+      <div class="salon-block">
+        <h3>Beauty — Laser, Liposana, PMU und Treatments</h3>
+        <img src="Salon.jpg" alt="Beauty-Behandlungsraum bei Feminity by Jule in Düsseldorf-Oberkassel" loading="lazy">
+        <p>Dies ist der Behandlungsraum für Kosmetik. Hier warten einige der spannendsten Anwendungen der Branche auf Euch. In Kürze folgt hier ein Update mit breaking-News-Charakter. Wollt Ihr alle Neuigkeiten auf Euer Telefon bekommen? Registriert Euch schnell mit Email unter unserem Blog!</p>
+      </div>
+    </div>
   </div>
 </section>
 

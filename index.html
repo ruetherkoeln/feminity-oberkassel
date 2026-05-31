@@ -332,10 +332,10 @@ h2{font-size:clamp(2.5rem,6vw,4.5rem);margin-bottom:2rem;text-align:center}
 
 /* SERVICES */
 .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2.5rem;margin-top:4rem}
-.service-card{background:#fff;padding:2.5rem;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+.service-card{background:#fff;padding:2.5rem;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.08);display:flex;flex-direction:column;height:100%}
 .service-card h3{font-size:1.75rem;margin-bottom:1rem}
-.service-badge{background:rgba(201,167,74,.15);color:var(--gold);font-size:.7rem;font-weight:700;padding:.4rem 1rem;border-radius:20px;margin-bottom:1rem;display:inline-block}
-.service-price{display:flex;justify-content:space-between;margin-top:2rem;padding-top:2rem;border-top:1px solid #EDE7DD}
+.service-badge{background:rgba(201,167,74,.15);color:var(--gold);font-size:.7rem;font-weight:700;padding:.4rem 1rem;border-radius:20px;margin-bottom:1rem;display:inline-block;align-self:flex-start}
+.service-price{display:flex;justify-content:space-between;align-items:baseline;margin-top:auto;padding-top:2rem;border-top:1px solid #EDE7DD}
 .service-price strong{font-size:1.75rem}
 
 /* FAQ */
@@ -513,7 +513,7 @@ gtag('config', 'G-V5ZLVNKNZG');
       <div class="service-card">
         <span class="service-badge">SIGNATURE</span>
         <h3>Beauty Drips</h3>
-        <p>Exklusive Infusionen mit Vitaminen und Nährstoffen für strahlende Haut und mehr Energie. Ab 150 €.</p>
+        <p>Exklusive Infusionen mit Vitaminen und Nährstoffen für strahlende Haut und mehr Energie.</p>
         <div class="service-price"><span>ab <strong>150€</strong></span></div>
       </div>
     </div>

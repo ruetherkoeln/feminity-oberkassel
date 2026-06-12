@@ -10,6 +10,16 @@
       ],
       "destination": "https://www.google.com/maps/search/Feminity+by+Jule+D%C3%BCsseldorf",
       "permanent": true
+    },
+    {
+      "source": "/blog",
+      "destination": "/blog.html",
+      "permanent": true
+    },
+    {
+      "source": "/blog/",
+      "destination": "/blog.html",
+      "permanent": true
     }
   ]
 }

@@ -132,6 +132,7 @@ nav .cont{max-width:1400px;margin:0 auto;display:flex;justify-content:space-betw
 .lang-flag:hover{border-color:var(--gold)}
 .lang-flag.active{opacity:.5;cursor:default;border-color:rgba(249,247,244,.4)}
 .lang-flag svg{display:block;width:22px;height:14px;border-radius:1px}
+.lang-switcher.mobile-only{display:none}
 
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
 .hamburger span{display:block;width:25px;height:2px;background:var(--cream);transition:all .3s}
@@ -193,6 +194,9 @@ footer a:hover{color:var(--gold)}
   .hamburger{display:flex;position:absolute;right:1.25rem;top:50%;transform:translateY(-50%)}
   nav .cont{justify-content:center;position:relative}
   .logo-nav{filter:brightness(1.3)}
+  .lang-switcher.mobile-only{display:inline-flex;position:absolute;right:4rem;top:50%;transform:translateY(-50%);z-index:2}
+  .lang-switcher.mobile-only .lang-flag{padding:.3rem .5rem}
+  .lang-switcher.mobile-only .lang-flag svg{width:24px;height:16px}
   .location-grid{grid-template-columns:1fr;gap:2.5rem}
   .section{padding:4rem 1.5rem}
 }
@@ -244,6 +248,14 @@ gtag('config', 'G-V5ZLVNKNZG');
       </li>
       <li><a href='#' class="nav-cta" onclick="return handleBookingClick();">Book</a></li>
     </ul>
+    <span class="lang-switcher mobile-only" aria-label="Language selection">
+      <a class="lang-flag" href="/" hreflang="de" aria-label="Deutsche Version" title="Deutsch">
+        <svg viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="1" y="0" fill="#000"/><rect width="5" height="1" y="1" fill="#D00"/><rect width="5" height="1" y="2" fill="#FFCE00"/></svg>
+      </a>
+      <span class="lang-flag active" aria-current="true" aria-label="English (active)">
+        <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk-t-en-top"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#uk-t-en-top)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></svg>
+      </span>
+    </span>
     <div class="hamburger" id="hamburger" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </div>

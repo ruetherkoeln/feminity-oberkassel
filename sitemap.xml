@@ -21,8 +21,14 @@
   </url>
   <url>
     <loc>https://feminity-oberkassel.de/blog.html</loc>
-    <lastmod>2026-05-15</lastmod>
+    <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://feminity-oberkassel.de/blog/brautstyling-duesseldorf.html</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>

@@ -12,6 +12,11 @@
       "permanent": true
     },
     {
+      "source": "/blog/browlifting.html",
+      "destination": "/blog/brow-lamination.html",
+      "permanent": true
+    },
+    {
       "source": "/blog",
       "destination": "/blog.html",
       "permanent": true

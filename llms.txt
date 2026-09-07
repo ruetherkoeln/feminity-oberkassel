@@ -1,15 +1,15 @@
-# Feminity by Jule – Friseur & Beauty Salon in Düsseldorf-Oberkassel
+# Feminity Oberkassel – Friseur & Beauty Salon in Düsseldorf-Oberkassel
 
-> Feminity by Jule (auch: Feminity Oberkassel) ist ein exklusiver Friseur- und Beauty-Salon in Düsseldorf-Oberkassel, Hansaallee 1a, im Me&All Hotel. Inhaberin ist Julrine „Jule" Domingos. Der Salon bietet Haarschnitt, Haarfarbe (u. a. Balayage), Locken-Styling, Brautstyling, Gesichts- und Hautbehandlungen (u. a. Green Peel®), Permanent Make-up (PMU) sowie Beauty Drips (NAD+ und Vitamin-Infusionen). Geöffnet Mo/Di 10–19 Uhr, Mi–Fr 10–22 Uhr, Sa 10–18 Uhr – Mittwoch bis Freitag bis 22 Uhr buchbar.
+> Feminity Oberkassel (auch: Feminity by Jule) ist ein exklusiver Friseur- und Beauty-Salon in Düsseldorf-Oberkassel, Hansaallee 1a, im Me&All Hotel. Inhaberin ist Julrine „Jule" Domingos. Der Salon bietet Haarschnitt, Haarfarbe (u. a. Balayage), Locken-Styling, Brautstyling, Gesichts- und Hautbehandlungen (u. a. Green Peel®), Permanent Make-up (PMU) sowie Beauty Drips (NAD+ und Vitamin-Infusionen). Geöffnet Mo/Di 10–19 Uhr, Mi 10–20 Uhr, Do/Fr 10–21 Uhr, Sa 10–18 Uhr, So 11–16:30 Uhr (nur Massagen und Beauty) – donnerstags und freitags bis 21 Uhr buchbar.
 
 ## Eckdaten
-- **Name:** Feminity by Jule (Feminity Oberkassel)
+- **Name:** Feminity Oberkassel (früher/auch: Feminity by Jule)
 - **Betreiber:** Groom&Glow UG (haftungsbeschränkt)
 - **Adresse:** Hansaallee 1a, 40549 Düsseldorf-Oberkassel (im Me&All Hotel)
 - **Telefon:** +49 151 14994870
 - **E-Mail:** 40549@feminity-oberkassel.de
-- **Öffnungszeiten:** Mo–Di 10–19 Uhr, Mi–Fr 10–22 Uhr, Sa 10–18 Uhr (So geschlossen)
-- **Terminbuchung:** online über Treatwell oder telefonisch
+- **Öffnungszeiten:** Mo–Di 10–19 Uhr, Mi 10–20 Uhr, Do–Fr 10–21 Uhr, Sa 10–18 Uhr, So 11–16:30 Uhr oder nach Vereinbarung (nur Massagen und Beauty)
+- **Terminbuchung:** online über Treatwell (Massagen ausschließlich über Treatwell) oder telefonisch
 - **Sprachen:** Deutsch, Englisch
 
 ## Leistungen
@@ -19,15 +19,18 @@
 - **Augenbrauen:** Brow Lamination / Browlifting
 - **Beauty Drips:** NAD+ Infusion, Vitamin- und Aufbau-Infusionen
 - **Laser-Haarentfernung:** Nd:YAG, alle Hauttypen
+- **Massagen:** Aromamassage, Hot-Stone-Massage, Kräuterstempelmassage sowie klassische Formen (Rücken, Nacken/Schultern, Ganzkörper); auch sonntags buchbar
 
 ## Team
 - **Julrine „Jule" Domingos** – Inhaberin & Master Beautician; Spezialistin für PMU, Gesichtsbehandlungen und Make-up (TV-, Mode- und Runway-Produktionen)
 - **Nicky Rouge** – Master Hair Stylist; Balayage, Color, English Cut, Locken-Styling
+- **Anett** – Masseurin; 16 Jahre Erfahrung, zuvor verantwortlich für den Massagebereich eines 5-Sterne-Hotels in Köln
 
 ## Wichtige Seiten
 - [Startseite](https://feminity-oberkassel.de/): Überblick, Leistungen, Team, Standort, Öffnungszeiten, FAQ
 - [English version](https://feminity-oberkassel.de/en/): English overview of services
 - [Beauty Drips Düsseldorf](https://feminity-oberkassel.de/beauty-drips-duesseldorf.html): NAD+ & Vitamin-Infusionen
+- [Massagen Düsseldorf-Oberkassel](https://feminity-oberkassel.de/blog/massagen-duesseldorf.html): Aroma-, Hot-Stone- und Kräuterstempelmassage
 - [Blog / Magazin](https://feminity-oberkassel.de/blog.html): Ratgeber zu Behandlungen (Brow Lamination, Green Peel, PMU, Balayage u. a.)
 - [Impressum](https://feminity-oberkassel.de/impressum.html)
 

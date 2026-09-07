@@ -865,6 +865,33 @@ document.addEventListener('click',function(e){
 </script>
 
 
+<!-- Floating Action Button: Massagen online buchbar -->
+<a href='#' onclick="return handleBookingClick();" style="
+  position:fixed;
+  bottom:47vh;
+  right:-10px;
+  z-index:9999;
+  background:var(--gold);
+  color:var(--black);
+  text-decoration:none;
+  padding:1rem 1.4rem 1rem 1.2rem;
+  border-radius:4px 4px 4px 4px;
+  font-family:'Montserrat',sans-serif;
+  font-weight:800;
+  font-size:.8rem;
+  text-align:center;
+  box-shadow:3px 4px 12px rgba(0,0,0,.35), -1px -1px 0 rgba(0,0,0,.08);
+  line-height:1.5;
+  max-width:150px;
+  transform:rotate(-5deg);
+  transition:transform .2s,box-shadow .2s;
+  border-top:3px solid rgba(255,255,255,.4);
+  letter-spacing:.03em;
+" onmouseover="this.style.transform='rotate(-2deg) scale(1.06)';this.style.boxShadow='5px 8px 20px rgba(0,0,0,.4)'"
+   onmouseout="this.style.transform='rotate(-5deg)';this.style.boxShadow='3px 4px 12px rgba(0,0,0,.35)'">
+  Ab sofort<br>MASSAGEN<br>online buchbar!
+</a>
+
 <!-- Floating Action Button: Interview Nicky (Lead Hair) -->
 <a href="blog/nicky-lead-hair.html" style="
   position:fixed;

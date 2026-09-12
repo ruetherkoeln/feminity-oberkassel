@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Einwilligung Bild &amp; Ton | Feminity Oberkassel</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Einwilligung">
+<meta name="format-detection" content="telephone=no">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@300;400;500;600;700&display=swap">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--cream:#F9F7F4;--gold:#C9A74A;--black:#0A0A0A;--rot:#B3261E}
+body{font-family:'Open Sans',sans-serif;background:var(--cream);color:var(--black);-webkit-text-size-adjust:100%}
+h1,h2,h3{font-family:'Roboto',sans-serif}
+img{max-width:100%;height:auto;display:block}
+
+header{background:var(--black);padding:1rem 2rem}
+header .cont{max-width:820px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.logo-nav{height:36px}
+.zurueck{color:var(--cream);text-decoration:none;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;opacity:.75}
+.zurueck:hover{color:var(--gold);opacity:1}
+
+.wrap{max-width:820px;margin:0 auto;padding:2.5rem 1.5rem 4rem}
+.eyebrow{text-transform:uppercase;letter-spacing:.18em;font-size:.72rem;font-weight:700;color:var(--gold)}
+h1{font-size:clamp(1.9rem,5vw,2.75rem);font-weight:300;margin:.5rem 0 1rem;line-height:1.15}
+.lead{font-size:1rem;line-height:1.7;color:#3B3B3B;max-width:38rem}
+
+.karte{background:#fff;border:1px solid rgba(10,10,10,.1);border-radius:14px;padding:1.75rem;margin-top:1.5rem}
+.karte h2{font-size:1.15rem;font-weight:500;margin-bottom:.35rem}
+.karte .unter{font-size:.85rem;color:#6E6E6E;margin-bottom:1.25rem;line-height:1.6}
+
+.raster{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+label.feld{display:block}
+label.feld span{display:block;font-size:.82rem;font-weight:600;margin-bottom:.4rem}
+input[type=text],input[type=email],input[type=tel],input[type=date]{
+  width:100%;padding:.95rem 1rem;font:inherit;font-size:1rem;background:var(--cream);
+  border:1px solid rgba(10,10,10,.18);border-radius:9px;color:var(--black);-webkit-appearance:none}
+input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,167,74,.25)}
+
+/* Große Trefferflächen — das wird mit dem Finger bedient, nicht mit der Maus. */
+.wahl{display:flex;align-items:flex-start;gap:.85rem;padding:.9rem 1rem;border:1px solid rgba(10,10,10,.14);
+  border-radius:10px;cursor:pointer;background:var(--cream);margin-bottom:.6rem;line-height:1.5;font-size:.95rem}
+.wahl:last-child{margin-bottom:0}
+.wahl input{width:24px;height:24px;flex:0 0 24px;margin-top:.1rem;accent-color:var(--gold)}
+.wahl:has(input:checked){border-color:var(--gold);background:rgba(201,167,74,.1)}
+.wahl small{display:block;color:#6E6E6E;font-size:.82rem;margin-top:.15rem}
+
+fieldset{border:0}
+legend{font-size:.82rem;font-weight:600;margin-bottom:.6rem}
+
+.recht{font-size:.85rem;line-height:1.75;color:#4A4A4A}
+.recht p+p{margin-top:.75rem}
+
+/* Unterschrift */
+.sig-rahmen{position:relative;border:2px dashed rgba(10,10,10,.25);border-radius:12px;background:#fff;overflow:hidden}
+.sig-rahmen.gezeichnet{border-style:solid;border-color:var(--gold)}
+canvas{display:block;width:100%;height:190px;touch-action:none;cursor:crosshair}
+.sig-hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  pointer-events:none;color:#9A9A9A;font-size:.95rem}
+.sig-rahmen.gezeichnet .sig-hint{display:none}
+.sig-leiste{display:flex;justify-content:space-between;align-items:center;margin-top:.75rem;gap:1rem}
+.sig-leiste small{color:#6E6E6E;font-size:.8rem;line-height:1.5}
+
+button{font:inherit;cursor:pointer;border-radius:50px;border:2px solid transparent}
+.btn-klein{background:transparent;border-color:rgba(10,10,10,.25);padding:.6rem 1.25rem;font-size:.85rem;white-space:nowrap}
+.btn-klein:hover{border-color:var(--black)}
+.btn-senden{display:block;width:100%;background:var(--gold);border-color:var(--gold);color:var(--black);
+  padding:1.25rem;font-size:1.05rem;font-weight:700;margin-top:1.5rem}
+.btn-senden:hover:not(:disabled){background:#D4AF37}
+.btn-senden:disabled{opacity:.5;cursor:not-allowed}
+
+.meldung{display:none;margin-top:1rem;padding:1rem 1.25rem;border-radius:10px;font-size:.92rem;line-height:1.6}
+.meldung.fehler{display:block;background:rgba(179,38,30,.09);border:1px solid rgba(179,38,30,.35);color:var(--rot)}
+
+/* Danke-Ansicht */
+.danke{display:none;text-align:center;padding:3.5rem 1.5rem}
+.danke.an{display:block}
+.danke .haken{width:76px;height:76px;margin:0 auto 1.5rem;border-radius:50%;background:var(--gold);
+  display:flex;align-items:center;justify-content:center;font-size:2.25rem;color:#fff}
+.danke h2{font-size:1.75rem;font-weight:300;margin-bottom:.75rem}
+.danke p{color:#5A5A5A;line-height:1.7;max-width:30rem;margin:0 auto 2rem}
+
+.honig{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+footer{background:var(--black);color:var(--cream);padding:1.75rem;text-align:center;font-size:.78rem}
+footer a{color:var(--gold);text-decoration:none}
+
+@media(max-width:640px){
+  header{padding:1rem}
+  .wrap{padding:2rem 1rem 3rem}
+  .karte{padding:1.35rem}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="cont">
+    <a href="/"><img src="/Logo.png" class="logo-nav" alt="Feminity Oberkassel"></a>
+    <a href="/im-salon.html" class="zurueck">Alle Bögen</a>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div id="formular">
+    <div class="eyebrow">Im Salon</div>
+    <h1>Einwilligung in Bild- und Tonaufnahmen</h1>
+    <p class="lead">
+      Wir zeigen unsere Arbeit gern — auf Instagram, auf unserer Website und im Salon.
+      Dafür brauchen wir Ihr Einverständnis. Sie entscheiden selbst, was davon erlaubt
+      ist, und können es jederzeit zurücknehmen.
+    </p>
+
+    <form id="bogen" novalidate>
+      <div class="honig" aria-hidden="true">
+        <label for="webseite">Bitte leer lassen</label>
+        <input id="webseite" name="webseite" type="text" tabindex="-1" autocomplete="off">
+      </div>
+
+      <div class="karte">
+        <h2>Ihre Angaben</h2>
+        <p class="unter">Vor- und Nachname brauchen wir. Alles andere ist freiwillig.</p>
+        <div class="raster">
+          <label class="feld"><span>Vorname *</span>
+            <input id="vorname" type="text" autocomplete="off" autocapitalize="words" required></label>
+          <label class="feld"><span>Nachname *</span>
+            <input id="nachname" type="text" autocomplete="off" autocapitalize="words" required></label>
+          <label class="feld"><span>Geburtsdatum</span>
+            <input id="geburtsdatum" type="date"></label>
+          <label class="feld"><span>E-Mail</span>
+            <input id="email" type="email" autocomplete="off" inputmode="email"></label>
+        </div>
+        <p class="unter" style="margin:.9rem 0 0">
+          Wenn Sie eine E-Mail-Adresse angeben, schicken wir Ihnen Ihre Einwilligung
+          als PDF zu — dann haben Sie sie schwarz auf weiß.
+        </p>
+      </div>
+
+      <div class="karte">
+        <h2>Was darf aufgenommen werden?</h2>
+        <p class="unter">Mehrfachauswahl — kreuzen Sie an, womit Sie einverstanden sind.</p>
+        <label class="wahl"><input type="checkbox" name="medien" value="foto">
+          <span>Fotoaufnahmen</span></label>
+        <label class="wahl"><input type="checkbox" name="medien" value="video">
+          <span>Videoaufnahmen</span></label>
+        <label class="wahl"><input type="checkbox" name="medien" value="ton">
+          <span>Tonaufnahmen<small>Zum Beispiel Ihre Stimme in einem Video</small></span></label>
+      </div>
+
+      <div class="karte">
+        <h2>Wo dürfen wir sie zeigen?</h2>
+        <p class="unter">Auch hier gilt: nur, was Sie ankreuzen.</p>
+        <label class="wahl"><input type="checkbox" name="kanaele" value="instagram">
+          <span>Instagram und Facebook</span></label>
+        <label class="wahl"><input type="checkbox" name="kanaele" value="website">
+          <span>Unsere Website feminity-oberkassel.de</span></label>
+        <label class="wahl"><input type="checkbox" name="kanaele" value="google">
+          <span>Google-Unternehmensprofil</span></label>
+        <label class="wahl"><input type="checkbox" name="kanaele" value="print">
+          <span>Gedrucktes Material und Aushang im Salon</span></label>
+        <label class="wahl"><input type="checkbox" name="kanaele" value="anzeigen">
+          <span>Bezahlte Werbeanzeigen</span></label>
+      </div>
+
+      <div class="karte">
+        <h2>Umfang</h2>
+        <fieldset style="margin-bottom:1.25rem">
+          <legend>Dürfen wir Ihren Vornamen dazuschreiben?</legend>
+          <label class="wahl"><input type="radio" name="namensnennung" value="ja">
+            <span>Ja, mein Vorname darf genannt werden</span></label>
+          <label class="wahl"><input type="radio" name="namensnennung" value="nein" checked>
+            <span>Nein, bitte ohne Namen</span></label>
+        </fieldset>
+        <fieldset>
+          <legend>Dürfen Sie erkennbar zu sehen sein?</legend>
+          <label class="wahl"><input type="radio" name="erkennbar" value="ja" checked>
+            <span>Ja, auch Aufnahmen, auf denen ich erkennbar bin</span></label>
+          <label class="wahl"><input type="radio" name="erkennbar" value="nein">
+            <span>Nein, nur Aufnahmen ohne erkennbares Gesicht<small>Zum Beispiel nur die Frisur von hinten</small></span></label>
+        </fieldset>
+      </div>
+
+      <div class="karte">
+        <h2>Minderjährig?</h2>
+        <label class="wahl"><input type="checkbox" id="minderjaehrig">
+          <span>Die abgebildete Person ist unter 18 Jahre alt<small>Dann unterschreibt die gesetzliche Vertretung</small></span></label>
+        <label class="feld" id="vertreterFeld" hidden style="margin-top:1rem">
+          <span>Name der gesetzlichen Vertretung *</span>
+          <input id="vertreter" type="text" autocomplete="off" autocapitalize="words"></label>
+      </div>
+
+      <div class="karte">
+        <h2>Das erklären Sie mit Ihrer Unterschrift</h2>
+        <div class="recht">
+          <p>
+            Ich willige ein, dass die oben angekreuzten Aufnahmen von mir angefertigt und für
+            die angekreuzten Zwecke verwendet werden dürfen. Die Einwilligung erfolgt
+            freiwillig; aus einer Verweigerung entstehen mir keine Nachteile — mein
+            Behandlungstermin bleibt davon unberührt.
+          </p>
+          <p>
+            Ich kann diese Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen,
+            formlos und ohne Angabe von Gründen, per E-Mail an
+            <a href="mailto:admin@feminity-oberkassel.de">admin@feminity-oberkassel.de</a>.
+            Bereits veröffentlichte Aufnahmen werden dann unverzüglich entfernt, soweit das
+            möglich und zumutbar ist. Wurden Aufnahmen bereits von Dritten geteilt, kann eine
+            vollständige Entfernung aus dem Internet nicht zugesichert werden.
+          </p>
+          <p>Eine Vergütung für die Aufnahmen und ihre Verwendung wird nicht gewährt.</p>
+          <p>
+            Rechtsgrundlage ist Art. 6 Abs. 1 lit. a DSGVO in Verbindung mit § 22 KunstUrhG.
+            Verantwortlich ist die Groom&amp;Glow UG (haftungsbeschränkt), Hansaallee 1a,
+            40549 Düsseldorf. Näheres in unserer
+            <a href="/impressum.html">Datenschutzerklärung</a>.
+          </p>
+        </div>
+        <label class="wahl" style="margin-top:1.25rem">
+          <input type="checkbox" id="einwilligung" required>
+          <span>Ich habe das gelesen und willige ein *</span></label>
+      </div>
+
+      <div class="karte">
+        <h2>Unterschrift</h2>
+        <p class="unter">Bitte mit dem Finger im Feld unterschreiben.</p>
+        <div class="sig-rahmen" id="sigRahmen">
+          <canvas id="sig"></canvas>
+          <div class="sig-hint">Hier unterschreiben</div>
+        </div>
+        <div class="sig-leiste">
+          <small id="sigWer">Es unterschreibt die abgebildete Person.</small>
+          <button type="button" class="btn-klein" id="sigLeeren">Neu zeichnen</button>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-senden" id="senden">Einwilligung absenden</button>
+      <div class="meldung" id="meldung" role="alert"></div>
+    </form>
+  </div>
+
+  <div class="danke" id="danke">
+    <div class="haken">✓</div>
+    <h2>Vielen Dank!</h2>
+    <p id="dankeText">Ihre Einwilligung ist bei uns angekommen.</p>
+    <button type="button" class="btn-klein" id="neuerBogen">Nächster Bogen</button>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2026 Groom&amp;Glow UG (haftungsbeschränkt) • <a href="/impressum.html">Impressum &amp; Datenschutz</a></p>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var form = document.getElementById('bogen');
+  var meldung = document.getElementById('meldung');
+  var sendenBtn = document.getElementById('senden');
+
+  // ── Unterschriftsfeld ────────────────────────────────────────────────────
+  var canvas = document.getElementById('sig');
+  var rahmen = document.getElementById('sigRahmen');
+  var ctx = canvas.getContext('2d');
+  var gezeichnet = false;
+  var zeichnet = false;
+
+  // Auf dem Bildschirm ist die Fläche CSS-breit, gezeichnet wird in
+  // Geräte-Pixeln — sonst sieht die Linie auf dem iPad ausgefranst aus.
+  function flaecheAufbauen() {
+    var dpr = window.devicePixelRatio || 1;
+    var breite = canvas.clientWidth;
+    var hoehe = canvas.clientHeight;
+    canvas.width = Math.round(breite * dpr);
+    canvas.height = Math.round(hoehe * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    // Weiß, damit das JPEG später keinen schwarzen Grund bekommt
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillRect(0, 0, breite, hoehe);
+    ctx.strokeStyle = '#0A0A0A';
+    ctx.lineWidth = 2.4;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+  }
+
+  function leeren() {
+    flaecheAufbauen();
+    gezeichnet = false;
+    rahmen.classList.remove('gezeichnet');
+  }
+
+  function punkt(ev) {
+    var r = canvas.getBoundingClientRect();
+    return { x: ev.clientX - r.left, y: ev.clientY - r.top };
+  }
+
+  canvas.addEventListener('pointerdown', function (ev) {
+    ev.preventDefault();
+    canvas.setPointerCapture(ev.pointerId);
+    zeichnet = true;
+    var p = punkt(ev);
+    ctx.beginPath();
+    ctx.moveTo(p.x, p.y);
+    // Ein kurzer Tipp soll auch einen Punkt hinterlassen
+    ctx.lineTo(p.x + 0.1, p.y);
+    ctx.stroke();
+    gezeichnet = true;
+    rahmen.classList.add('gezeichnet');
+  });
+
+  canvas.addEventListener('pointermove', function (ev) {
+    if (!zeichnet) return;
+    ev.preventDefault();
+    var p = punkt(ev);
+    ctx.lineTo(p.x, p.y);
+    ctx.stroke();
+  });
+
+  ['pointerup', 'pointercancel', 'pointerleave'].forEach(function (art) {
+    canvas.addEventListener(art, function () { zeichnet = false; });
+  });
+
+  document.getElementById('sigLeeren').addEventListener('click', leeren);
+
+  // Beim Drehen des iPads würde die Fläche sonst verzerren.
+  var dreh;
+  window.addEventListener('resize', function () {
+    clearTimeout(dreh);
+    dreh = setTimeout(function () { if (!gezeichnet) flaecheAufbauen(); }, 200);
+  });
+
+  // ── Minderjährigkeit ─────────────────────────────────────────────────────
+  var minderjaehrig = document.getElementById('minderjaehrig');
+  var vertreterFeld = document.getElementById('vertreterFeld');
+  var sigWer = document.getElementById('sigWer');
+  minderjaehrig.addEventListener('change', function () {
+    vertreterFeld.hidden = !minderjaehrig.checked;
+    sigWer.textContent = minderjaehrig.checked
+      ? 'Es unterschreibt die gesetzliche Vertretung.'
+      : 'Es unterschreibt die abgebildete Person.';
+  });
+
+  // ── Absenden ─────────────────────────────────────────────────────────────
+  function fehlerZeigen(text) {
+    meldung.textContent = text;
+    meldung.className = 'meldung fehler';
+    meldung.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  var FEHLERTEXT = {
+    pflicht: 'Bitte tragen Sie Vor- und Nachnamen ein.',
+    vertreter: 'Bitte tragen Sie den Namen der gesetzlichen Vertretung ein.',
+    einwilligung: 'Bitte bestätigen Sie die Einwilligung.',
+    signatur: 'Bitte unterschreiben Sie im dafür vorgesehenen Feld.',
+    versand: 'Der Bogen konnte nicht versendet werden. Bitte sagen Sie uns kurz Bescheid.',
+    konfiguration: 'Der Versand ist noch nicht eingerichtet. Bitte an der Rezeption melden.',
+    pdf: 'Das Dokument konnte nicht erzeugt werden. Bitte an der Rezeption melden.'
+  };
+
+  function ausgewaehlt(name) {
+    return Array.prototype.map.call(
+      form.querySelectorAll('input[name="' + name + '"]:checked'),
+      function (el) { return el.value; }
+    );
+  }
+
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    meldung.className = 'meldung';
+
+    var vorname = document.getElementById('vorname').value.trim();
+    var nachname = document.getElementById('nachname').value.trim();
+    if (!vorname || !nachname) return fehlerZeigen(FEHLERTEXT.pflicht);
+    if (minderjaehrig.checked && !document.getElementById('vertreter').value.trim()) {
+      return fehlerZeigen(FEHLERTEXT.vertreter);
+    }
+    if (!document.getElementById('einwilligung').checked) return fehlerZeigen(FEHLERTEXT.einwilligung);
+    if (!gezeichnet) return fehlerZeigen(FEHLERTEXT.signatur);
+
+    var daten = {
+      bogen: 'einwilligung-bild-ton',
+      webseite: document.getElementById('webseite').value,
+      vorname: vorname,
+      nachname: nachname,
+      geburtsdatum: document.getElementById('geburtsdatum').value,
+      email: document.getElementById('email').value.trim(),
+      medien: ausgewaehlt('medien'),
+      kanaele: ausgewaehlt('kanaele'),
+      namensnennung: (form.querySelector('input[name="namensnennung"]:checked') || {}).value || 'nein',
+      erkennbar: (form.querySelector('input[name="erkennbar"]:checked') || {}).value || 'ja',
+      minderjaehrig: minderjaehrig.checked,
+      vertreter: document.getElementById('vertreter').value.trim(),
+      unterschriftsort: 'Düsseldorf',
+      einwilligung: true,
+      // JPEG statt PNG: lässt sich unverändert ins PDF einbetten
+      signatur: canvas.toDataURL('image/jpeg', 0.85)
+    };
+
+    sendenBtn.disabled = true;
+    sendenBtn.textContent = 'Wird gesendet …';
+
+    fetch('/api/fragebogen', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(daten)
+    })
+      .then(function (a) { return a.json().catch(function () { return {}; }); })
+      .then(function (a) {
+        if (!a.ok) throw new Error(a.fehler || 'versand');
+        document.getElementById('dankeText').textContent = daten.email
+          ? 'Ihre Einwilligung ist bei uns angekommen. Eine Kopie liegt gleich in Ihrem Postfach.'
+          : 'Ihre Einwilligung ist bei uns angekommen.';
+        document.getElementById('formular').style.display = 'none';
+        document.getElementById('danke').classList.add('an');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      })
+      .catch(function (e) {
+        fehlerZeigen(FEHLERTEXT[e.message] || FEHLERTEXT.versand);
+      })
+      .then(function () {
+        sendenBtn.disabled = false;
+        sendenBtn.textContent = 'Einwilligung absenden';
+      });
+  });
+
+  // Nach dem Absenden beginnt die nächste Person mit einem leeren Bogen —
+  // auf einem geteilten Tablet darf nichts von der Vorgängerin stehen bleiben.
+  document.getElementById('neuerBogen').addEventListener('click', function () {
+    form.reset();
+    vertreterFeld.hidden = true;
+    sigWer.textContent = 'Es unterschreibt die abgebildete Person.';
+    leeren();
+    meldung.className = 'meldung';
+    document.getElementById('danke').classList.remove('an');
+    document.getElementById('formular').style.display = '';
+    window.scrollTo({ top: 0 });
+  });
+
+  flaecheAufbauen();
+})();
+</script>
+
+</body>
+</html>

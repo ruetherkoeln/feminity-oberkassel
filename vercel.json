@@ -26,5 +26,16 @@
       "destination": "/blog.html",
       "permanent": true
     }
+  ],
+  "headers": [
+    {
+      "source": "/im-salon(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    }
   ]
 }

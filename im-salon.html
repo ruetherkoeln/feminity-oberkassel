@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Im Salon | Feminity Oberkassel</title>
+<meta name="description" content="Erhebungsbögen zum Ausfüllen im Salon Feminity Oberkassel.">
+
+<!-- Interner Bereich: gehört nicht in den Index und nicht in die Sitemap.
+     Die Bögen werden auf dem Salon-iPad ausgefüllt, nicht von Gästen zu Hause. -->
+<meta name="robots" content="noindex, nofollow">
+
+<!-- Auf dem iPad als Web-App zum Home-Bildschirm hinzufügbar -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Im Salon">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="format-detection" content="telephone=no">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@300;400;500;600;700&display=swap">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--cream:#F9F7F4;--gold:#C9A74A;--black:#0A0A0A}
+body{font-family:'Open Sans',sans-serif;background:var(--cream);color:var(--black);-webkit-text-size-adjust:100%}
+h1,h2,h3{font-family:'Roboto',sans-serif}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+
+/* Schlanke Kopfzeile — im Kiosk-Betrieb soll möglichst wenig
+   vom Bogen ablenken, deshalb keine volle Navigation. */
+header{background:var(--black);padding:1rem 2rem}
+header .cont{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.logo-nav{height:40px}
+.zurueck{color:var(--cream);text-decoration:none;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;opacity:.75}
+.zurueck:hover{color:var(--gold);opacity:1}
+
+.wrap{max-width:1100px;margin:0 auto;padding:3.5rem 2rem 5rem}
+.eyebrow{text-transform:uppercase;letter-spacing:.18em;font-size:.75rem;font-weight:700;color:var(--gold)}
+h1{font-size:clamp(2.25rem,6vw,3.5rem);font-weight:300;margin:.6rem 0 1.25rem;line-height:1.1}
+.lead{font-size:1.05rem;line-height:1.75;max-width:44rem;color:#3B3B3B}
+
+.boegen{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;margin-top:3rem}
+
+/* Kacheln sind bewusst groß: sie werden mit dem Finger auf dem iPad
+   getroffen, nicht mit der Maus. */
+.bogen{background:#fff;border:1px solid rgba(10,10,10,.1);border-radius:14px;padding:1.75rem;display:flex;flex-direction:column;min-height:200px;text-decoration:none;transition:border-color .2s,transform .2s,box-shadow .2s}
+a.bogen:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 10px 28px rgba(10,10,10,.08)}
+.bogen h2{font-size:1.3rem;font-weight:500;margin:0 0 .6rem;line-height:1.25}
+.bogen p{font-size:.925rem;line-height:1.6;color:#5A5A5A;flex:1}
+.status{display:inline-block;align-self:flex-start;margin-top:1.25rem;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.45rem .85rem;border-radius:50px}
+.status.offen{background:var(--gold);color:var(--black)}
+.status.bald{background:rgba(10,10,10,.06);color:#7A7A7A}
+.bogen.wartet{opacity:.72}
+
+.hinweis{margin-top:3.5rem;background:#fff;border:1px solid rgba(10,10,10,.1);border-left:4px solid var(--gold);border-radius:10px;padding:1.5rem 1.75rem}
+.hinweis h3{font-size:1.05rem;font-weight:500;margin-bottom:.6rem}
+.hinweis p{font-size:.9rem;line-height:1.7;color:#5A5A5A}
+.hinweis p + p{margin-top:.7rem}
+
+footer{background:var(--black);color:var(--cream);padding:2rem;text-align:center;font-size:.8rem}
+footer a{color:var(--gold);text-decoration:none}
+footer a:hover{text-decoration:underline}
+
+@media(max-width:640px){
+  header{padding:1rem}
+  .wrap{padding:2.5rem 1.25rem 3.5rem}
+  .bogen{padding:1.5rem;min-height:0}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="cont">
+    <a href="/"><img src="Logo.png" class="logo-nav" alt="Feminity Oberkassel"></a>
+    <a href="/" class="zurueck">Zur Website</a>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="eyebrow">Im Salon</div>
+  <h1>Erhebungsbögen</h1>
+  <p class="lead">
+    Vor bestimmten Behandlungen brauchen wir ein paar Angaben von Ihnen — zu Ihrer
+    Gesundheit, zu Medikamenten und dazu, was Sie sich wünschen. Das geht hier direkt
+    am Tablet: ausfüllen, mit dem Finger unterschreiben, fertig. Kein Papier, keine
+    Wartezeit an der Rezeption.
+  </p>
+
+  <div class="boegen">
+
+    <div class="bogen wartet">
+      <h2>Permanent Make-up</h2>
+      <p>
+        Anamnese vor der Pigmentierung: Medikamente, Blutverdünner, Allergien,
+        Hauterkrankungen und die Einwilligung in die Behandlung.
+      </p>
+      <span class="status bald">In Vorbereitung</span>
+    </div>
+
+    <div class="bogen wartet">
+      <h2>Laser-Haarentfernung</h2>
+      <p>
+        Vor der Behandlung mit dem Nd:YAG: Hauttyp, Sonnenexposition, lichtempfindliche
+        Medikamente und die Aufklärung nach der Strahlenschutzverordnung.
+      </p>
+      <span class="status bald">In Vorbereitung</span>
+    </div>
+
+    <div class="bogen wartet">
+      <h2>Beauty Drips &amp; NAD+</h2>
+      <p>
+        Vor der Infusion: Vorerkrankungen, Nieren- und Herzfunktion, Medikation,
+        Allergien und bekannte Unverträglichkeiten.
+      </p>
+      <span class="status bald">In Vorbereitung</span>
+    </div>
+
+    <div class="bogen wartet">
+      <h2>Neu bei uns</h2>
+      <p>
+        Der kurze Bogen für den ersten Besuch: Kontaktdaten, Behandlungswunsch,
+        Haar- und Hautzustand — ohne tiefe Gesundheitsfragen.
+      </p>
+      <span class="status bald">In Vorbereitung</span>
+    </div>
+
+  </div>
+
+  <div class="hinweis">
+    <h3>Was mit Ihren Angaben passiert</h3>
+    <p>
+      Die Bögen fragen teils nach Gesundheitsdaten. Die brauchen wir, um Sie sicher
+      behandeln zu können — und wir holen dafür vor dem Absenden Ihre ausdrückliche
+      Einwilligung ein.
+    </p>
+    <p>
+      Ihr ausgefüllter Bogen wird als PDF an unser Salon-Postfach übermittelt und dort
+      zu Ihrer Kundenakte genommen. Auf dem Tablet bleibt nichts zurück: Nach dem
+      Absenden ist das Formular geleert, die nächste Person beginnt mit einem leeren
+      Bogen. Einzelheiten stehen in unserer
+      <a href="/impressum.html">Datenschutzerklärung</a>.
+    </p>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2026 Groom&amp;Glow UG (haftungsbeschränkt) • <a href="/impressum.html">Impressum &amp; Datenschutz</a></p>
+</footer>
+
+</body>
+</html>

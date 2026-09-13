@@ -93,74 +93,90 @@ const deutscheZeit = (d) =>
   d.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Berlin' });
 
 // ── PDF ─────────────────────────────────────────────────────────────────────
+// Zielformat: eine A4-Seite. Der Bogen wird im Salon abgeheftet und soll
+// nicht aus zwei losen Blättern bestehen, von denen eines die Unterschrift
+// trägt. Deshalb kompakte Grade, enge Abstände und die beiden Ankreuzblöcke
+// nebeneinander statt untereinander.
+const SPALTE_BREITE = 240;
+const SPALTE_RECHTS = 267;
+
 function pdfBauen(bogen, d, unterschrift, jetzt) {
   const pdf = new Pdf();
+  const H = 10.5;  // Grad der Zwischenüberschriften
+  const feldStil = { spalte: 100, groesse: 9, zeilenhoehe: 11.5 };
 
-  pdf.text('Feminity Oberkassel · Groom&Glow UG (haftungsbeschränkt)', { groesse: 8.5, abstand: 2 });
-  pdf.text('Hansaallee 1a · 40549 Düsseldorf', { groesse: 8.5, abstand: 10 });
-  pdf.ueberschrift(bogen.titel, 16);
-  pdf.linie();
+  pdf.text('Feminity Oberkassel · Groom&Glow UG (haftungsbeschränkt) · Hansaallee 1a · 40549 Düsseldorf',
+    { groesse: 8, abstand: 6 });
+  pdf.ueberschrift(bogen.titel, 15, 5);
+  pdf.linie(0.6, 0.75, 9);
 
-  pdf.ueberschrift('Angaben zur Person', 11.5);
-  pdf.feld('Name', `${d.vorname} ${d.nachname}`);
-  if (d.geburtsdatum) pdf.feld('Geburtsdatum', datumAusFormular(d.geburtsdatum));
-  if (d.email) pdf.feld('E-Mail', d.email);
-  if (d.telefon) pdf.feld('Telefon', d.telefon);
+  pdf.ueberschrift('Angaben zur Person', H, 3);
+  pdf.feld('Name', `${d.vorname} ${d.nachname}`, feldStil);
+  if (d.geburtsdatum) pdf.feld('Geburtsdatum', datumAusFormular(d.geburtsdatum), feldStil);
+  if (d.email) pdf.feld('E-Mail', d.email, feldStil);
+  if (d.telefon) pdf.feld('Telefon', d.telefon, feldStil);
   pdf.luecke(6);
 
-  pdf.ueberschrift('Art der Aufnahmen', 11.5);
-  // Feste Reihenfolge wie im Formular — sonst steht das Angekreuzte oben und
-  // der Bogen liest sich anders als der Bildschirm, den die Person vor sich hatte.
+  // Zwei Spalten: links die Aufnahmearten, rechts die Verwendung.
+  // y wird gemerkt, die rechte Spalte beginnt wieder oben, und danach geht
+  // es unterhalb der längeren von beiden weiter.
   const medien = (d.medien || []).filter((m) => MEDIEN[m]);
-  for (const schluessel of Object.keys(MEDIEN)) {
-    pdf.text(`${medien.includes(schluessel) ? '[x]' : '[  ]'}  ${MEDIEN[schluessel]}`, { groesse: 10, abstand: 0 });
-  }
-  pdf.luecke(10);
-
-  pdf.ueberschrift('Verwendung', 11.5);
   const kanaele = (d.kanaele || []).filter((k) => KANAELE[k]);
-  for (const schluessel of Object.keys(KANAELE)) {
-    pdf.text(`${kanaele.includes(schluessel) ? '[x]' : '[  ]'}  ${KANAELE[schluessel]}`, { groesse: 10, abstand: 0 });
-  }
-  pdf.luecke(10);
+  const oben = pdf.y;
 
-  pdf.ueberschrift('Umfang', 11.5);
+  pdf.ueberschrift('Art der Aufnahmen', H, 3);
+  for (const schluessel of Object.keys(MEDIEN)) {
+    pdf.text(`${medien.includes(schluessel) ? '[x]' : '[  ]'}  ${MEDIEN[schluessel]}`,
+      { groesse: 9, abstand: 0, breite: SPALTE_BREITE });
+  }
+  const linksUnten = pdf.y;
+
+  // Zurück nach oben für die rechte Spalte. Die Überschrift wird hier als
+  // fetter Text gesetzt statt über ueberschrift(), weil sie den Einzug der
+  // Spalte braucht.
+  pdf.y = oben;
+  pdf.text('Verwendung', { groesse: H, fett: true, abstand: 3, einzug: SPALTE_RECHTS, breite: SPALTE_BREITE });
+  for (const schluessel of Object.keys(KANAELE)) {
+    pdf.text(`${kanaele.includes(schluessel) ? '[x]' : '[  ]'}  ${KANAELE[schluessel]}`,
+      { groesse: 9, abstand: 0, breite: SPALTE_BREITE, einzug: SPALTE_RECHTS });
+  }
+
+  pdf.y = Math.min(linksUnten, pdf.y) - 10;
+
+  pdf.ueberschrift('Umfang', H, 3);
   pdf.feld('Namensnennung', d.namensnennung === 'ja'
     ? 'Mein Vorname darf genannt werden'
-    : 'Mein Name darf nicht genannt werden');
+    : 'Mein Name darf nicht genannt werden', feldStil);
   pdf.feld('Erkennbarkeit', d.erkennbar === 'nein'
     ? 'Nur Aufnahmen, auf denen ich nicht erkennbar bin'
-    : 'Aufnahmen, auf denen ich erkennbar bin, sind erlaubt');
-  pdf.luecke(8);
+    : 'Aufnahmen, auf denen ich erkennbar bin, sind erlaubt', feldStil);
+  pdf.luecke(6);
 
-  pdf.ueberschrift('Erklärung', 11.5);
-  for (const absatz of bogen.rechtstext) pdf.text(absatz, { groesse: 9.5, abstand: 7 });
-  pdf.luecke(8);
+  pdf.ueberschrift('Erklärung', H, 3);
+  for (const absatz of bogen.rechtstext) pdf.text(absatz, { groesse: 8.5, abstand: 5 });
+  pdf.luecke(4);
 
-  // Der Unterschriftsblock darf nicht zwischen Ueberschrift und Strich
-  // auseinanderfallen — lieber eine neue Seite beginnen.
-  pdf.platz(d.minderjaehrig ? 230 : 190);
-  pdf.linie();
-  pdf.ueberschrift('Unterschrift', 11.5);
+  pdf.linie(0.6, 0.75, 9);
+  pdf.ueberschrift('Unterschrift', H, 3);
   if (d.minderjaehrig) {
-    pdf.text(
-      'Die einwilligende Person ist minderjährig. Es unterschreibt die gesetzliche Vertretung:',
-      { groesse: 9.5, abstand: 4 }
-    );
-    pdf.feld('Gesetzliche Vertretung', d.vertreter || '—');
+    pdf.text('Die einwilligende Person ist minderjährig. Es unterschreibt die gesetzliche Vertretung:',
+      { groesse: 8.5, abstand: 2 });
+    // Ohne Beschriftung — der Satz darüber sagt bereits, wer hier steht.
+    // Als Feld gesetzt stieße "Gesetzliche Vertretung" an den Namen.
+    pdf.text(d.vertreter || '—', { groesse: 9.5, fett: true, abstand: 4 });
   }
-  pdf.bild(unterschrift, 230, 85);
-  pdf.text(`${d.unterschriftsort || 'Düsseldorf'}, ${deutschesDatum(jetzt)}`, { groesse: 9.5, abstand: 2 });
+  pdf.bild(unterschrift, 200, 62);
+  pdf.text(`${d.unterschriftsort || 'Düsseldorf'}, ${deutschesDatum(jetzt)}`, { groesse: 9, abstand: 1 });
   pdf.text(
     d.minderjaehrig ? `${d.vertreter || ''} für ${d.vorname} ${d.nachname}` : `${d.vorname} ${d.nachname}`,
-    { groesse: 9.5, abstand: 12 }
+    { groesse: 9, abstand: 8 }
   );
 
-  pdf.linie(0.4, 0.85);
+  pdf.linie(0.4, 0.85, 8);
   pdf.text(
     `Digital erfasst im Salon am ${deutschesDatum(jetzt)} um ${deutscheZeit(jetzt)} Uhr. ` +
     'Die Unterschrift wurde auf einem Tablet mit dem Finger gezeichnet.',
-    { groesse: 8, abstand: 0 }
+    { groesse: 7.5, abstand: 0 }
   );
 
   return pdf.bauen();

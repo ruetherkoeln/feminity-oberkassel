@@ -12,7 +12,7 @@
 // abgedeckt, deshalb wird der Text nach cp1252 kodiert.
 
 const SEITE = { breite: 595.28, hoehe: 841.89 }; // A4 in Punkt
-const RAND = 56;
+const RAND = 44;
 const TEXTBREITE = SEITE.breite - 2 * RAND;
 
 // ── Text-Kodierung ──────────────────────────────────────────────────────────
@@ -166,17 +166,17 @@ class Pdf {
     this.y -= abstand;
   }
 
-  ueberschrift(inhalt, groesse = 15) {
+  ueberschrift(inhalt, groesse = 15, abstand = 8) {
     this.platz(groesse * 2.2);
-    this.text(inhalt, { groesse, fett: true, abstand: 8 });
+    this.text(inhalt, { groesse, fett: true, abstand });
   }
 
-  linie(staerke = 0.6, grau = 0.75) {
+  linie(staerke = 0.6, grau = 0.75, abstand = 12) {
     this.platz(10);
     this.aktuell.teile.push(
       `q ${grau} G ${staerke} w ${RAND} ${this.y.toFixed(2)} m ${(SEITE.breite - RAND).toFixed(2)} ${this.y.toFixed(2)} l S Q`
     );
-    this.y -= 12;
+    this.y -= abstand;
   }
 
   luecke(hoehe = 10) {
@@ -184,28 +184,27 @@ class Pdf {
   }
 
   // Beschriftung links, Wert rechts — für die Angaben aus dem Formular.
-  feld(bezeichnung, wert) {
-    const spalte = 150;
-    const zeilen = umbrechen(wert || '—', 10, false, TEXTBREITE - spalte);
-    this.platz(zeilen.length * 14.5 + 4);
+  feld(bezeichnung, wert, { spalte = 120, groesse = 9.5, zeilenhoehe = 12.5, breite = TEXTBREITE, einzug = 0 } = {}) {
+    const zeilen = umbrechen(wert || '—', groesse, false, breite - spalte);
+    this.platz(zeilen.length * zeilenhoehe + 4);
     const start = this.y;
     const bez = maskieren(nachCp1252(bezeichnung)).toString('latin1');
     this.aktuell.teile.push(
-      `BT /F2 9.5 Tf 1 0 0 1 ${RAND} ${start.toFixed(2)} Tm (${bez}) Tj ET`
+      `BT /F2 ${groesse} Tf 1 0 0 1 ${(RAND + einzug).toFixed(2)} ${start.toFixed(2)} Tm (${bez}) Tj ET`
     );
     let y = start;
     for (const zeile of zeilen) {
       const roh = maskieren(nachCp1252(zeile)).toString('latin1');
       this.aktuell.teile.push(
-        `BT /F1 10 Tf 1 0 0 1 ${(RAND + spalte).toFixed(2)} ${y.toFixed(2)} Tm (${roh}) Tj ET`
+        `BT /F1 ${groesse} Tf 1 0 0 1 ${(RAND + einzug + spalte).toFixed(2)} ${y.toFixed(2)} Tm (${roh}) Tj ET`
       );
-      y -= 14.5;
+      y -= zeilenhoehe;
     }
-    this.y = y - 3;
+    this.y = y - 2;
   }
 
   // jpeg: Buffer. Höhe wird aus dem Seitenverhältnis berechnet.
-  bild(jpeg, maxBreite = 220, maxHoehe = 90) {
+  bild(jpeg, maxBreite = 220, maxHoehe = 90, einzug = 0) {
     const info = jpegDaten(jpeg);
     let b = maxBreite;
     let h = (info.hoehe / info.breite) * b;
@@ -215,7 +214,7 @@ class Pdf {
     this.bilder.push({ name, jpeg, info });
     this.aktuell.bilder.push(name);
     this.aktuell.teile.push(
-      `q ${b.toFixed(2)} 0 0 ${h.toFixed(2)} ${RAND} ${(this.y - h).toFixed(2)} cm /${name} Do Q`
+      `q ${b.toFixed(2)} 0 0 ${h.toFixed(2)} ${(RAND + einzug).toFixed(2)} ${(this.y - h).toFixed(2)} cm /${name} Do Q`
     );
     this.y -= h + 6;
     return { breite: b, hoehe: h };

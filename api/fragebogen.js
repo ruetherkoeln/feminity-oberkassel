@@ -14,6 +14,7 @@ const MAX_FELD = 400;                   // Zeichen pro Textfeld
 // Jeder Bogen bringt seinen eigenen Rumpf mit. Kopf, Unterschrift und Fusszeile
 // sind fuer alle gleich und stehen weiter unten.
 const GESUNDHEIT = require('../im-salon/fragen-gesundheit.js');
+const MASSAGE = require('../im-salon/fragen-massage.js');
 
 const BOEGEN = {
   'einwilligung-bild-ton': {
@@ -40,6 +41,24 @@ const BOEGEN = {
     // genau die Angabe, auf die es angekommen waere.
     pruefen(f) {
       for (const frage of GESUNDHEIT.FRAGEN) {
+        const a = f.antworten[frage.id];
+        if (a !== 'ja' && a !== 'nein') return 'unvollstaendig';
+      }
+      return null;
+    },
+  },
+
+  massage: {
+    titel: 'Vor Ihrer Massage',
+    dateiname: 'Massage',
+    pflicht: ['vorname', 'nachname', 'geburtsdatum'],
+    text: ['vorname', 'nachname', 'geburtsdatum', 'behandlungsdatum', 'email', 'telefon',
+           'druck', 'schwerpunkt', 'aussparen', 'vertreter', 'unterschriftsort'],
+    listen: ['massagen'],
+    karten: ['antworten', 'details'],
+    koerper: koerperMassage,
+    pruefen(f) {
+      for (const frage of MASSAGE.ALLE) {
         const a = f.antworten[frage.id];
         if (a !== 'ja' && a !== 'nein') return 'unvollstaendig';
       }
@@ -82,6 +101,21 @@ const KANAELE = {
   website: 'Unsere Website und Salonprofile (z. B. Treatwell)',
   print: 'Print (z. B. Aushang im Salon, Flyer)',
 };
+
+// Erklaerung des Massage-Bogens — wandert mit ins PDF.
+const MASSAGE_ERKLAERUNG = [
+  'Ich habe die vorstehenden Fragen vollständig und wahrheitsgemäß beantwortet und teile ' +
+    'Änderungen meines Gesundheitszustands vor der nächsten Behandlung unaufgefordert mit.',
+  'Mir ist bekannt, dass es sich um eine Wellness- und Entspannungsmassage handelt. Sie ist ' +
+    'keine medizinische Heilbehandlung, dient nicht der Linderung von Krankheiten und ersetzt ' +
+    'weder ärztliche Untersuchung noch Physiotherapie.',
+  'Ich sage während der Behandlung sofort Bescheid, wenn mir etwas unangenehm ist, der Druck ' +
+    'zu stark wird, mir zu warm wird oder Schmerzen auftreten.',
+  'Ich willige ausdrücklich ein, dass Feminity Oberkassel die angegebenen Gesundheitsdaten ' +
+    'verarbeitet, um die Massage sicher durchführen zu können (Art. 9 Abs. 2 lit. a DSGVO). ' +
+    'Die Einwilligung ist freiwillig und jederzeit mit Wirkung für die Zukunft widerrufbar — ' +
+    'per E-Mail an admin@feminity-oberkassel.de.',
+];
 
 // Kontaktwege des Bogens "Persoenliche Daten" — steuern Formular und PDF.
 const KONTAKT = {
@@ -295,6 +329,62 @@ function koerperGesundheit(pdf, d) {
 
   pdf.ueberschrift('Erklärung', H, 3);
   for (const absatz of GESUNDHEIT_ERKLAERUNG) pdf.text(absatz, { groesse: 8.5, abstand: 5 });
+  pdf.luecke(2);
+}
+
+// ── Rumpf: Massage ──────────────────────────────────────────────────────────
+// Setzt eine Fragengruppe an einem Einzug; gibt zurueck, wo sie endet.
+function massageGruppe(pdf, gruppe, d, einzug) {
+  pdf.text(gruppe.titel, { groesse: 9.5, fett: true, abstand: 2, einzug, breite: SPALTE_BREITE });
+  for (const frage of gruppe.fragen) {
+    const antwort = d.antworten[frage.id] === 'ja' ? 'Ja' : 'Nein';
+    pdf.feld(antwort, frage.frage,
+      { spalte: 26, groesse: 8, zeilenhoehe: 9.8, breite: SPALTE_BREITE, einzug });
+    const detail = frage.detail && d.antworten[frage.id] === 'ja' ? (d.details[frage.id] || '') : '';
+    if (detail) {
+      pdf.text(`${frage.detail} ${detail}`,
+        { groesse: 7.5, abstand: 1, einzug: einzug + 26, breite: SPALTE_BREITE - 26 });
+    }
+  }
+  pdf.luecke(5);
+}
+
+function koerperMassage(pdf, d) {
+  personBauen(pdf, d);
+
+  const gewaehlt = (d.massagen || []).filter((m) => MASSAGE.MASSAGEN.some((x) => x.id === m));
+  const oben = pdf.y;
+
+  pdf.ueberschrift('Gewünschte Massage', H, 3);
+  pdf.text(
+    MASSAGE.MASSAGEN.filter((m) => gewaehlt.includes(m.id)).map((m) => m.name).join(' · ') || '—',
+    { groesse: 9, abstand: 0, breite: SPALTE_BREITE }
+  );
+  const linksUnten = pdf.y;
+
+  pdf.y = oben;
+  pdf.text('Druck', { groesse: H, fett: true, abstand: 3, einzug: SPALTE_RECHTS, breite: SPALTE_BREITE });
+  const druck = MASSAGE.DRUCK.find((x) => x.id === d.druck);
+  pdf.text(druck ? druck.name : '— (keine Angabe)',
+    { groesse: 9, abstand: 0, breite: SPALTE_BREITE, einzug: SPALTE_RECHTS });
+  pdf.y = Math.min(linksUnten, pdf.y) - 10;
+
+  if (d.schwerpunkt) pdf.feld('Schwerpunkt', d.schwerpunkt, { spalte: 100, groesse: 9, zeilenhoehe: 11.5 });
+  if (d.aussparen) pdf.feld('Bitte aussparen', d.aussparen, { spalte: 100, groesse: 9, zeilenhoehe: 11.5 });
+  if (d.schwerpunkt || d.aussparen) pdf.luecke(6);
+
+  pdf.ueberschrift('Gesundheitliche Angaben', H, 3);
+  const start = pdf.y;
+  const haelfte = Math.ceil(MASSAGE.GRUPPEN.length / 2);
+  for (const gruppe of MASSAGE.GRUPPEN.slice(0, haelfte)) massageGruppe(pdf, gruppe, d, 0);
+  const spalteLinks = pdf.y;
+
+  pdf.y = start;
+  for (const gruppe of MASSAGE.GRUPPEN.slice(haelfte)) massageGruppe(pdf, gruppe, d, SPALTE_RECHTS);
+  pdf.y = Math.min(spalteLinks, pdf.y) - 4;
+
+  pdf.ueberschrift('Erklärung', H, 3);
+  for (const absatz of MASSAGE_ERKLAERUNG) pdf.text(absatz, { groesse: 8, abstand: 4 });
   pdf.luecke(2);
 }
 

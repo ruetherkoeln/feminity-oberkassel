@@ -185,6 +185,11 @@ class Pdf {
 
   // Beschriftung links, Wert rechts — für die Angaben aus dem Formular.
   feld(bezeichnung, wert, { spalte = 120, groesse = 9.5, zeilenhoehe = 12.5, breite = TEXTBREITE, einzug = 0 } = {}) {
+    // Ist die Beschriftung breiter als ihre Spalte, ruecken Wert und Spalte
+    // nach rechts. Sonst stossen beide aneinander — das ist beim Setzen der
+    // Boegen zweimal passiert und laesst sich hier ein fuer alle Mal abstellen.
+    const noetig = textbreite(bezeichnung, groesse, true) + 8;
+    if (noetig > spalte) spalte = noetig;
     const zeilen = umbrechen(wert || '—', groesse, false, breite - spalte);
     this.platz(zeilen.length * zeilenhoehe + 4);
     const start = this.y;

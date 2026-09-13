@@ -8,7 +8,9 @@ Das Ergebnis geht als PDF per E-Mail an den Salon; gespeichert wird nichts.
 | Datei | Zweck |
 |---|---|
 | `im-salon.html` | Übersicht mit den Kacheln aller Bögen |
-| `im-salon/einwilligung-bild-ton.html` | Erster Bogen: Einwilligung Bild & Ton |
+| `im-salon/einwilligung-bild-ton.html` | Bogen: Einwilligung Bild & Ton |
+| `im-salon/gesundheitsfragebogen.html` | Bogen: Gesundheitsfragebogen |
+| `im-salon/fragen-gesundheit.js` | Fragenkatalog — von Browser **und** Server geladen |
 | `api/fragebogen.js` | Nimmt den Bogen entgegen, baut das PDF, verschickt es |
 | `api/_pdf.js` | PDF-Erzeuger |
 | `api/_smtp.js` | Mailversand über SMTP |
@@ -46,14 +48,39 @@ und **Preview**:
 
 Der Absender muss zum Postfach gehören — IONOS lehnt fremde Absenderadressen ab.
 
+## Der Fragenkatalog des Gesundheitsbogens
+
+`im-salon/fragen-gesundheit.js` ist die einzige Quelle für die Fragen. Die Datei
+wird zweimal geladen: im Browser über `<script src>`, um das Formular zu bauen,
+und auf dem Server über `require()`, um die Fragen ins PDF zu schreiben. Deshalb
+der doppelte Export am Ende der Datei.
+
+Eine Frage ändern heißt also: nur dort ändern. Die `id` eines Eintrags sollte
+dagegen stehen bleiben — sie ist der Schlüssel in der Übertragung, und alte
+Bögen im Postfach beziehen sich darauf.
+
 ## Einen weiteren Bogen anlegen
 
-1. In `api/fragebogen.js` im Objekt `BOEGEN` einen Eintrag ergänzen: `titel`,
-   `dateiname`, `pflicht` und den `rechtstext`, der ins PDF wandert.
-2. Den Abschnitt in `pdfBauen()` um die neuen Felder erweitern.
-3. Eine HTML-Datei unter `im-salon/` anlegen — am einfachsten als Kopie von
-   `einwilligung-bild-ton.html`; Unterschriftsfeld und Absende-Logik sind darin
-   vollständig enthalten und müssen nur um die neuen Felder ergänzt werden.
+1. In `api/fragebogen.js` im Objekt `BOEGEN` einen Eintrag ergänzen:
+   - `titel`, `dateiname`, `pflicht`
+   - `text` — Namen der einfachen Textfelder, die übernommen werden sollen
+   - `listen` — Namen der Mehrfachauswahlen (Arrays)
+   - `karten` — Namen der Objekte (wie `antworten` beim Gesundheitsbogen)
+   - `koerper` — die Funktion, die den Rumpf ins PDF schreibt
+   - optional `pruefen(felder)` für eigene Prüfungen; gibt einen Fehlerschlüssel
+     zurück oder `null`
+
+   Übernommen wird **nur**, was der Bogen so deklariert — alles andere verwirft
+   der Handler.
+
+2. Eine `koerper`-Funktion schreiben. Kopf, Angaben zur Person, Unterschrift und
+   Fußzeile kommen von `kopfBauen()`, `personBauen()` und `unterschriftBauen()`
+   und müssen nicht wiederholt werden.
+
+3. Eine HTML-Datei unter `im-salon/` anlegen — am einfachsten als Kopie eines
+   bestehenden Bogens; Unterschriftsfeld und Absende-Logik sind darin vollständig
+   enthalten.
+
 4. In `im-salon.html` die zugehörige Kachel von `wartet`/`bald` auf einen Link
    mit `status offen` umstellen.
 

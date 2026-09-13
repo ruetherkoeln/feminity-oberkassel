@@ -14,6 +14,7 @@ Das Ergebnis geht als PDF per E-Mail an den Salon; gespeichert wird nichts.
 | `im-salon/massage.html` | Bogen: Vor Ihrer Massage |
 | `im-salon/fragen-gesundheit.js` | Fragenkatalog Gesundheit — von Browser **und** Server geladen |
 | `im-salon/fragen-massage.js` | Fragenkatalog Massage — ebenso |
+| `im-salon/senden.js` | Absenden mit Wiederholung — von allen vier Bögen genutzt |
 | `api/fragebogen.js` | Nimmt den Bogen entgegen, baut das PDF, verschickt es |
 | `api/_pdf.js` | PDF-Erzeuger |
 | `api/_smtp.js` | Mailversand über SMTP |
@@ -86,6 +87,25 @@ Bögen im Postfach beziehen sich darauf.
 
 4. In `im-salon.html` die zugehörige Kachel von `wartet`/`bald` auf einen Link
    mit `status offen` umstellen.
+
+## Wenn der Versand klemmt
+
+Zwei Stufen greifen hintereinander:
+
+1. **Server** (`sendenMitZweitversuch` in `api/fragebogen.js`): wiederholt bei einem
+   SMTP-4xx genau einmal nach 1,5 Sekunden. Deckt einen kurzen Aussetzer ab.
+2. **Browser** (`im-salon/senden.js`): wiederholt drei Minuten lang alle 30 Sekunden,
+   sichtbar mit Countdown und Abbrechen-Knopf. Deckt eine Sperre über Minuten ab —
+   genau der Fall vom 13.09.2026, als IONOS nach vielen Testmails eine halbe Stunde
+   lang nichts mehr annahm.
+
+Bei endgültigen Fehlern (fehlende Pflichtangabe, fehlende Einwilligung, fehlende
+Konfiguration) wird **nicht** wiederholt — die beheben sich durch Warten nicht.
+
+Die Angaben liegen währenddessen ausschließlich im Arbeitsspeicher der offenen Seite.
+Bewusst nicht in `sessionStorage`: Das Tablet geht von Hand zu Hand. Preis dafür: Wird
+die Seite geschlossen, ist der Bogen weg. Ein Rückfallweg, der das PDF stattdessen zum
+Sichern anbietet, ist besprochen, aber noch nicht gebaut.
 
 ## Datenschutz
 

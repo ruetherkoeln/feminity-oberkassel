@@ -99,6 +99,9 @@ button{font:inherit;cursor:pointer;border-radius:50px;border:2px solid transpare
 
 .meldung{display:none;margin-top:1rem;padding:1rem 1.25rem;border-radius:10px;font-size:.92rem;line-height:1.6}
 .meldung.fehler{display:block;background:rgba(179,38,30,.09);border:1px solid rgba(179,38,30,.35);color:var(--rot)}
+.meldung.warten{display:block;background:rgba(201,167,74,.14);border:1px solid rgba(201,167,74,.5);color:#5A4718}
+.warten-status{margin-top:.55rem;font-size:.85rem;font-variant-numeric:tabular-nums}
+.meldung.warten button{margin-top:.8rem}
 
 .danke{display:none;text-align:center;padding:3.5rem 1.5rem}
 .danke.an{display:block}
@@ -234,6 +237,7 @@ footer a{color:var(--gold);text-decoration:none}
 
 <!-- Fragenkatalog — dieselbe Datei, die der Server fürs PDF liest -->
 <script src="/im-salon/fragen-gesundheit.js"></script>
+<script src="/im-salon/senden.js"></script>
 <script>
 (function () {
   'use strict';
@@ -402,14 +406,67 @@ footer a{color:var(--gold);text-decoration:none}
     vertreter: 'Bitte tragen Sie den Namen der gesetzlichen Vertretung ein.',
     einwilligung: 'Bitte bestätigen Sie die Erklärung.',
     signatur: 'Bitte unterschreiben Sie im dafür vorgesehenen Feld.',
+    aufgegeben: 'Der Versand klappt gerade nicht. Bitte sagen Sie uns Bescheid, bevor Sie die Seite schließen.',
+    abgebrochen: 'Abgebrochen. Sie können es erneut versuchen — Ihre Angaben stehen noch.',
     versand: 'Der Bogen konnte nicht versendet werden. Bitte sagen Sie uns kurz Bescheid.',
     konfiguration: 'Der Versand ist noch nicht eingerichtet. Bitte an der Rezeption melden.',
     pdf: 'Das Dokument konnte nicht erzeugt werden. Bitte an der Rezeption melden.'
   };
 
+  // ── Warten und Wiederholen ───────────────────────────────────────────────
+  var lauf = null;          // laufender Sendeversuch, damit er abbrechbar bleibt
+  var warteStatus = null;   // Zeile mit dem Countdown
+
+  function zuruecksetzen() {
+    sendenBtn.disabled = false;
+    sendenBtn.textContent = 'Fragebogen absenden';
+  }
+
+  function wartenZeigen(bisVersuch, rest, versuch) {
+    // Kasten nur einmal bauen und danach nur die Zahlen tauschen — sonst
+    // wuerde der Abbrechen-Knopf jede Sekunde neu entstehen.
+    if (!warteStatus) {
+      meldung.className = 'meldung warten';
+      meldung.textContent = '';
+
+      var text = document.createElement('div');
+      var stark = document.createElement('strong');
+      stark.textContent = 'Der Versand klemmt gerade. ';
+      text.appendChild(stark);
+      text.appendChild(document.createTextNode(
+        'Wir versuchen es automatisch weiter. Bitte lassen Sie diese Seite offen — '
+        + 'Ihre Angaben sind noch da.'));
+      meldung.appendChild(text);
+
+      warteStatus = document.createElement('div');
+      warteStatus.className = 'warten-status';
+      meldung.appendChild(warteStatus);
+
+      var abbrechen = document.createElement('button');
+      abbrechen.type = 'button';
+      abbrechen.className = 'btn-klein';
+      abbrechen.textContent = 'Abbrechen';
+      abbrechen.addEventListener('click', function () {
+        if (lauf) lauf.abbrechen();
+        lauf = null;
+        warteStatus = null;
+        zuruecksetzen();
+        fehlerZeigen(FEHLERTEXT.abgebrochen);
+      });
+      meldung.appendChild(abbrechen);
+
+      sendenBtn.textContent = 'Wird erneut versucht …';
+      meldung.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    warteStatus.textContent =
+      'Nächster Versuch in ' + bisVersuch + ' Sekunden · '
+      + versuch + '. Versuch · noch ' + rest + ' Sekunden';
+  }
+
   form.addEventListener('submit', function (ev) {
     ev.preventDefault();
     meldung.className = 'meldung';
+    warteStatus = null;
 
     var vorname = document.getElementById('vorname').value.trim();
     var nachname = document.getElementById('nachname').value.trim();
@@ -467,28 +524,25 @@ footer a{color:var(--gold);text-decoration:none}
     sendenBtn.disabled = true;
     sendenBtn.textContent = 'Wird gesendet …';
 
-    fetch('/api/fragebogen', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(daten)
-    })
-      .then(function (a) { return a.json().catch(function () { return {}; }); })
-      .then(function (a) {
-        if (!a.ok) throw new Error(a.fehler || 'versand');
+    lauf = window.ABSENDEN.absenden(daten, {
+      erfolg: function () {
+        lauf = null;
+        meldung.className = 'meldung';
+        zuruecksetzen();
         document.getElementById('dankeText').textContent = daten.email
           ? 'Ihr Fragebogen ist bei uns angekommen. Eine Kopie liegt gleich in Ihrem Postfach.'
           : 'Ihr Fragebogen ist bei uns angekommen.';
         document.getElementById('formular').style.display = 'none';
         document.getElementById('danke').classList.add('an');
         window.scrollTo({ top: 0, behavior: 'smooth' });
-      })
-      .catch(function (e) {
-        fehlerZeigen(FEHLERTEXT[e.message] || FEHLERTEXT.versand);
-      })
-      .then(function () {
-        sendenBtn.disabled = false;
-        sendenBtn.textContent = 'Fragebogen absenden';
-      });
+      },
+      wartet: wartenZeigen,
+      fehler: function (code, fristAbgelaufen) {
+        lauf = null;
+        zuruecksetzen();
+        fehlerZeigen(fristAbgelaufen ? FEHLERTEXT.aufgegeben : (FEHLERTEXT[code] || FEHLERTEXT.versand));
+      }
+    });
   });
 
   // Auf einem geteilten Tablet darf nichts von der Vorgängerin stehen bleiben.

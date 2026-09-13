@@ -46,6 +46,29 @@ const BOEGEN = {
       return null;
     },
   },
+
+  'persoenliche-daten': {
+    titel: 'Persönliche Daten und Erreichbarkeit',
+    dateiname: 'Persoenliche-Daten',
+    pflicht: ['vorname', 'nachname'],
+    text: ['vorname', 'nachname', 'email', 'mobil', 'strasse', 'plz', 'ort',
+           'vertreter', 'unterschriftsort'],
+    karten: ['antworten'],
+    koerper: koerperKontakt,
+    pruefen(f) {
+      for (const schluessel of Object.keys(KONTAKT)) {
+        const a = f.antworten[schluessel];
+        if (a !== 'ja' && a !== 'nein') return 'unvollstaendig';
+      }
+      // Wer per WhatsApp erreicht werden moechte, muss eine Nummer angeben —
+      // sonst steht eine Einwilligung ohne Weg, sie einzuloesen.
+      if (f.antworten.whatsapp === 'ja' && !f.mobil) return 'mobil';
+      // Dasselbe fuer die uebrigen Wege: irgendein Kanal muss da sein.
+      const willKontakt = Object.keys(KONTAKT).some((k) => f.antworten[k] === 'ja');
+      if (willKontakt && !f.email && !f.mobil) return 'kontaktweg';
+      return null;
+    },
+  },
 };
 
 // Steuern Formular und PDF des Einwilligungsbogens gleichermassen.
@@ -59,6 +82,29 @@ const KANAELE = {
   website: 'Unsere Website und Salonprofile (z. B. Treatwell)',
   print: 'Print (z. B. Aushang im Salon, Flyer)',
 };
+
+// Kontaktwege des Bogens "Persoenliche Daten" — steuern Formular und PDF.
+const KONTAKT = {
+  erinnerungen: 'Terminerinnerungen und Neuigkeiten aus dem Salon',
+  whatsapp: 'WhatsApp-Broadcast',
+  events: 'Infos und Einladungen zu Events',
+};
+
+const KONTAKT_ERKLAERUNG = [
+  'Ich willige ein, dass Feminity Oberkassel mich auf den oben gewählten Wegen kontaktiert. ' +
+    'Die Einwilligung ist freiwillig; ohne sie kann ich den Salon wie gewohnt besuchen.',
+  'Ich kann die Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen, formlos und ohne ' +
+    'Angabe von Gründen — per E-Mail an admin@feminity-oberkassel.de oder mit einer kurzen ' +
+    'Nachricht im Salon. Dafür entstehen keine anderen als die Übermittlungskosten nach den ' +
+    'Basistarifen.',
+  'Meine Daten werden nicht an Dritte weitergegeben und nicht für Werbung fremder Unternehmen ' +
+    'verwendet.',
+  'Beim WhatsApp-Broadcast wird meine Mobilnummer im WhatsApp-Geschäftskonto des Salons ' +
+    'gespeichert; die Übermittlung läuft über Meta Platforms Ireland Ltd. Wer das nicht möchte, ' +
+    'wählt hier Nein und bleibt über die übrigen Wege erreichbar.',
+  'Rechtsgrundlage ist Artikel 6 Absatz 1 Buchstabe a der Datenschutz-Grundverordnung. ' +
+    'Verantwortlich ist die Groom&Glow UG (haftungsbeschränkt), Hansaallee 1a, 40549 Düsseldorf.',
+];
 
 // Erklaerung des Einwilligungsbogens — wandert mit ins PDF.
 const EINWILLIGUNG_RECHTSTEXT = [
@@ -249,6 +295,28 @@ function koerperGesundheit(pdf, d) {
 
   pdf.ueberschrift('Erklärung', H, 3);
   for (const absatz of GESUNDHEIT_ERKLAERUNG) pdf.text(absatz, { groesse: 8.5, abstand: 5 });
+  pdf.luecke(2);
+}
+
+// ── Rumpf: Persoenliche Daten und Erreichbarkeit ────────────────────────────
+function koerperKontakt(pdf, d) {
+  pdf.ueberschrift('Angaben zur Person', H, 3);
+  pdf.feld('Name', `${d.vorname} ${d.nachname}`, FELD);
+  pdf.feld('E-Mail', d.email || '—', FELD);
+  pdf.feld('Mobilnummer', d.mobil || '—', FELD);
+  const anschrift = [d.strasse, [d.plz, d.ort].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+  pdf.feld('Anschrift', anschrift || '— (freiwillig, nicht angegeben)', FELD);
+  pdf.luecke(8);
+
+  pdf.ueberschrift('Dürfen wir uns melden?', H, 3);
+  for (const schluessel of Object.keys(KONTAKT)) {
+    const antwort = d.antworten[schluessel] === 'ja' ? 'Ja' : 'Nein';
+    pdf.feld(antwort, KONTAKT[schluessel], { spalte: 30, groesse: 9, zeilenhoehe: 12.5 });
+  }
+  pdf.luecke(8);
+
+  pdf.ueberschrift('Erklärung', H, 3);
+  for (const absatz of KONTAKT_ERKLAERUNG) pdf.text(absatz, { groesse: 8.5, abstand: 5 });
   pdf.luecke(2);
 }
 

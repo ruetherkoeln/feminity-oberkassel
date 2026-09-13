@@ -239,6 +239,9 @@ footer a{color:var(--gold);text-decoration:none}
     eingabe.type = 'text';
     eingabe.id = 'b_' + f.id;
     eingabe.autocomplete = 'off';
+    // Als Attribut, nicht als Eigenschaft: form.reset() stellt den
+    // Ausgangswert wieder her, und der soll die Vorgabe sein, nicht leer.
+    if (f.standard) eingabe.setAttribute('value', f.standard);
     l.appendChild(span); l.appendChild(eingabe);
     behandlungBox.appendChild(l);
   });

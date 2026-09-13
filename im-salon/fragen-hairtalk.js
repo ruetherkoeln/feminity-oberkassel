@@ -18,7 +18,7 @@
     { id: 'qualitaet', name: 'Qualität / Länge / Farbe' },
     { id: 'tressen', name: 'Anzahl Tressen' },
     { id: 'einsetztermin', name: 'Termin zum Einsetzen' },
-    { id: 'stylistin', name: 'Stylistin' },
+    { id: 'stylistin', name: 'Stylistin', standard: 'Evelin' },
   ];
 
   var BESTAETIGUNGEN = [

@@ -11,34 +11,44 @@ const MAX_KOERPER = 3 * 1024 * 1024;   // 3 MB — die Unterschrift wiegt wenige
 const MAX_FELD = 400;                   // Zeichen pro Textfeld
 
 // ── Bogen-Definitionen ──────────────────────────────────────────────────────
-// Weitere Bögen werden hier ergänzt; Formular und PDF bleiben dieselbe Maschine.
+// Jeder Bogen bringt seinen eigenen Rumpf mit. Kopf, Unterschrift und Fusszeile
+// sind fuer alle gleich und stehen weiter unten.
+const GESUNDHEIT = require('../im-salon/fragen-gesundheit.js');
+
 const BOEGEN = {
   'einwilligung-bild-ton': {
     titel: 'Einwilligung in Bild- und Tonaufnahmen',
     dateiname: 'Einwilligung-Bild-Ton',
     pflicht: ['vorname', 'nachname'],
-    // Rechtlicher Text, der mit ins PDF wandert — der unterschriebene Bogen
-    // muss aus sich heraus belegen, worin eingewilligt wurde.
-    rechtstext: [
-      'Ich willige ein, dass die oben bezeichneten Aufnahmen von mir angefertigt und für die ' +
-        'angekreuzten Zwecke verwendet werden dürfen. Die Einwilligung erfolgt freiwillig; ' +
-        'aus einer Verweigerung entstehen mir keine Nachteile, insbesondere bleibt mein ' +
-        'Behandlungstermin davon unberührt.',
-      'Die Einwilligung ist jederzeit mit Wirkung für die Zukunft widerrufbar, formlos und ohne ' +
-        'Angabe von Gründen — per E-Mail an admin@feminity-oberkassel.de. Bereits erfolgte ' +
-        'Veröffentlichungen werden daraufhin unverzüglich entfernt, soweit dies möglich und ' +
-        'zumutbar ist. Bei Aufnahmen, die bereits von Dritten geteilt wurden, kann eine ' +
-        'vollständige Entfernung aus dem Internet nicht zugesichert werden.',
-      'Eine Vergütung für die Aufnahmen und ihre Verwendung wird nicht gewährt.',
-      'Rechtsgrundlage ist Artikel 6 Absatz 1 Buchstabe a der Datenschutz-Grundverordnung in ' +
-        'Verbindung mit § 22 Kunsturhebergesetz. Verantwortlich ist die Groom&Glow UG ' +
-        '(haftungsbeschränkt), Hansaallee 1a, 40549 Düsseldorf.',
-    ],
+    text: ['vorname', 'nachname', 'geburtsdatum', 'email', 'telefon', 'vertreter',
+           'unterschriftsort', 'namensnennung', 'erkennbar'],
+    listen: ['medien', 'kanaele'],
+    koerper: koerperEinwilligung,
+  },
+
+  gesundheitsfragebogen: {
+    titel: 'Gesundheitsfragebogen',
+    dateiname: 'Gesundheitsfragebogen',
+    pflicht: ['vorname', 'nachname', 'geburtsdatum'],
+    text: ['vorname', 'nachname', 'geburtsdatum', 'email', 'telefon', 'vertreter',
+           'unterschriftsort'],
+    listen: ['behandlungen'],
+    // Antworten und Freitexte kommen als Objekte, nicht als einzelne Felder
+    karten: ['antworten', 'details'],
+    koerper: koerperGesundheit,
+    // Jede Frage braucht ein Ja oder Nein — eine Luecke waere im Zweifel
+    // genau die Angabe, auf die es angekommen waere.
+    pruefen(f) {
+      for (const frage of GESUNDHEIT.ALLE) {
+        const a = f.antworten[frage.id];
+        if (a !== 'ja' && a !== 'nein') return 'unvollstaendig';
+      }
+      return null;
+    },
   },
 };
 
-// Diese beiden Tabellen steuern Formular und PDF gleichermaßen: Was hier
-// steht, erscheint im Bogen als Ankreuzfeld und im PDF als [x] bzw. [ ].
+// Steuern Formular und PDF des Einwilligungsbogens gleichermassen.
 const MEDIEN = {
   foto: 'Fotos',
   video: 'Videos (Bild und Ton)',
@@ -49,6 +59,39 @@ const KANAELE = {
   website: 'Unsere Website und Salonprofile (z. B. Treatwell)',
   print: 'Print (z. B. Aushang im Salon, Flyer)',
 };
+
+// Erklaerung des Einwilligungsbogens — wandert mit ins PDF.
+const EINWILLIGUNG_RECHTSTEXT = [
+  'Ich willige ein, dass die oben bezeichneten Aufnahmen von mir angefertigt und für die ' +
+    'angekreuzten Zwecke verwendet werden dürfen. Die Einwilligung erfolgt freiwillig; ' +
+    'aus einer Verweigerung entstehen mir keine Nachteile, insbesondere bleibt mein ' +
+    'Behandlungstermin davon unberührt.',
+  'Die Einwilligung ist jederzeit mit Wirkung für die Zukunft widerrufbar, formlos und ohne ' +
+    'Angabe von Gründen — per E-Mail an admin@feminity-oberkassel.de. Bereits erfolgte ' +
+    'Veröffentlichungen werden daraufhin unverzüglich entfernt, soweit dies möglich und ' +
+    'zumutbar ist. Bei Aufnahmen, die bereits von Dritten geteilt wurden, kann eine ' +
+    'vollständige Entfernung aus dem Internet nicht zugesichert werden.',
+  'Eine Vergütung für die Aufnahmen und ihre Verwendung wird nicht gewährt.',
+  'Rechtsgrundlage ist Artikel 6 Absatz 1 Buchstabe a der Datenschutz-Grundverordnung in ' +
+    'Verbindung mit § 22 Kunsturhebergesetz. Verantwortlich ist die Groom&Glow UG ' +
+    '(haftungsbeschränkt), Hansaallee 1a, 40549 Düsseldorf.',
+];
+
+// Erklaerungen des Gesundheitsbogens — wandern mit ins PDF, damit der
+// unterschriebene Bogen aus sich heraus belegt, was erklaert wurde.
+const GESUNDHEIT_ERKLAERUNG = [
+  'Ich habe die vorstehenden Fragen vollständig und wahrheitsgemäß beantwortet.',
+  'Ich willige ausdrücklich ein, dass Feminity Oberkassel die angegebenen Gesundheitsdaten ' +
+    'verarbeitet, um die Behandlung sicher planen und durchführen zu können ' +
+    '(Art. 9 Abs. 2 lit. a DSGVO). Diese Einwilligung ist freiwillig und jederzeit mit Wirkung ' +
+    'für die Zukunft widerrufbar — per E-Mail an admin@feminity-oberkassel.de. Ohne sie kann ' +
+    'die Behandlung aus Sicherheitsgründen nicht durchgeführt werden.',
+  'Ich wurde über Ablauf, Wirkung und mögliche Risiken der gewünschten Behandlung aufgeklärt ' +
+    'und hatte Gelegenheit, Fragen zu stellen.',
+  'Ändert sich mein Gesundheitszustand, teile ich das vor der nächsten Behandlung unaufgefordert mit.',
+  'Mir ist bekannt, dass die Beratung im Salon keine ärztliche Beratung ersetzt und dass ich ' +
+    'im Zweifel ärztlichen Rat einholen sollte.',
+];
 
 // ── Hilfen ──────────────────────────────────────────────────────────────────
 const txt = (wert) => String(wert === undefined || wert === null ? '' : wert).trim().slice(0, MAX_FELD);
@@ -93,92 +136,145 @@ const deutscheZeit = (d) =>
   d.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Berlin' });
 
 // ── PDF ─────────────────────────────────────────────────────────────────────
-// Zielformat: eine A4-Seite. Der Bogen wird im Salon abgeheftet und soll
-// nicht aus zwei losen Blättern bestehen, von denen eines die Unterschrift
-// trägt. Deshalb kompakte Grade, enge Abstände und die beiden Ankreuzblöcke
-// nebeneinander statt untereinander.
+// Zielformat: eine A4-Seite je Bogen. Die Blaetter werden im Salon abgeheftet
+// und sollen nicht auseinanderfallen, wobei die Unterschrift ohne den Text
+// endet, zu dem sie gehoert. Daher kompakte Grade, enge Abstaende und
+// Spaltensatz, wo es die Hoehe halbiert.
 const SPALTE_BREITE = 240;
 const SPALTE_RECHTS = 267;
+const H = 10.5;                                                  // Zwischenüberschriften
+const FELD = { spalte: 100, groesse: 9, zeilenhoehe: 11.5 };     // Beschriftung + Wert
 
-function pdfBauen(bogen, d, unterschrift, jetzt) {
-  const pdf = new Pdf();
-  const H = 10.5;  // Grad der Zwischenüberschriften
-  const feldStil = { spalte: 100, groesse: 9, zeilenhoehe: 11.5 };
-
+function kopfBauen(pdf, bogen) {
   pdf.text('Feminity Oberkassel · Groom&Glow UG (haftungsbeschränkt) · Hansaallee 1a · 40549 Düsseldorf',
     { groesse: 8, abstand: 6 });
   pdf.ueberschrift(bogen.titel, 15, 5);
   pdf.linie(0.6, 0.75, 9);
+}
 
+function personBauen(pdf, d) {
   pdf.ueberschrift('Angaben zur Person', H, 3);
-  pdf.feld('Name', `${d.vorname} ${d.nachname}`, feldStil);
-  if (d.geburtsdatum) pdf.feld('Geburtsdatum', datumAusFormular(d.geburtsdatum), feldStil);
-  if (d.email) pdf.feld('E-Mail', d.email, feldStil);
-  if (d.telefon) pdf.feld('Telefon', d.telefon, feldStil);
+  pdf.feld('Name', `${d.vorname} ${d.nachname}`, FELD);
+  if (d.geburtsdatum) pdf.feld('Geburtsdatum', datumAusFormular(d.geburtsdatum), FELD);
+  if (d.email) pdf.feld('E-Mail', d.email, FELD);
+  if (d.telefon) pdf.feld('Telefon', d.telefon, FELD);
   pdf.luecke(6);
+}
 
-  // Zwei Spalten: links die Aufnahmearten, rechts die Verwendung.
-  // y wird gemerkt, die rechte Spalte beginnt wieder oben, und danach geht
-  // es unterhalb der längeren von beiden weiter.
-  const medien = (d.medien || []).filter((m) => MEDIEN[m]);
-  const kanaele = (d.kanaele || []).filter((k) => KANAELE[k]);
-  const oben = pdf.y;
-
-  pdf.ueberschrift('Art der Aufnahmen', H, 3);
-  for (const schluessel of Object.keys(MEDIEN)) {
-    pdf.text(`${medien.includes(schluessel) ? '[x]' : '[  ]'}  ${MEDIEN[schluessel]}`,
-      { groesse: 9, abstand: 0, breite: SPALTE_BREITE });
-  }
-  const linksUnten = pdf.y;
-
-  // Zurück nach oben für die rechte Spalte. Die Überschrift wird hier als
-  // fetter Text gesetzt statt über ueberschrift(), weil sie den Einzug der
-  // Spalte braucht.
-  pdf.y = oben;
-  pdf.text('Verwendung', { groesse: H, fett: true, abstand: 3, einzug: SPALTE_RECHTS, breite: SPALTE_BREITE });
-  for (const schluessel of Object.keys(KANAELE)) {
-    pdf.text(`${kanaele.includes(schluessel) ? '[x]' : '[  ]'}  ${KANAELE[schluessel]}`,
-      { groesse: 9, abstand: 0, breite: SPALTE_BREITE, einzug: SPALTE_RECHTS });
-  }
-
-  pdf.y = Math.min(linksUnten, pdf.y) - 10;
-
-  pdf.ueberschrift('Umfang', H, 3);
-  pdf.feld('Namensnennung', d.namensnennung === 'ja'
-    ? 'Mein Vorname darf genannt werden'
-    : 'Mein Name darf nicht genannt werden', feldStil);
-  pdf.feld('Erkennbarkeit', d.erkennbar === 'nein'
-    ? 'Nur Aufnahmen, auf denen ich nicht erkennbar bin'
-    : 'Aufnahmen, auf denen ich erkennbar bin, sind erlaubt', feldStil);
-  pdf.luecke(6);
-
-  pdf.ueberschrift('Erklärung', H, 3);
-  for (const absatz of bogen.rechtstext) pdf.text(absatz, { groesse: 8.5, abstand: 5 });
-  pdf.luecke(4);
-
+function unterschriftBauen(pdf, d, jetzt) {
   pdf.linie(0.6, 0.75, 9);
   pdf.ueberschrift('Unterschrift', H, 3);
   if (d.minderjaehrig) {
-    pdf.text('Die einwilligende Person ist minderjährig. Es unterschreibt die gesetzliche Vertretung:',
+    pdf.text('Die unterzeichnende Person ist minderjährig. Es unterschreibt die gesetzliche Vertretung:',
       { groesse: 8.5, abstand: 2 });
     // Ohne Beschriftung — der Satz darüber sagt bereits, wer hier steht.
-    // Als Feld gesetzt stieße "Gesetzliche Vertretung" an den Namen.
     pdf.text(d.vertreter || '—', { groesse: 9.5, fett: true, abstand: 4 });
   }
-  pdf.bild(unterschrift, 200, 62);
+  pdf.bild(d._unterschrift, 200, 62);
   pdf.text(`${d.unterschriftsort || 'Düsseldorf'}, ${deutschesDatum(jetzt)}`, { groesse: 9, abstand: 1 });
   pdf.text(
     d.minderjaehrig ? `${d.vertreter || ''} für ${d.vorname} ${d.nachname}` : `${d.vorname} ${d.nachname}`,
     { groesse: 9, abstand: 8 }
   );
-
   pdf.linie(0.4, 0.85, 8);
   pdf.text(
     `Digital erfasst im Salon am ${deutschesDatum(jetzt)} um ${deutscheZeit(jetzt)} Uhr. ` +
     'Die Unterschrift wurde auf einem Tablet mit dem Finger gezeichnet.',
     { groesse: 7.5, abstand: 0 }
   );
+}
 
+// ── Rumpf: Einwilligung Bild und Ton ────────────────────────────────────────
+function koerperEinwilligung(pdf, d) {
+  personBauen(pdf, d);
+
+  // Zwei Spalten: links die Aufnahmearten, rechts die Verwendung. y wird
+  // gemerkt, die rechte Spalte beginnt wieder oben, danach geht es unterhalb
+  // der längeren von beiden weiter.
+  const medien = (d.medien || []).filter((m) => MEDIEN[m]);
+  const kanaele = (d.kanaele || []).filter((k) => KANAELE[k]);
+  const oben = pdf.y;
+
+  pdf.ueberschrift('Art der Aufnahmen', H, 3);
+  for (const k of Object.keys(MEDIEN)) {
+    pdf.text(`${medien.includes(k) ? '[x]' : '[  ]'}  ${MEDIEN[k]}`,
+      { groesse: 9, abstand: 0, breite: SPALTE_BREITE });
+  }
+  const linksUnten = pdf.y;
+
+  pdf.y = oben;
+  pdf.text('Verwendung', { groesse: H, fett: true, abstand: 3, einzug: SPALTE_RECHTS, breite: SPALTE_BREITE });
+  for (const k of Object.keys(KANAELE)) {
+    pdf.text(`${kanaele.includes(k) ? '[x]' : '[  ]'}  ${KANAELE[k]}`,
+      { groesse: 9, abstand: 0, breite: SPALTE_BREITE, einzug: SPALTE_RECHTS });
+  }
+  pdf.y = Math.min(linksUnten, pdf.y) - 10;
+
+  pdf.ueberschrift('Umfang', H, 3);
+  pdf.feld('Namensnennung', d.namensnennung === 'ja'
+    ? 'Mein Vorname darf genannt werden'
+    : 'Mein Name darf nicht genannt werden', FELD);
+  pdf.feld('Erkennbarkeit', d.erkennbar === 'nein'
+    ? 'Nur Aufnahmen, auf denen ich nicht erkennbar bin'
+    : 'Aufnahmen, auf denen ich erkennbar bin, sind erlaubt', FELD);
+  pdf.luecke(6);
+
+  pdf.ueberschrift('Erklärung', H, 3);
+  for (const absatz of EINWILLIGUNG_RECHTSTEXT) pdf.text(absatz, { groesse: 8.5, abstand: 5 });
+  pdf.luecke(4);
+}
+
+// ── Rumpf: Gesundheitsfragebogen ────────────────────────────────────────────
+// Die Antwort steht vorn und fett, die Frage dahinter: Beim Durchsehen sucht
+// man die Ja-Antworten, nicht die Fragen.
+function gruppeBauen(pdf, gruppe, d, einzug) {
+  pdf.text(gruppe.titel, { groesse: 9.5, fett: true, abstand: 2, einzug, breite: SPALTE_BREITE });
+  for (const frage of gruppe.fragen) {
+    const antwort = d.antworten[frage.id] === 'ja' ? 'Ja' : 'Nein';
+    pdf.feld(antwort, frage.frage,
+      { spalte: 26, groesse: 8, zeilenhoehe: 9.8, breite: SPALTE_BREITE, einzug });
+    const detail = frage.detail && d.antworten[frage.id] === 'ja' ? (d.details[frage.id] || '') : '';
+    if (detail) {
+      pdf.text(`${frage.detail} ${detail}`,
+        { groesse: 7.5, abstand: 1, einzug: einzug + 26, breite: SPALTE_BREITE - 26 });
+    }
+  }
+  pdf.luecke(5);
+}
+
+function koerperGesundheit(pdf, d) {
+  personBauen(pdf, d);
+
+  const gewaehlt = (d.behandlungen || []).filter((b) => GESUNDHEIT.BEHANDLUNGEN.some((x) => x.id === b));
+  pdf.ueberschrift('Geplante Behandlung', H, 3);
+  pdf.text(
+    GESUNDHEIT.BEHANDLUNGEN.filter((b) => gewaehlt.includes(b.id)).map((b) => b.name).join(' · ') || '—',
+    { groesse: 9, abstand: 8 }
+  );
+
+  pdf.ueberschrift('Gesundheitliche Angaben', H, 3);
+  const oben = pdf.y;
+  // Links die ersten beiden Gruppen, rechts die übrigen — halbiert die Höhe.
+  const haelfte = Math.ceil(GESUNDHEIT.GRUPPEN.length / 2);
+  for (const gruppe of GESUNDHEIT.GRUPPEN.slice(0, haelfte)) gruppeBauen(pdf, gruppe, d, 0);
+  const linksUnten = pdf.y;
+
+  pdf.y = oben;
+  for (const gruppe of GESUNDHEIT.GRUPPEN.slice(haelfte)) gruppeBauen(pdf, gruppe, d, SPALTE_RECHTS);
+
+  pdf.y = Math.min(linksUnten, pdf.y) - 4;
+
+  pdf.ueberschrift('Erklärung', H, 3);
+  for (const absatz of GESUNDHEIT_ERKLAERUNG) pdf.text(absatz, { groesse: 8, abstand: 4 });
+  pdf.luecke(2);
+}
+
+function pdfBauen(bogen, d, unterschrift, jetzt) {
+  const pdf = new Pdf();
+  d._unterschrift = unterschrift;
+  kopfBauen(pdf, bogen);
+  bogen.koerper(pdf, d);
+  unterschriftBauen(pdf, d, jetzt);
   return pdf.bauen();
 }
 
@@ -202,15 +298,20 @@ module.exports = async (req, res) => {
   const bogen = BOEGEN[txt(d.bogen)];
   if (!bogen) return res.status(400).json({ ok: false, fehler: 'Unbekannter Bogen' });
 
-  const felder = {};
-  for (const name of ['vorname', 'nachname', 'geburtsdatum', 'email', 'telefon', 'vertreter', 'unterschriftsort']) {
-    felder[name] = txt(d[name]);
+  // Nur uebernehmen, was der Bogen deklariert — alles andere wird verworfen.
+  const felder = { minderjaehrig: d.minderjaehrig === true || txt(d.minderjaehrig) === 'ja' };
+  for (const name of bogen.text || []) felder[name] = txt(d[name]);
+  for (const name of bogen.listen || []) {
+    felder[name] = Array.isArray(d[name]) ? d[name].slice(0, 50).map(txt) : [];
   }
-  felder.medien = Array.isArray(d.medien) ? d.medien.map(txt) : [];
-  felder.kanaele = Array.isArray(d.kanaele) ? d.kanaele.map(txt) : [];
-  felder.namensnennung = txt(d.namensnennung);
-  felder.erkennbar = txt(d.erkennbar);
-  felder.minderjaehrig = d.minderjaehrig === true || txt(d.minderjaehrig) === 'ja';
+  for (const name of bogen.karten || []) {
+    const roh = d[name];
+    const karte = {};
+    if (roh && typeof roh === 'object' && !Array.isArray(roh)) {
+      for (const schluessel of Object.keys(roh).slice(0, 100)) karte[txt(schluessel)] = txt(roh[schluessel]);
+    }
+    felder[name] = karte;
+  }
 
   for (const name of bogen.pflicht) {
     if (!felder[name]) return res.status(400).json({ ok: false, fehler: 'pflicht' });
@@ -219,6 +320,10 @@ module.exports = async (req, res) => {
     return res.status(400).json({ ok: false, fehler: 'vertreter' });
   }
   if (d.einwilligung !== true) return res.status(400).json({ ok: false, fehler: 'einwilligung' });
+  if (bogen.pruefen) {
+    const fehler = bogen.pruefen(felder);
+    if (fehler) return res.status(400).json({ ok: false, fehler });
+  }
 
   const unterschrift = unterschriftLesen(d.signatur);
   if (!unterschrift) return res.status(400).json({ ok: false, fehler: 'signatur' });
@@ -278,10 +383,11 @@ module.exports = async (req, res) => {
         von,
         vonName: 'Feminity Oberkassel',
         an: felder.email,
-        betreff: 'Ihre Einwilligung bei Feminity Oberkassel',
+        betreff: `Ihr ${bogen.titel} bei Feminity Oberkassel`,
         text:
           `Guten Tag ${felder.vorname} ${felder.nachname},\n\n` +
-          'anbei Ihre heute im Salon erteilte Einwilligung als PDF — zum Nachlesen und Aufbewahren.\n\n' +
+          `anbei Ihr heute im Salon ausgefüllter Bogen "${bogen.titel}" als PDF — ` +
+          'zum Nachlesen und Aufbewahren.\n\n' +
           'Sie können diese Einwilligung jederzeit widerrufen, formlos und ohne Angabe von Gründen, ' +
           'per E-Mail an admin@feminity-oberkassel.de.\n\n' +
           'Herzliche Grüße\nIhr Team von Feminity Oberkassel\n' +

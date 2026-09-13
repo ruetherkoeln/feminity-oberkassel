@@ -10,6 +10,7 @@ Das Ergebnis geht als PDF per E-Mail an den Salon; gespeichert wird nichts.
 | `im-salon.html` | Übersicht mit den Kacheln aller Bögen |
 | `im-salon/einwilligung-bild-ton.html` | Bogen: Einwilligung Bild & Ton |
 | `im-salon/gesundheitsfragebogen.html` | Bogen: Gesundheitsfragebogen |
+| `im-salon/persoenliche-daten.html` | Bogen: Persönliche Daten und Erreichbarkeit |
 | `im-salon/fragen-gesundheit.js` | Fragenkatalog — von Browser **und** Server geladen |
 | `api/fragebogen.js` | Nimmt den Bogen entgegen, baut das PDF, verschickt es |
 | `api/_pdf.js` | PDF-Erzeuger |

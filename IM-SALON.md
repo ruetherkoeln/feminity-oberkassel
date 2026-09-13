@@ -11,7 +11,9 @@ Das Ergebnis geht als PDF per E-Mail an den Salon; gespeichert wird nichts.
 | `im-salon/einwilligung-bild-ton.html` | Bogen: Einwilligung Bild & Ton |
 | `im-salon/gesundheitsfragebogen.html` | Bogen: Gesundheitsfragebogen |
 | `im-salon/persoenliche-daten.html` | Bogen: Persönliche Daten und Erreichbarkeit |
-| `im-salon/fragen-gesundheit.js` | Fragenkatalog — von Browser **und** Server geladen |
+| `im-salon/massage.html` | Bogen: Vor Ihrer Massage |
+| `im-salon/fragen-gesundheit.js` | Fragenkatalog Gesundheit — von Browser **und** Server geladen |
+| `im-salon/fragen-massage.js` | Fragenkatalog Massage — ebenso |
 | `api/fragebogen.js` | Nimmt den Bogen entgegen, baut das PDF, verschickt es |
 | `api/_pdf.js` | PDF-Erzeuger |
 | `api/_smtp.js` | Mailversand über SMTP |

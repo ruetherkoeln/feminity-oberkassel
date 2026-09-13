@@ -11,7 +11,9 @@
 
 const tls = require('tls');
 
-const ZEITLIMIT = 20000;
+// Knapper als das Zeitbudget einer Serverfunktion, damit nach einem
+// gescheiterten Versuch noch Luft für einen zweiten bleibt.
+const ZEITLIMIT = 8000;
 
 function base64(text) {
   return Buffer.from(String(text), 'utf8').toString('base64');
@@ -69,7 +71,12 @@ class Verbindung {
     if (!erwartet.includes(code)) {
       // Zugangsdaten dürfen nicht ins Log geraten
       const gezeigt = text && /^AUTH|^[A-Za-z0-9+/=]{8,}$/.test(text) ? '(Zugangsdaten)' : text;
-      throw new Error(`SMTP ${code} auf "${gezeigt}": ${antwort.split('\r\n')[0]}`);
+      const fehler = new Error(`SMTP ${code} auf "${gezeigt}": ${antwort.split('\r\n')[0]}`);
+      // 4xx ist laut RFC 5321 voruebergehend — Greylisting, Ratenlimit,
+      // Postfach gerade nicht erreichbar. Ein zweiter Versuch lohnt sich.
+      fehler.code = code;
+      fehler.voruebergehend = code >= 400 && code < 500;
+      throw fehler;
     }
     return antwort;
   }

@@ -261,6 +261,27 @@ function pdfBauen(bogen, d, unterschrift, jetzt) {
   return pdf.bauen();
 }
 
+// Ein 4xx von SMTP ist voruebergehend — Greylisting oder Ratenlimit. Dem Gast
+// als endgueltigen Fehler zu zeigen, was Sekunden spaeter durchginge, waere im
+// Salon aergerlich: ausgefuellt, unterschrieben, und dann eine Fehlermeldung.
+// Wiederholt wird nur, wenn dafuer noch Zeit im Budget der Funktion ist; ein
+// langsam gelaufener Zeitablauf soll den zweiten Versuch nicht erzwingen.
+const WIEDERHOLUNG_MS = 1500;
+const BUDGET_MS = 4000;
+
+async function sendenMitZweitversuch(zugang, mail) {
+  const start = Date.now();
+  try {
+    return await senden(zugang, mail);
+  } catch (e) {
+    const verbraucht = Date.now() - start;
+    if (!e.voruebergehend || verbraucht > BUDGET_MS) throw e;
+    console.error(`Fragebogen: ${e.message} — zweiter Versuch`);
+    await new Promise((f) => setTimeout(f, WIEDERHOLUNG_MS));
+    return senden(zugang, mail);
+  }
+}
+
 // ── Handler ─────────────────────────────────────────────────────────────────
 module.exports = async (req, res) => {
   if (req.method !== 'POST') {
@@ -337,7 +358,7 @@ module.exports = async (req, res) => {
   const datei = `${bogen.dateiname}_${name}_${jetzt.toISOString().slice(0, 10)}.pdf`;
 
   try {
-    await senden(zugang, {
+    await sendenMitZweitversuch(zugang, {
       von,
       vonName: 'Feminity Oberkassel — Bögen',
       an,

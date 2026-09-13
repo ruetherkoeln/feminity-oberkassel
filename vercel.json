@@ -25,6 +25,16 @@
       "source": "/blog/",
       "destination": "/blog.html",
       "permanent": true
+    },
+    {
+      "source": "/im-salon",
+      "destination": "/im-salon.html",
+      "permanent": true
+    },
+    {
+      "source": "/im-salon/",
+      "destination": "/im-salon.html",
+      "permanent": true
     }
   ],
   "headers": [

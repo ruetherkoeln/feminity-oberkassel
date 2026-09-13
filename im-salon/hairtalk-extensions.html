@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Einwilligung Bild &amp; Ton | Feminity Oberkassel</title>
+<title>Hairtalk Extensions — Bestätigung | Feminity Oberkassel</title>
 <meta name="robots" content="noindex, nofollow">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Einwilligung">
+<meta name="apple-mobile-web-app-title" content="Hairtalk">
 <meta name="format-detection" content="telephone=no">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,28 +36,41 @@ h1{font-size:clamp(1.9rem,5vw,2.75rem);font-weight:300;margin:.5rem 0 1rem;line-
 .karte .unter{font-size:.85rem;color:#6E6E6E;margin-bottom:1.25rem;line-height:1.6}
 
 .raster{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+.raster.plz{grid-template-columns:minmax(7rem,1fr) 2fr}
 label.feld{display:block}
 label.feld span{display:block;font-size:.82rem;font-weight:600;margin-bottom:.4rem}
-input[type=text],input[type=email],input[type=tel],input[type=date]{
+input[type=text],input[type=email],input[type=tel]{
   width:100%;padding:.95rem 1rem;font:inherit;font-size:1rem;background:var(--cream);
   border:1px solid rgba(10,10,10,.18);border-radius:9px;color:var(--black);-webkit-appearance:none}
 input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,167,74,.25)}
 
-/* Große Trefferflächen — das wird mit dem Finger bedient, nicht mit der Maus. */
 .wahl{display:flex;align-items:flex-start;gap:.85rem;padding:.9rem 1rem;border:1px solid rgba(10,10,10,.14);
   border-radius:10px;cursor:pointer;background:var(--cream);margin-bottom:.6rem;line-height:1.5;font-size:.95rem}
 .wahl:last-child{margin-bottom:0}
 .wahl input{width:24px;height:24px;flex:0 0 24px;margin-top:.1rem;accent-color:var(--gold)}
 .wahl:has(input:checked){border-color:var(--gold);background:rgba(201,167,74,.1)}
+.wahl.offen{border-color:rgba(179,38,30,.5);background:rgba(179,38,30,.05)}
 .wahl small{display:block;color:#6E6E6E;font-size:.82rem;margin-top:.15rem}
 
-fieldset{border:0}
-legend{font-size:.82rem;font-weight:600;margin-bottom:.6rem}
+
+.zeile{display:flex;align-items:center;gap:1rem;padding:.8rem .85rem;border-radius:10px;
+  border:1px solid transparent;flex-wrap:wrap}
+.zeile:nth-child(even){background:rgba(10,10,10,.025)}
+.zeile.offen{border-color:rgba(179,38,30,.45);background:rgba(179,38,30,.05)}
+.zeile .frage{flex:1;min-width:11rem;font-size:.95rem;line-height:1.45}
+.zeile .frage small{display:block;color:#6E6E6E;font-size:.82rem;margin-top:.15rem}
+.paar{display:flex;gap:.4rem;flex:0 0 auto}
+.paar label{position:relative;display:block}
+.paar input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer}
+.paar span{display:block;min-width:4.5rem;text-align:center;padding:.7rem .9rem;font-size:.9rem;
+  font-weight:600;border:1.5px solid rgba(10,10,10,.2);border-radius:50px;background:#fff;
+  cursor:pointer;transition:background .15s,border-color .15s,color .15s}
+.paar input:checked + span{background:var(--gold);border-color:var(--gold);color:var(--black)}
+.paar input:focus-visible + span{box-shadow:0 0 0 3px rgba(201,167,74,.35)}
 
 .recht{font-size:.85rem;line-height:1.75;color:#4A4A4A}
 .recht p+p{margin-top:.75rem}
 
-/* Unterschrift */
 .sig-rahmen{position:relative;border:2px dashed rgba(10,10,10,.25);border-radius:12px;background:#fff;overflow:hidden}
 .sig-rahmen.gezeichnet{border-style:solid;border-color:var(--gold)}
 canvas{display:block;width:100%;height:190px;touch-action:none;cursor:crosshair}
@@ -81,7 +94,6 @@ button{font:inherit;cursor:pointer;border-radius:50px;border:2px solid transpare
 .warten-status{margin-top:.55rem;font-size:.85rem;font-variant-numeric:tabular-nums}
 .meldung.warten button{margin-top:.8rem}
 
-/* Danke-Ansicht */
 .danke{display:none;text-align:center;padding:3.5rem 1.5rem}
 .danke.an{display:block}
 .danke .haken{width:76px;height:76px;margin:0 auto 1.5rem;border-radius:50%;background:var(--gold);
@@ -98,6 +110,8 @@ footer a{color:var(--gold);text-decoration:none}
   header{padding:1rem}
   .wrap{padding:2rem 1rem 3rem}
   .karte{padding:1.35rem}
+  .zeile{padding:.8rem .5rem}
+  .paar span{min-width:4rem;padding:.75rem .7rem}
 }
 </style>
 </head>
@@ -106,7 +120,7 @@ footer a{color:var(--gold);text-decoration:none}
 <header>
   <div class="cont">
     <a href="/"><img src="/Logo.png" class="logo-nav" alt="Feminity Oberkassel"></a>
-    <a href="/im-salon.html" class="zurueck">Alle Bögen</a>
+    <a href="/im-salon" class="zurueck">Alle Bögen</a>
   </div>
 </header>
 
@@ -114,11 +128,11 @@ footer a{color:var(--gold);text-decoration:none}
 
   <div id="formular">
     <div class="eyebrow">Im Salon</div>
-    <h1>Einwilligung in Bild- und Tonaufnahmen</h1>
+    <h1>Hairtalk Extensions</h1>
     <p class="lead">
-      Wir zeigen unsere Arbeit gern — auf Instagram, auf unserer Website und im Salon.
-      Dafür brauchen wir Ihr Einverständnis. Sie entscheiden selbst, was davon erlaubt
-      ist, und können es jederzeit zurücknehmen.
+      Sie haben das Merkblatt zu den Tape-In Extensions gelesen. Hier bestätigen Sie
+      kurz die wichtigsten Punkte — damit später klar ist, worüber wir gesprochen
+      haben. <a href="/im-salon/merkblatt-hairtalk.html">Merkblatt noch einmal lesen</a>
     </p>
 
     <form id="bogen" novalidate>
@@ -128,99 +142,48 @@ footer a{color:var(--gold);text-decoration:none}
       </div>
 
       <div class="karte">
-        <h2>Ihre Angaben</h2>
-        <p class="unter">Vor- und Nachname brauchen wir. Alles andere ist freiwillig.</p>
+        <h2>Kundendaten</h2>
+        <p class="unter">Vor- und Nachname brauchen wir. Alles Weitere hilft uns bei der Zuordnung.</p>
         <div class="raster">
           <label class="feld"><span>Vorname *</span>
             <input id="vorname" type="text" autocomplete="off" autocapitalize="words" required></label>
           <label class="feld"><span>Nachname *</span>
             <input id="nachname" type="text" autocomplete="off" autocapitalize="words" required></label>
-          <label class="feld"><span>Geburtsdatum</span>
-            <input id="geburtsdatum" type="date"></label>
-          <label class="feld"><span>E-Mail</span>
+          <label class="feld"><span>Telefon</span>
+            <input id="telefon" type="tel" autocomplete="off" inputmode="tel"></label>
+          <label class="feld"><span>E-Mail-Adresse</span>
             <input id="email" type="email" autocomplete="off" inputmode="email"></label>
+          <label class="feld"><span>Datum der Beratung</span>
+            <input id="beratungsdatum" type="date"></label>
         </div>
-        <p class="unter" style="margin:.9rem 0 0">
-          Mit einer E-Mail-Adresse bekommen Sie Ihre unterschriebene Einwilligung als PDF
+        <p class="unter" style="margin:1.1rem 0 0">
+          Mit einer E-Mail-Adresse bekommen Sie Ihre unterschriebene Bestätigung als PDF
           zugeschickt — damit Sie jederzeit nachlesen können, was genau Sie unterschrieben haben.
         </p>
       </div>
 
       <div class="karte">
-        <h2>Was darf aufgenommen werden?</h2>
-        <p class="unter">Mehrfachauswahl — kreuzen Sie an, womit Sie einverstanden sind.</p>
-        <label class="wahl"><input type="checkbox" name="medien" value="foto">
-          <span>Fotos</span></label>
-        <label class="wahl"><input type="checkbox" name="medien" value="video">
-          <span>Videos<small>Bild und Ton — also auch Ihre Stimme, wenn Sie im Video sprechen</small></span></label>
+        <h2>Behandlung</h2>
+        <p class="unter">Füllt das Team gemeinsam mit Ihnen aus.</p>
+        <div class="raster" id="behandlung"></div>
       </div>
 
       <div class="karte">
-        <h2>Wo dürfen wir sie zeigen?</h2>
-        <p class="unter">Auch hier gilt: nur, was Sie ankreuzen.</p>
-        <label class="wahl"><input type="checkbox" name="kanaele" value="social">
-          <span>Social Media<small>Zum Beispiel Instagram und Facebook</small></span></label>
-        <label class="wahl"><input type="checkbox" name="kanaele" value="website">
-          <span>Unsere Website und Salonprofile<small>Zum Beispiel Treatwell</small></span></label>
-        <label class="wahl"><input type="checkbox" name="kanaele" value="print">
-          <span>Print<small>Zum Beispiel Aushang im Salon oder Flyer</small></span></label>
-      </div>
-
-      <div class="karte">
-        <h2>Umfang</h2>
-        <fieldset style="margin-bottom:1.25rem">
-          <legend>Dürfen wir Ihren Vornamen dazuschreiben?</legend>
-          <label class="wahl"><input type="radio" name="namensnennung" value="ja">
-            <span>Ja, mein Vorname darf genannt werden</span></label>
-          <label class="wahl"><input type="radio" name="namensnennung" value="nein" checked>
-            <span>Nein, bitte ohne Namen</span></label>
-        </fieldset>
-        <fieldset>
-          <legend>Dürfen Sie erkennbar zu sehen sein?</legend>
-          <label class="wahl"><input type="radio" name="erkennbar" value="ja" checked>
-            <span>Ja, auch Aufnahmen, auf denen ich erkennbar bin</span></label>
-          <label class="wahl"><input type="radio" name="erkennbar" value="nein">
-            <span>Nein, nur Aufnahmen ohne erkennbares Gesicht<small>Zum Beispiel nur die Frisur von hinten</small></span></label>
-        </fieldset>
+        <h2>Meine Bestätigung</h2>
+        <p class="unter">
+          Bitte jeden Punkt einzeln bestätigen. Alle sieben sind nötig — jeder steht für
+          etwas, das wir in der Beratung besprochen haben.
+        </p>
+        <div id="bestaetigungen"></div>
       </div>
 
       <div class="karte">
         <h2>Minderjährig?</h2>
         <label class="wahl"><input type="checkbox" id="minderjaehrig">
-          <span>Die abgebildete Person ist unter 18 Jahre alt<small>Dann unterschreibt die gesetzliche Vertretung</small></span></label>
+          <span>Die Person ist unter 18 Jahre alt<small>Dann unterschreibt die gesetzliche Vertretung</small></span></label>
         <label class="feld" id="vertreterFeld" hidden style="margin-top:1rem">
           <span>Name der gesetzlichen Vertretung *</span>
           <input id="vertreter" type="text" autocomplete="off" autocapitalize="words"></label>
-      </div>
-
-      <div class="karte">
-        <h2>Das erklären Sie mit Ihrer Unterschrift</h2>
-        <div class="recht">
-          <p>
-            Ich willige ein, dass die oben angekreuzten Aufnahmen von mir angefertigt und für
-            die angekreuzten Zwecke verwendet werden dürfen. Die Einwilligung erfolgt
-            freiwillig; aus einer Verweigerung entstehen mir keine Nachteile — mein
-            Behandlungstermin bleibt davon unberührt.
-          </p>
-          <p>
-            Ich kann diese Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen,
-            formlos und ohne Angabe von Gründen, per E-Mail an
-            <a href="mailto:admin@feminity-oberkassel.de">admin@feminity-oberkassel.de</a>.
-            Bereits veröffentlichte Aufnahmen werden dann unverzüglich entfernt, soweit das
-            möglich und zumutbar ist. Wurden Aufnahmen bereits von Dritten geteilt, kann eine
-            vollständige Entfernung aus dem Internet nicht zugesichert werden.
-          </p>
-          <p>Eine Vergütung für die Aufnahmen und ihre Verwendung wird nicht gewährt.</p>
-          <p>
-            Rechtsgrundlage ist Art. 6 Abs. 1 lit. a DSGVO in Verbindung mit § 22 KunstUrhG.
-            Verantwortlich ist die Groom&amp;Glow UG (haftungsbeschränkt), Hansaallee 1a,
-            40549 Düsseldorf. Näheres in unserer
-            <a href="/impressum.html">Datenschutzerklärung</a>.
-          </p>
-        </div>
-        <label class="wahl" style="margin-top:1.25rem">
-          <input type="checkbox" id="einwilligung" required>
-          <span>Ich habe das gelesen und willige ein *</span></label>
       </div>
 
       <div class="karte">
@@ -231,12 +194,12 @@ footer a{color:var(--gold);text-decoration:none}
           <div class="sig-hint">Hier unterschreiben</div>
         </div>
         <div class="sig-leiste">
-          <small id="sigWer">Es unterschreibt die abgebildete Person.</small>
+          <small id="sigWer">Es unterschreibt die genannte Person.</small>
           <button type="button" class="btn-klein" id="sigLeeren">Neu zeichnen</button>
         </div>
       </div>
 
-      <button type="submit" class="btn-senden" id="senden">Einwilligung absenden</button>
+      <button type="submit" class="btn-senden" id="senden">Bestätigung absenden</button>
       <div class="meldung" id="meldung" role="alert"></div>
     </form>
   </div>
@@ -244,7 +207,7 @@ footer a{color:var(--gold);text-decoration:none}
   <div class="danke" id="danke">
     <div class="haken">✓</div>
     <h2>Vielen Dank!</h2>
-    <p id="dankeText">Ihre Einwilligung ist bei uns angekommen.</p>
+    <p id="dankeText">Ihre Bestätigung ist bei uns angekommen.</p>
     <button type="button" class="btn-klein" id="neuerBogen">Nächster Bogen</button>
   </div>
 
@@ -255,13 +218,48 @@ footer a{color:var(--gold);text-decoration:none}
 </footer>
 
 <script src="/im-salon/senden.js"></script>
+<script src="/im-salon/fragen-hairtalk.js"></script>
 <script>
 (function () {
   'use strict';
 
+  var KAT = window.HAIRTALK;
   var form = document.getElementById('bogen');
   var meldung = document.getElementById('meldung');
   var sendenBtn = document.getElementById('senden');
+
+  // Behandlungsfelder aus dem Katalog — dieselbe Quelle, aus der das PDF liest
+  var behandlungBox = document.getElementById('behandlung');
+  KAT.BEHANDLUNG.forEach(function (f) {
+    var l = document.createElement('label');
+    l.className = 'feld';
+    var span = document.createElement('span');
+    span.textContent = f.name;
+    var eingabe = document.createElement('input');
+    eingabe.type = 'text';
+    eingabe.id = 'b_' + f.id;
+    eingabe.autocomplete = 'off';
+    l.appendChild(span); l.appendChild(eingabe);
+    behandlungBox.appendChild(l);
+  });
+
+  // Bestaetigungen — jede einzeln. Eine Sammelbestaetigung waere keine
+  // Aufklaerung, sondern ein Haken unter etwas Ungelesenem.
+  var bestBox = document.getElementById('bestaetigungen');
+  KAT.BESTAETIGUNGEN.forEach(function (best) {
+    var l = document.createElement('label');
+    l.className = 'wahl';
+    l.dataset.best = best.id;
+    var eingabe = document.createElement('input');
+    eingabe.type = 'checkbox';
+    eingabe.name = 'best';
+    eingabe.value = best.id;
+    var span = document.createElement('span');
+    span.textContent = best.text;
+    eingabe.addEventListener('change', function () { l.classList.remove('offen'); });
+    l.appendChild(eingabe); l.appendChild(span);
+    bestBox.appendChild(l);
+  });
 
   // ── Unterschriftsfeld ────────────────────────────────────────────────────
   var canvas = document.getElementById('sig');
@@ -270,8 +268,6 @@ footer a{color:var(--gold);text-decoration:none}
   var gezeichnet = false;
   var zeichnet = false;
 
-  // Auf dem Bildschirm ist die Fläche CSS-breit, gezeichnet wird in
-  // Geräte-Pixeln — sonst sieht die Linie auf dem iPad ausgefranst aus.
   function flaecheAufbauen() {
     var dpr = window.devicePixelRatio || 1;
     var breite = canvas.clientWidth;
@@ -279,7 +275,6 @@ footer a{color:var(--gold);text-decoration:none}
     canvas.width = Math.round(breite * dpr);
     canvas.height = Math.round(hoehe * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    // Weiß, damit das JPEG später keinen schwarzen Grund bekommt
     ctx.fillStyle = '#FFFFFF';
     ctx.fillRect(0, 0, breite, hoehe);
     ctx.strokeStyle = '#0A0A0A';
@@ -306,7 +301,6 @@ footer a{color:var(--gold);text-decoration:none}
     var p = punkt(ev);
     ctx.beginPath();
     ctx.moveTo(p.x, p.y);
-    // Ein kurzer Tipp soll auch einen Punkt hinterlassen
     ctx.lineTo(p.x + 0.1, p.y);
     ctx.stroke();
     gezeichnet = true;
@@ -327,7 +321,6 @@ footer a{color:var(--gold);text-decoration:none}
 
   document.getElementById('sigLeeren').addEventListener('click', leeren);
 
-  // Beim Drehen des iPads würde die Fläche sonst verzerren.
   var dreh;
   window.addEventListener('resize', function () {
     clearTimeout(dreh);
@@ -342,34 +335,27 @@ footer a{color:var(--gold);text-decoration:none}
     vertreterFeld.hidden = !minderjaehrig.checked;
     sigWer.textContent = minderjaehrig.checked
       ? 'Es unterschreibt die gesetzliche Vertretung.'
-      : 'Es unterschreibt die abgebildete Person.';
+      : 'Es unterschreibt die genannte Person.';
   });
 
   // ── Absenden ─────────────────────────────────────────────────────────────
-  function fehlerZeigen(text) {
+  function fehlerZeigen(text, ziel) {
     meldung.textContent = text;
     meldung.className = 'meldung fehler';
-    meldung.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    (ziel || meldung).scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
   var FEHLERTEXT = {
     pflicht: 'Bitte tragen Sie Vor- und Nachnamen ein.',
+    bestaetigungen: 'Bitte bestätigen Sie jeden Punkt einzeln — alle sieben sind nötig.',
     vertreter: 'Bitte tragen Sie den Namen der gesetzlichen Vertretung ein.',
-    einwilligung: 'Bitte bestätigen Sie die Einwilligung.',
     signatur: 'Bitte unterschreiben Sie im dafür vorgesehenen Feld.',
     aufgegeben: 'Der Versand klappt gerade nicht. Bitte sagen Sie uns Bescheid, bevor Sie die Seite schließen.',
     abgebrochen: 'Abgebrochen. Sie können es erneut versuchen — Ihre Angaben stehen noch.',
-    versand: 'Der Bogen konnte nicht versendet werden. Bitte sagen Sie uns kurz Bescheid.',
+    versand: 'Die Bestätigung konnte nicht versendet werden. Bitte sagen Sie uns kurz Bescheid.',
     konfiguration: 'Der Versand ist noch nicht eingerichtet. Bitte an der Rezeption melden.',
     pdf: 'Das Dokument konnte nicht erzeugt werden. Bitte an der Rezeption melden.'
   };
-
-  function ausgewaehlt(name) {
-    return Array.prototype.map.call(
-      form.querySelectorAll('input[name="' + name + '"]:checked'),
-      function (el) { return el.value; }
-    );
-  }
 
   // ── Warten und Wiederholen ───────────────────────────────────────────────
   var lauf = null;          // laufender Sendeversuch, damit er abbrechbar bleibt
@@ -377,7 +363,7 @@ footer a{color:var(--gold);text-decoration:none}
 
   function zuruecksetzen() {
     sendenBtn.disabled = false;
-    sendenBtn.textContent = 'Einwilligung absenden';
+    sendenBtn.textContent = 'Bestätigung absenden';
   }
 
   function wartenZeigen(bisVersuch, rest, versuch) {
@@ -429,30 +415,44 @@ footer a{color:var(--gold);text-decoration:none}
     var vorname = document.getElementById('vorname').value.trim();
     var nachname = document.getElementById('nachname').value.trim();
     if (!vorname || !nachname) return fehlerZeigen(FEHLERTEXT.pflicht);
+
+    // Fehlende Bestaetigungen markieren und zur ersten springen
+    var bestaetigt = {};
+    var ersteOffen = null;
+    KAT.BESTAETIGUNGEN.forEach(function (best) {
+      var kasten = form.querySelector('[data-best="' + best.id + '"]');
+      var an = kasten.querySelector('input').checked;
+      bestaetigt[best.id] = an ? 'ja' : 'nein';
+      if (!an) {
+        kasten.classList.add('offen');
+        if (!ersteOffen) ersteOffen = kasten;
+      }
+    });
+    if (ersteOffen) return fehlerZeigen(FEHLERTEXT.bestaetigungen, ersteOffen);
+
     if (minderjaehrig.checked && !document.getElementById('vertreter').value.trim()) {
       return fehlerZeigen(FEHLERTEXT.vertreter);
     }
-    if (!document.getElementById('einwilligung').checked) return fehlerZeigen(FEHLERTEXT.einwilligung);
     if (!gezeichnet) return fehlerZeigen(FEHLERTEXT.signatur);
 
     var daten = {
-      bogen: 'einwilligung-bild-ton',
+      bogen: 'hairtalk-extensions',
       webseite: document.getElementById('webseite').value,
       vorname: vorname,
       nachname: nachname,
-      geburtsdatum: document.getElementById('geburtsdatum').value,
+      telefon: document.getElementById('telefon').value.trim(),
       email: document.getElementById('email').value.trim(),
-      medien: ausgewaehlt('medien'),
-      kanaele: ausgewaehlt('kanaele'),
-      namensnennung: (form.querySelector('input[name="namensnennung"]:checked') || {}).value || 'nein',
-      erkennbar: (form.querySelector('input[name="erkennbar"]:checked') || {}).value || 'ja',
+      beratungsdatum: document.getElementById('beratungsdatum').value,
+      bestaetigt: bestaetigt,
       minderjaehrig: minderjaehrig.checked,
       vertreter: document.getElementById('vertreter').value.trim(),
       unterschriftsort: 'Düsseldorf',
       einwilligung: true,
-      // JPEG statt PNG: lässt sich unverändert ins PDF einbetten
       signatur: canvas.toDataURL('image/jpeg', 0.85)
     };
+    KAT.BEHANDLUNG.forEach(function (f) {
+      daten[f.id] = document.getElementById('b_' + f.id).value.trim();
+    });
 
     sendenBtn.disabled = true;
     sendenBtn.textContent = 'Wird gesendet …';
@@ -463,8 +463,8 @@ footer a{color:var(--gold);text-decoration:none}
         meldung.className = 'meldung';
         zuruecksetzen();
         document.getElementById('dankeText').textContent = daten.email
-          ? 'Ihre Einwilligung ist bei uns angekommen. Eine Kopie liegt gleich in Ihrem Postfach.'
-          : 'Ihre Einwilligung ist bei uns angekommen.';
+          ? 'Ihre Bestätigung ist bei uns angekommen. Eine Kopie liegt gleich in Ihrem Postfach.'
+          : 'Ihre Bestätigung ist bei uns angekommen.';
         document.getElementById('formular').style.display = 'none';
         document.getElementById('danke').classList.add('an');
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -478,12 +478,14 @@ footer a{color:var(--gold);text-decoration:none}
     });
   });
 
-  // Nach dem Absenden beginnt die nächste Person mit einem leeren Bogen —
-  // auf einem geteilten Tablet darf nichts von der Vorgängerin stehen bleiben.
+  // Auf einem geteilten Tablet darf nichts von der Vorgängerin stehen bleiben.
   document.getElementById('neuerBogen').addEventListener('click', function () {
     form.reset();
     vertreterFeld.hidden = true;
-    sigWer.textContent = 'Es unterschreibt die abgebildete Person.';
+    sigWer.textContent = 'Es unterschreibt die genannte Person.';
+    Array.prototype.forEach.call(form.querySelectorAll('[data-best]'), function (k) {
+      k.classList.remove('offen');
+    });
     leeren();
     meldung.className = 'meldung';
     document.getElementById('danke').classList.remove('an');

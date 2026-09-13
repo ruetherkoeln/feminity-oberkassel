@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Merkblatt Hairtalk Extensions | Feminity Oberkassel</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Merkblatt">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@300;400;500;600;700&display=swap">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--cream:#F9F7F4;--gold:#C9A74A;--black:#0A0A0A;--rot:#B3261E;--gruen:#3F7A4E}
+body{font-family:'Open Sans',sans-serif;background:var(--cream);color:var(--black);-webkit-text-size-adjust:100%}
+h1,h2,h3{font-family:'Roboto',sans-serif}
+img{max-width:100%;height:auto;display:block}
+
+header{background:var(--black);padding:1rem 2rem}
+header .cont{max-width:820px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.logo-nav{height:36px}
+.zurueck{color:var(--cream);text-decoration:none;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;opacity:.75}
+.zurueck:hover{color:var(--gold);opacity:1}
+
+.wrap{max-width:820px;margin:0 auto;padding:2.5rem 1.5rem 4rem}
+.eyebrow{text-transform:uppercase;letter-spacing:.18em;font-size:.72rem;font-weight:700;color:var(--gold)}
+h1{font-size:clamp(1.9rem,5vw,2.75rem);font-weight:300;margin:.5rem 0 .5rem;line-height:1.15}
+.unterzeile{font-size:1rem;line-height:1.6;color:#5A5A5A}
+.stylistin{margin-top:.4rem;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:600}
+
+.karte{background:#fff;border:1px solid rgba(10,10,10,.1);border-radius:14px;padding:1.75rem;margin-top:1.5rem}
+.karte h2{font-size:1.15rem;font-weight:500;margin-bottom:1rem;display:flex;align-items:baseline;gap:.7rem}
+.karte h2 .zahl{font-size:.78rem;font-weight:700;letter-spacing:.14em;color:var(--gold);flex:0 0 auto}
+.karte p{font-size:.95rem;line-height:1.75;color:#3B3B3B}
+.karte p + p{margin-top:.85rem}
+
+.schritte{list-style:none;counter-reset:s}
+.schritte li{position:relative;padding-left:2.6rem;margin-bottom:1.1rem;font-size:.95rem;line-height:1.7;color:#3B3B3B}
+.schritte li:last-child{margin-bottom:0}
+.schritte li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:-.1rem;
+  width:1.9rem;height:1.9rem;border-radius:50%;background:rgba(201,167,74,.18);color:#8A6F20;
+  font-weight:700;font-size:.85rem;display:flex;align-items:center;justify-content:center}
+.schritte li strong{display:block;font-weight:600;color:var(--black);margin-bottom:.15rem}
+
+ul.punkte{list-style:none}
+ul.punkte li{position:relative;padding-left:1.3rem;margin-bottom:.6rem;font-size:.95rem;line-height:1.7;color:#3B3B3B}
+ul.punkte li::before{content:'·';position:absolute;left:.3rem;color:var(--gold);font-weight:700;font-size:1.3rem;line-height:1.2}
+
+.hinweis{background:rgba(201,167,74,.12);border:1px solid rgba(201,167,74,.45);border-radius:10px;
+  padding:1rem 1.2rem;margin-top:1.1rem;font-size:.92rem;line-height:1.7}
+.hinweis strong{font-weight:700}
+.achtung{background:rgba(179,38,30,.07);border-color:rgba(179,38,30,.35)}
+
+.pflege{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:.5rem}
+.pflege h3{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-bottom:.75rem}
+.pflege .ja h3{color:var(--gruen)}
+.pflege .nein h3{color:var(--rot)}
+.pflege ul{list-style:none}
+.pflege li{position:relative;padding-left:1.4rem;margin-bottom:.6rem;font-size:.9rem;line-height:1.6;color:#3B3B3B}
+.pflege .ja li::before{content:'+';position:absolute;left:0;color:var(--gruen);font-weight:700}
+.pflege .nein li::before{content:'–';position:absolute;left:0;color:var(--rot);font-weight:700}
+
+.abschluss{margin-top:2.5rem;text-align:center}
+.btn-gold{display:inline-block;background:var(--gold);color:var(--black);padding:1.1rem 2.2rem;
+  border-radius:50px;font-weight:700;text-decoration:none;font-size:1rem}
+.btn-gold:hover{background:#D4AF37}
+.abschluss p{margin-top:.9rem;font-size:.85rem;color:#6E6E6E;line-height:1.6}
+
+.fuss{margin-top:2.5rem;font-size:.78rem;line-height:1.7;color:#8A8A8A}
+
+footer{background:var(--black);color:var(--cream);padding:1.75rem;text-align:center;font-size:.78rem}
+footer a{color:var(--gold);text-decoration:none}
+
+@media(max-width:640px){
+  header{padding:1rem}
+  .wrap{padding:2rem 1rem 3rem}
+  .karte{padding:1.35rem}
+  .pflege{grid-template-columns:1fr;gap:1.5rem}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="cont">
+    <a href="/"><img src="/Logo.png" class="logo-nav" alt="Feminity Oberkassel"></a>
+    <a href="/im-salon" class="zurueck">Alle Bögen</a>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="eyebrow">Im Salon · Merkblatt</div>
+  <h1>Hairtalk Tape-In Extensions</h1>
+  <p class="unterzeile">Ablauf, Anwendung und Pflege — alles Wesentliche auf einen Blick.</p>
+  <p class="stylistin">Installed by Evelin</p>
+
+  <div class="karte">
+    <h2><span class="zahl">I</span> Ihr Weg zu den Extensions</h2>
+    <ol class="schritte">
+      <li><strong>Beratungstermin buchen</strong>
+        Online buchbar ist ausschließlich der Beratungstermin. Ein Einsetztermin kann vorab
+        nicht gebucht werden.</li>
+      <li><strong>Beratung im Salon</strong>
+        Haaranalyse, Struktur, Länge, Farbe und Menge werden bestimmt. Sie erhalten Preis-
+        und Pflegeauskunft.</li>
+      <li><strong>Exklusive Bestellung</strong>
+        Erst nach der Beratung bestellen wir Haar und Tressen individuell und exklusiv für Sie.</li>
+      <li><strong>Einsetztermin</strong>
+        Der Termin zum Einsetzen wird vergeben, sobald Ihre Bestellung im Salon eingetroffen ist.</li>
+    </ol>
+    <div class="hinweis">
+      Ohne vorherige Beratung im Salon vergeben wir keinen Einsetztermin — jede Bestellung
+      wird individuell für Sie gefertigt.
+    </div>
+  </div>
+
+  <div class="karte">
+    <h2><span class="zahl">II</span> Unser Arbeitsgrundsatz</h2>
+    <ul class="punkte">
+      <li>Feminity Oberkassel arbeitet ausschließlich mit eigenen Haaren und Tressen der
+        Firma Hairtalk.</li>
+      <li>Wir setzen in keinem Fall Fremdarbeit ein.</li>
+      <li>Wir setzen keine Extensions anderer Salons hoch, nachdem diese herausgewachsen sind.</li>
+    </ul>
+    <p style="margin-top:1rem">
+      Bei fremdem Material kennen wir weder das Haar noch den verwendeten Kleber, noch sind
+      uns die Voraussetzungen der vorangegangenen Behandlung bekannt. Eine fachgerechte
+      Beurteilung von Haltbarkeit, Haarschutz und Ergebnis ist dann nicht möglich.
+    </p>
+  </div>
+
+  <div class="karte">
+    <h2><span class="zahl">III</span> Die ersten 48 Stunden</h2>
+    <div class="hinweis achtung">
+      <strong>Nach dem Einsetzen bitte nicht shampoonieren.</strong> In den ersten 48 Stunden
+      darf das Haar nicht gewaschen werden. Der Verbund zwischen Tape und Eigenhaar braucht
+      diese Zeit, um vollständig auszuhärten.
+    </div>
+    <p style="margin-top:1rem">
+      Verzichten Sie in diesem Zeitraum ebenso auf Sauna, Dampfbad und starkes Schwitzen —
+      und binden Sie das Haar am Ansatz nicht straff zusammen.
+    </p>
+  </div>
+
+  <div class="karte">
+    <h2><span class="zahl">IV</span> Pflegehinweis</h2>
+    <p>
+      Die speziell von Hairtalk entwickelten Pflegeprodukte sind auf die Bedürfnisse von
+      Hairtalk Extensions und Hairwear abgestimmt. Nur mit ihnen können Extensions und
+      Haarteile optimal gepflegt und geschützt werden.
+    </p>
+    <p>
+      Damit Sie möglichst lange Freude daran haben, empfehlen wir ausdrücklich, ausschließlich
+      die von Hairtalk empfohlenen Pflegeprodukte zu verwenden — insbesondere Hairtalk Shampoo
+      und Pflege. Andere Produkte können Zustand, Qualität und Haltbarkeit der Extensions
+      sowie der Verbindungsstellen beeinträchtigen.
+    </p>
+    <div class="hinweis achtung">
+      <strong>Wichtiger Hinweis zur Gewährleistung.</strong> Als Hairtalk Spezialist können wir
+      für Zustand und Haltbarkeit keine Gewährleistung übernehmen, sofern andere als die von
+      Hairtalk empfohlenen Pflegeprodukte verwendet werden.
+    </div>
+  </div>
+
+  <div class="karte">
+    <h2><span class="zahl">V</span> Pflege im Alltag</h2>
+    <div class="pflege">
+      <div class="ja">
+        <h3>Empfohlen</h3>
+        <ul>
+          <li>Ausschließlich Hairtalk Shampoo und Pflege verwenden</li>
+          <li>Kopf beim Waschen leicht nach hinten neigen, Shampoo sanft einmassieren</li>
+          <li>Pflege und Kur nur in Längen und Spitzen auftragen</li>
+          <li>Von den Spitzen zum Ansatz durchkämmen, Ansatz dabei mit der Hand fixieren</li>
+          <li>Haar vor dem Schlafen vollständig trocknen und locker flechten</li>
+          <li>Hitzeschutz verwenden, Stylinggeräte mit Abstand zu den Verbindungsstellen führen</li>
+          <li>Kontroll- und Wechseltermin wahrnehmen, in der Regel alle 6–8 Wochen</li>
+        </ul>
+      </div>
+      <div class="nein">
+        <h3>Bitte vermeiden</h3>
+        <ul>
+          <li>Shampoonieren innerhalb der ersten 48 Stunden</li>
+          <li>Silikon-, öl- oder alkoholhaltige Produkte im Ansatzbereich</li>
+          <li>Pflege, Kur oder Öl direkt auf den Verbindungsstellen</li>
+          <li>Nass schlafen oder nasses Haar straff zusammenbinden</li>
+          <li>Trockenshampoo am Ansatz</li>
+          <li>Chlor-, Salzwasser, Sauna und Solarium ohne Schutz</li>
+          <li>Eigenständiges Lösen, Nachkleben oder Umsetzen der Tapes</li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin-top:1.3rem">
+      Die richtige Pflege entscheidet über Langlebigkeit und Zustand Ihrer Extensions.
+      Vielen Dank für Ihr Verständnis und Ihr Vertrauen.
+    </p>
+  </div>
+
+  <div class="abschluss">
+    <a class="btn-gold" href="/im-salon/hairtalk-extensions.html">Gelesen — zur Bestätigung</a>
+    <p>
+      Dort bestätigen Sie kurz, dass Sie dieses Merkblatt erhalten haben.
+      Mit Ihrer E-Mail-Adresse bekommen Sie Ihre Bestätigung anschließend als PDF zugeschickt,
+      damit Sie wissen, was genau Sie unterschrieben haben.
+    </p>
+  </div>
+
+  <p class="fuss">
+    Dieses Merkblatt dient der Aufklärung und ersetzt nicht die individuelle Beratung im Salon.
+    Hairtalk® ist eine Marke des jeweiligen Rechteinhabers. Feminity Oberkassel arbeitet als
+    Hairtalk Spezialist.
+  </p>
+
+</div>
+
+<footer>
+  <p>© 2026 Groom&amp;Glow UG (haftungsbeschränkt) • <a href="/impressum.html">Impressum &amp; Datenschutz</a></p>
+</footer>
+
+</body>
+</html>

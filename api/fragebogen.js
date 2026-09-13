@@ -37,18 +37,17 @@ const BOEGEN = {
   },
 };
 
+// Diese beiden Tabellen steuern Formular und PDF gleichermaßen: Was hier
+// steht, erscheint im Bogen als Ankreuzfeld und im PDF als [x] bzw. [ ].
 const MEDIEN = {
-  foto: 'Fotoaufnahmen',
-  video: 'Videoaufnahmen',
-  ton: 'Tonaufnahmen (z. B. Stimme in einem Video)',
+  foto: 'Fotos',
+  video: 'Videos (Bild und Ton)',
 };
 
 const KANAELE = {
-  instagram: 'Instagram und Facebook',
-  website: 'Website feminity-oberkassel.de',
-  google: 'Google-Unternehmensprofil',
-  print: 'Gedrucktes Material und Aushang im Salon',
-  anzeigen: 'Bezahlte Werbeanzeigen',
+  social: 'Social Media (z. B. Instagram und Facebook)',
+  website: 'Unsere Website und Salonprofile (z. B. Treatwell)',
+  print: 'Print (z. B. Aushang im Salon, Flyer)',
 };
 
 // ── Hilfen ──────────────────────────────────────────────────────────────────
@@ -110,10 +109,11 @@ function pdfBauen(bogen, d, unterschrift, jetzt) {
   pdf.luecke(6);
 
   pdf.ueberschrift('Art der Aufnahmen', 11.5);
+  // Feste Reihenfolge wie im Formular — sonst steht das Angekreuzte oben und
+  // der Bogen liest sich anders als der Bildschirm, den die Person vor sich hatte.
   const medien = (d.medien || []).filter((m) => MEDIEN[m]);
-  pdf.text(medien.length ? medien.map((m) => `[x]  ${MEDIEN[m]}`).join('\n') : '[  ] keine Angabe', { groesse: 10 });
   for (const schluessel of Object.keys(MEDIEN)) {
-    if (!medien.includes(schluessel)) pdf.text(`[  ]  ${MEDIEN[schluessel]}`, { groesse: 10, abstand: 0 });
+    pdf.text(`${medien.includes(schluessel) ? '[x]' : '[  ]'}  ${MEDIEN[schluessel]}`, { groesse: 10, abstand: 0 });
   }
   pdf.luecke(10);
 

@@ -13,7 +13,10 @@ Das Ergebnis geht als PDF per E-Mail an den Salon; gespeichert wird nichts.
 | `im-salon/persoenliche-daten.html` | Bogen: Persönliche Daten und Erreichbarkeit |
 | `im-salon/massage.html` | Bogen: Vor Ihrer Massage |
 | `im-salon/fragen-gesundheit.js` | Fragenkatalog Gesundheit — von Browser **und** Server geladen |
+| `im-salon/hairtalk-extensions.html` | Bogen: Hairtalk Extensions — Aufklärung |
+| `im-salon/merkblatt-hairtalk.html` | Merkblatt zum Lesen, ohne Unterschrift |
 | `im-salon/fragen-massage.js` | Fragenkatalog Massage — ebenso |
+| `im-salon/fragen-hairtalk.js` | Bestätigungen Hairtalk — ebenso |
 | `im-salon/senden.js` | Absenden mit Wiederholung — von allen vier Bögen genutzt |
 | `api/fragebogen.js` | Nimmt den Bogen entgegen, baut das PDF, verschickt es |
 | `api/_pdf.js` | PDF-Erzeuger |
@@ -87,6 +90,17 @@ Bögen im Postfach beziehen sich darauf.
 
 4. In `im-salon.html` die zugehörige Kachel von `wartet`/`bald` auf einen Link
    mit `status offen` umstellen.
+
+## Kopie an den Gast
+
+Gibt die Person eine E-Mail-Adresse an, geht dasselbe PDF zusätzlich an sie. Das ist
+kein Beiwerk: Wer etwas unterschreibt, soll nachlesen können, was darin stand — Art. 7
+Abs. 1 DSGVO verlangt, die Einwilligung nachweisen zu können, und die Person hat ein
+berechtigtes Interesse an ihrem eigenen Exemplar. Jeder Bogen sagt das mit einem Satz
+unter dem E-Mail-Feld, die Übersicht wiederholt es im Hinweiskasten.
+
+Scheitert der Versand der Kopie, gilt der Bogen trotzdem als angekommen — der Eintrag
+im Salon-Postfach ist das Original, die Kopie die Zugabe.
 
 ## Wenn der Versand klemmt
 

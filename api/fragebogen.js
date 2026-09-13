@@ -15,6 +15,7 @@ const MAX_FELD = 400;                   // Zeichen pro Textfeld
 // sind fuer alle gleich und stehen weiter unten.
 const GESUNDHEIT = require('../im-salon/fragen-gesundheit.js');
 const MASSAGE = require('../im-salon/fragen-massage.js');
+const HAIRTALK = require('../im-salon/fragen-hairtalk.js');
 
 const BOEGEN = {
   'einwilligung-bild-ton': {
@@ -66,6 +67,25 @@ const BOEGEN = {
     },
   },
 
+  'hairtalk-extensions': {
+    titel: 'Hairtalk Tape-In Extensions — Aufklärung',
+    dateiname: 'Hairtalk-Aufklaerung',
+    pflicht: ['vorname', 'nachname'],
+    text: ['vorname', 'nachname', 'email', 'telefon', 'beratungsdatum',
+           'qualitaet', 'tressen', 'einsetztermin', 'stylistin',
+           'vertreter', 'unterschriftsort'],
+    karten: ['bestaetigt'],
+    koerper: koerperHairtalk,
+    // Jede Bestaetigung einzeln — eine Sammelbestaetigung waere keine
+    // Aufklaerung, sondern ein Haken unter etwas Ungelesenem.
+    pruefen(f) {
+      for (const b of HAIRTALK.BESTAETIGUNGEN) {
+        if (f.bestaetigt[b.id] !== 'ja') return 'bestaetigungen';
+      }
+      return null;
+    },
+  },
+
   'persoenliche-daten': {
     titel: 'Persönliche Daten und Erreichbarkeit',
     dateiname: 'Persoenliche-Daten',
@@ -101,6 +121,13 @@ const KANAELE = {
   website: 'Unsere Website und Salonprofile (z. B. Treatwell)',
   print: 'Print (z. B. Aushang im Salon, Flyer)',
 };
+
+// Schlussvermerk des Hairtalk-Bogens — wandert mit ins PDF.
+const HAIRTALK_SCHLUSS = [
+  'Dieses Merkblatt dient der Aufklärung und ersetzt nicht die individuelle Beratung im Salon. '
+    + 'Hairtalk® ist eine Marke des jeweiligen Rechteinhabers. Feminity Oberkassel arbeitet als '
+    + 'Hairtalk Spezialist.',
+];
 
 // Erklaerung des Massage-Bogens — wandert mit ins PDF.
 const MASSAGE_ERKLAERUNG = [
@@ -330,6 +357,31 @@ function koerperGesundheit(pdf, d) {
   pdf.ueberschrift('Erklärung', H, 3);
   for (const absatz of GESUNDHEIT_ERKLAERUNG) pdf.text(absatz, { groesse: 8.5, abstand: 5 });
   pdf.luecke(2);
+}
+
+// ── Rumpf: Hairtalk-Aufklaerung ─────────────────────────────────────────────
+function koerperHairtalk(pdf, d) {
+  pdf.ueberschrift('Kundendaten', H, 3);
+  pdf.feld('Name', `${d.vorname} ${d.nachname}`, FELD);
+  if (d.telefon) pdf.feld('Telefon', d.telefon, FELD);
+  if (d.email) pdf.feld('E-Mail', d.email, FELD);
+  if (d.beratungsdatum) pdf.feld('Datum der Beratung', datumAusFormular(d.beratungsdatum), FELD);
+  pdf.luecke(6);
+
+  pdf.ueberschrift('Behandlung', H, 3);
+  for (const feld of HAIRTALK.BEHANDLUNG) {
+    pdf.feld(feld.name, d[feld.id] || '—', { spalte: 130, groesse: 9, zeilenhoehe: 11.5 });
+  }
+  pdf.luecke(6);
+
+  pdf.ueberschrift('Meine Bestätigung', H, 3);
+  for (const b of HAIRTALK.BESTAETIGUNGEN) {
+    pdf.text(`${d.bestaetigt[b.id] === 'ja' ? '[x]' : '[  ]'}  ${b.text}`,
+      { groesse: 8.5, abstand: 3, einzug: 0 });
+  }
+  pdf.luecke(4);
+
+  for (const absatz of HAIRTALK_SCHLUSS) pdf.text(absatz, { groesse: 7.5, abstand: 4 });
 }
 
 // ── Rumpf: Massage ──────────────────────────────────────────────────────────

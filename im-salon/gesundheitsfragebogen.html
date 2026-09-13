@@ -157,6 +157,8 @@ footer a{color:var(--gold);text-decoration:none}
             <input id="nachname" type="text" autocomplete="off" autocapitalize="words" required></label>
           <label class="feld"><span>Geburtsdatum *</span>
             <input id="geburtsdatum" type="date" required></label>
+          <label class="feld"><span>Datum der Behandlung</span>
+            <input id="behandlungsdatum" type="date"></label>
           <label class="feld"><span>Telefon</span>
             <input id="telefon" type="tel" autocomplete="off" inputmode="tel"></label>
           <label class="feld"><span>E-Mail</span>
@@ -168,16 +170,16 @@ footer a{color:var(--gold);text-decoration:none}
       </div>
 
       <div class="karte">
-        <h2>Geplante Behandlung</h2>
-        <p class="unter">Womit sind Sie heute bei uns? Mehrfachauswahl möglich.</p>
-        <div id="behandlungen"></div>
+        <h2>Hautzustand</h2>
+        <p class="unter">Wie würden Sie Ihre Haut beschreiben? Mehrfachauswahl möglich.</p>
+        <div id="hautzustand"></div>
       </div>
 
       <div class="karte">
         <h2>Gesundheitliche Angaben</h2>
         <p class="unter">
-          Bitte bei jeder Zeile Ja oder Nein wählen. Bei „Ja" fragen wir an einigen
-          Stellen kurz nach — je genauer, desto besser können wir uns darauf einstellen.
+          Bitte bei jeder Zeile Ja oder Nein wählen. Bei „Ja" fragen wir kurz nach —
+          je genauer, desto besser können wir uns darauf einstellen.
         </p>
         <div id="fragen"></div>
       </div>
@@ -241,82 +243,67 @@ footer a{color:var(--gold);text-decoration:none}
   var meldung = document.getElementById('meldung');
   var sendenBtn = document.getElementById('senden');
 
-  // ── Behandlungen und Fragen aus dem Katalog aufbauen ─────────────────────
-  var behandlungen = document.getElementById('behandlungen');
-  KAT.BEHANDLUNGEN.forEach(function (b) {
+  // ── Hautzustand und Fragen aus dem Katalog aufbauen ─────────────────────
+  var hautBox = document.getElementById('hautzustand');
+  KAT.HAUTZUSTAND.forEach(function (h) {
     var l = document.createElement('label');
     l.className = 'wahl';
-    l.innerHTML = '<input type="checkbox" name="behandlungen" value="' + b.id + '"><span></span>';
-    l.querySelector('span').textContent = b.name;
-    behandlungen.appendChild(l);
+    l.innerHTML = '<input type="checkbox" name="hautzustand" value="' + h.id + '"><span></span>';
+    l.querySelector('span').textContent = h.name;
+    hautBox.appendChild(l);
   });
 
   var fragenBox = document.getElementById('fragen');
-  KAT.GRUPPEN.forEach(function (gruppe) {
-    var g = document.createElement('div');
-    g.className = 'gruppe';
-    var h = document.createElement('h3');
-    h.textContent = gruppe.titel;
-    g.appendChild(h);
+  KAT.FRAGEN.forEach(function (frage) {
+    var zeile = document.createElement('div');
+    zeile.className = 'zeile';
+    zeile.dataset.frage = frage.id;
 
-    gruppe.fragen.forEach(function (frage) {
-      var zeile = document.createElement('div');
-      zeile.className = 'zeile';
-      zeile.dataset.frage = frage.id;
+    var text = document.createElement('div');
+    text.className = 'frage';
+    text.textContent = frage.frage;
+    zeile.appendChild(text);
 
-      var text = document.createElement('div');
-      text.className = 'frage';
-      text.textContent = frage.frage;
-      zeile.appendChild(text);
+    var paar = document.createElement('div');
+    paar.className = 'paar';
+    ['ja', 'nein'].forEach(function (wert) {
+      var l = document.createElement('label');
+      l.innerHTML = '<input type="radio" name="f_' + frage.id + '" value="' + wert + '"><span></span>';
+      l.querySelector('span').textContent = wert === 'ja' ? 'Ja' : 'Nein';
+      paar.appendChild(l);
+    });
+    zeile.appendChild(paar);
 
-      var paar = document.createElement('div');
-      paar.className = 'paar';
-      ['ja', 'nein'].forEach(function (wert) {
-        var l = document.createElement('label');
-        l.innerHTML = '<input type="radio" name="f_' + frage.id + '" value="' + wert + '"><span></span>';
-        l.querySelector('span').textContent = wert === 'ja' ? 'Ja' : 'Nein';
-        paar.appendChild(l);
-      });
-      zeile.appendChild(paar);
+    if (frage.detail) {
+      var detail = document.createElement('div');
+      detail.className = 'detail';
+      detail.hidden = true;
+      detail.innerHTML = '<input type="text" autocomplete="off">';
+      detail.querySelector('input').placeholder = frage.detail;
+      detail.querySelector('input').id = 'd_' + frage.id;
+      zeile.appendChild(detail);
+    }
 
-      if (frage.detail) {
-        var detail = document.createElement('div');
-        detail.className = 'detail';
-        detail.hidden = true;
-        detail.innerHTML = '<input type="text" autocomplete="off">';
-        detail.querySelector('input').placeholder = frage.detail;
-        detail.querySelector('input').id = 'd_' + frage.id;
-        zeile.appendChild(detail);
-      }
-
-      // Sobald eine Antwort da ist, verschwindet die Fehlermarkierung; das
-      // Freitextfeld erscheint nur bei "Ja".
-      paar.addEventListener('change', function () {
-        zeile.classList.remove('offen');
-        var d = zeile.querySelector('.detail');
-        if (d) d.hidden = zeile.querySelector('input[value="ja"]').checked !== true;
-      });
-
-      g.appendChild(zeile);
+    // Sobald eine Antwort da ist, verschwindet die Fehlermarkierung; das
+    // Freitextfeld erscheint nur bei "Ja".
+    paar.addEventListener('change', function () {
+      zeile.classList.remove('offen');
+      var d = zeile.querySelector('.detail');
+      if (d) d.hidden = zeile.querySelector('input[value="ja"]').checked !== true;
     });
 
-    fragenBox.appendChild(g);
+    fragenBox.appendChild(zeile);
   });
 
   // Erklärungstext — Wortlaut identisch mit dem PDF
   var ERKLAERUNG = [
-    'Ich habe die vorstehenden Fragen vollständig und wahrheitsgemäß beantwortet.',
+    'Ich habe die vorstehenden Fragen vollständig und wahrheitsgemäß beantwortet und teile ' +
+      'Änderungen meines Gesundheitszustands vor der nächsten Behandlung unaufgefordert mit.',
     'Ich willige ausdrücklich ein, dass Feminity Oberkassel die angegebenen Gesundheitsdaten ' +
       'verarbeitet, um die Behandlung sicher planen und durchführen zu können ' +
-      '(Art. 9 Abs. 2 lit. a DSGVO). Diese Einwilligung ist freiwillig und jederzeit mit ' +
-      'Wirkung für die Zukunft widerrufbar — per E-Mail an admin@feminity-oberkassel.de. ' +
-      'Ohne sie kann die Behandlung aus Sicherheitsgründen nicht durchgeführt werden.',
-    'Ich wurde über Ablauf, Wirkung und mögliche Risiken der gewünschten Behandlung ' +
-      'aufgeklärt und hatte Gelegenheit, Fragen zu stellen.',
-    'Ändert sich mein Gesundheitszustand, teile ich das vor der nächsten Behandlung ' +
-      'unaufgefordert mit.',
-    'Mir ist bekannt, dass die Beratung im Salon keine ärztliche Beratung ersetzt und dass ' +
-      'ich im Zweifel ärztlichen Rat einholen sollte.'
+      '(Art. 9 Abs. 2 lit. a DSGVO). Die Einwilligung ist freiwillig und jederzeit mit ' +
+      'Wirkung für die Zukunft widerrufbar — per E-Mail an admin@feminity-oberkassel.de.',
+    'Mir ist bekannt, dass die Beratung im Salon keine ärztliche Beratung ersetzt.'
   ];
   var erklaerungBox = document.getElementById('erklaerung');
   ERKLAERUNG.forEach(function (absatz) {
@@ -433,7 +420,7 @@ footer a{color:var(--gold);text-decoration:none}
     var antworten = {};
     var details = {};
     var ersteOffen = null;
-    KAT.ALLE.forEach(function (frage) {
+    KAT.FRAGEN.forEach(function (frage) {
       var gewaehlt = form.querySelector('input[name="f_' + frage.id + '"]:checked');
       var zeile = form.querySelector('[data-frage="' + frage.id + '"]');
       if (!gewaehlt) {
@@ -453,8 +440,8 @@ footer a{color:var(--gold);text-decoration:none}
     if (!document.getElementById('einwilligung').checked) return fehlerZeigen(FEHLERTEXT.einwilligung);
     if (!gezeichnet) return fehlerZeigen(FEHLERTEXT.signatur);
 
-    var behandlungenGewaehlt = Array.prototype.map.call(
-      form.querySelectorAll('input[name="behandlungen"]:checked'),
+    var hautGewaehlt = Array.prototype.map.call(
+      form.querySelectorAll('input[name="hautzustand"]:checked'),
       function (el) { return el.value; }
     );
 
@@ -466,7 +453,8 @@ footer a{color:var(--gold);text-decoration:none}
       geburtsdatum: geburtsdatum,
       email: document.getElementById('email').value.trim(),
       telefon: document.getElementById('telefon').value.trim(),
-      behandlungen: behandlungenGewaehlt,
+      behandlungsdatum: document.getElementById('behandlungsdatum').value,
+      hautzustand: hautGewaehlt,
       antworten: antworten,
       details: details,
       minderjaehrig: minderjaehrig.checked,

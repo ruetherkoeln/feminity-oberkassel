@@ -30,16 +30,16 @@ const BOEGEN = {
     titel: 'Gesundheitsfragebogen',
     dateiname: 'Gesundheitsfragebogen',
     pflicht: ['vorname', 'nachname', 'geburtsdatum'],
-    text: ['vorname', 'nachname', 'geburtsdatum', 'email', 'telefon', 'vertreter',
-           'unterschriftsort'],
-    listen: ['behandlungen'],
+    text: ['vorname', 'nachname', 'geburtsdatum', 'behandlungsdatum', 'email', 'telefon',
+           'vertreter', 'unterschriftsort'],
+    listen: ['hautzustand'],
     // Antworten und Freitexte kommen als Objekte, nicht als einzelne Felder
     karten: ['antworten', 'details'],
     koerper: koerperGesundheit,
     // Jede Frage braucht ein Ja oder Nein — eine Luecke waere im Zweifel
     // genau die Angabe, auf die es angekommen waere.
     pruefen(f) {
-      for (const frage of GESUNDHEIT.ALLE) {
+      for (const frage of GESUNDHEIT.FRAGEN) {
         const a = f.antworten[frage.id];
         if (a !== 'ja' && a !== 'nein') return 'unvollstaendig';
       }
@@ -80,17 +80,13 @@ const EINWILLIGUNG_RECHTSTEXT = [
 // Erklaerungen des Gesundheitsbogens — wandern mit ins PDF, damit der
 // unterschriebene Bogen aus sich heraus belegt, was erklaert wurde.
 const GESUNDHEIT_ERKLAERUNG = [
-  'Ich habe die vorstehenden Fragen vollständig und wahrheitsgemäß beantwortet.',
+  'Ich habe die vorstehenden Fragen vollständig und wahrheitsgemäß beantwortet und teile ' +
+    'Änderungen meines Gesundheitszustands vor der nächsten Behandlung unaufgefordert mit.',
   'Ich willige ausdrücklich ein, dass Feminity Oberkassel die angegebenen Gesundheitsdaten ' +
     'verarbeitet, um die Behandlung sicher planen und durchführen zu können ' +
-    '(Art. 9 Abs. 2 lit. a DSGVO). Diese Einwilligung ist freiwillig und jederzeit mit Wirkung ' +
-    'für die Zukunft widerrufbar — per E-Mail an admin@feminity-oberkassel.de. Ohne sie kann ' +
-    'die Behandlung aus Sicherheitsgründen nicht durchgeführt werden.',
-  'Ich wurde über Ablauf, Wirkung und mögliche Risiken der gewünschten Behandlung aufgeklärt ' +
-    'und hatte Gelegenheit, Fragen zu stellen.',
-  'Ändert sich mein Gesundheitszustand, teile ich das vor der nächsten Behandlung unaufgefordert mit.',
-  'Mir ist bekannt, dass die Beratung im Salon keine ärztliche Beratung ersetzt und dass ich ' +
-    'im Zweifel ärztlichen Rat einholen sollte.',
+    '(Art. 9 Abs. 2 lit. a DSGVO). Die Einwilligung ist freiwillig und jederzeit mit Wirkung ' +
+    'für die Zukunft widerrufbar — per E-Mail an admin@feminity-oberkassel.de.',
+  'Mir ist bekannt, dass die Beratung im Salon keine ärztliche Beratung ersetzt.',
 ];
 
 // ── Hilfen ──────────────────────────────────────────────────────────────────
@@ -158,6 +154,7 @@ function personBauen(pdf, d) {
   if (d.geburtsdatum) pdf.feld('Geburtsdatum', datumAusFormular(d.geburtsdatum), FELD);
   if (d.email) pdf.feld('E-Mail', d.email, FELD);
   if (d.telefon) pdf.feld('Telefon', d.telefon, FELD);
+  if (d.behandlungsdatum) pdf.feld('Datum der Behandlung', datumAusFormular(d.behandlungsdatum), FELD);
   pdf.luecke(6);
 }
 
@@ -225,47 +222,33 @@ function koerperEinwilligung(pdf, d) {
 }
 
 // ── Rumpf: Gesundheitsfragebogen ────────────────────────────────────────────
-// Die Antwort steht vorn und fett, die Frage dahinter: Beim Durchsehen sucht
-// man die Ja-Antworten, nicht die Fragen.
-function gruppeBauen(pdf, gruppe, d, einzug) {
-  pdf.text(gruppe.titel, { groesse: 9.5, fett: true, abstand: 2, einzug, breite: SPALTE_BREITE });
-  for (const frage of gruppe.fragen) {
-    const antwort = d.antworten[frage.id] === 'ja' ? 'Ja' : 'Nein';
-    pdf.feld(antwort, frage.frage,
-      { spalte: 26, groesse: 8, zeilenhoehe: 9.8, breite: SPALTE_BREITE, einzug });
-    const detail = frage.detail && d.antworten[frage.id] === 'ja' ? (d.details[frage.id] || '') : '';
-    if (detail) {
-      pdf.text(`${frage.detail} ${detail}`,
-        { groesse: 7.5, abstand: 1, einzug: einzug + 26, breite: SPALTE_BREITE - 26 });
-    }
-  }
-  pdf.luecke(5);
-}
-
+// Aufbau folgt dem Papierbogen des Salons: Angaben, Hautzustand, vier Fragen.
+// Die Antwort steht vorn und fett — beim Durchsehen sucht man die Ja-Antworten,
+// nicht die Fragen.
 function koerperGesundheit(pdf, d) {
   personBauen(pdf, d);
 
-  const gewaehlt = (d.behandlungen || []).filter((b) => GESUNDHEIT.BEHANDLUNGEN.some((x) => x.id === b));
-  pdf.ueberschrift('Geplante Behandlung', H, 3);
-  pdf.text(
-    GESUNDHEIT.BEHANDLUNGEN.filter((b) => gewaehlt.includes(b.id)).map((b) => b.name).join(' · ') || '—',
-    { groesse: 9, abstand: 8 }
-  );
+  pdf.ueberschrift('Hautzustand', H, 3);
+  const haut = (d.hautzustand || []).filter((x) => GESUNDHEIT.HAUTZUSTAND.some((h) => h.id === x));
+  for (const eintrag of GESUNDHEIT.HAUTZUSTAND) {
+    pdf.text(`${haut.includes(eintrag.id) ? '[x]' : '[  ]'}  ${eintrag.name}`,
+      { groesse: 9, abstand: 0, breite: SPALTE_BREITE });
+  }
+  pdf.luecke(10);
 
-  pdf.ueberschrift('Gesundheitliche Angaben', H, 3);
-  const oben = pdf.y;
-  // Links die ersten beiden Gruppen, rechts die übrigen — halbiert die Höhe.
-  const haelfte = Math.ceil(GESUNDHEIT.GRUPPEN.length / 2);
-  for (const gruppe of GESUNDHEIT.GRUPPEN.slice(0, haelfte)) gruppeBauen(pdf, gruppe, d, 0);
-  const linksUnten = pdf.y;
-
-  pdf.y = oben;
-  for (const gruppe of GESUNDHEIT.GRUPPEN.slice(haelfte)) gruppeBauen(pdf, gruppe, d, SPALTE_RECHTS);
-
-  pdf.y = Math.min(linksUnten, pdf.y) - 4;
+  pdf.ueberschrift('Gesundheitsfragen', H, 3);
+  for (const frage of GESUNDHEIT.FRAGEN) {
+    const antwort = d.antworten[frage.id] === 'ja' ? 'Ja' : 'Nein';
+    pdf.feld(antwort, frage.frage, { spalte: 30, groesse: 9, zeilenhoehe: 11.5 });
+    if (frage.detail) {
+      const wert = d.antworten[frage.id] === 'ja' ? (d.details[frage.id] || '—') : '—';
+      pdf.text(`${frage.detail} ${wert}`, { groesse: 8.5, abstand: 3, einzug: 30 });
+    }
+  }
+  pdf.luecke(8);
 
   pdf.ueberschrift('Erklärung', H, 3);
-  for (const absatz of GESUNDHEIT_ERKLAERUNG) pdf.text(absatz, { groesse: 8, abstand: 4 });
+  for (const absatz of GESUNDHEIT_ERKLAERUNG) pdf.text(absatz, { groesse: 8.5, abstand: 5 });
   pdf.luecke(2);
 }
 

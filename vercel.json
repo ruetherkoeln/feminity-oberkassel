@@ -12,6 +12,11 @@
       "permanent": true
     },
     {
+      "source": "/blog/vivien-mader-pmu.html",
+      "destination": "/blog/pmu-fakten.html",
+      "permanent": true
+    },
+    {
       "source": "/blog/browlifting.html",
       "destination": "/blog/brow-lamination.html",
       "permanent": true

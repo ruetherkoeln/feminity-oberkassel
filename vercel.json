@@ -12,6 +12,11 @@
       "permanent": true
     },
     {
+      "source": "/blog/jule-story.html",
+      "destination": "/blog.html",
+      "permanent": true
+    },
+    {
       "source": "/blog/vivien-mader-pmu.html",
       "destination": "/blog/pmu-fakten.html",
       "permanent": true

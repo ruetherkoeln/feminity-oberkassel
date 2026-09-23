@@ -1,0 +1,9 @@
+# Interne Arbeitspapiere gehoeren nicht ins oeffentliche Verzeichnis.
+#
+# Vercel liefert bei dieser Site jede Datei aus, die im Repo liegt — es gibt
+# keinen Build-Schritt, der Quellen von Ergebnis trennt. Ohne diesen Ausschluss
+# waren GBP-OPTIMIERUNG.md und IM-SALON.md unter ihrer Adresse frei abrufbar.
+#
+# Die Dateien bleiben in der Versionsverwaltung. Sie werden nur nicht mehr
+# hochgeladen. Wer sie braucht, liest sie im Repo.
+*.md

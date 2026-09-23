@@ -12,6 +12,11 @@
       "permanent": true
     },
     {
+      "source": "/blog/liposan-nad-drips.html",
+      "destination": "/beauty-drips-duesseldorf.html",
+      "permanent": true
+    },
+    {
       "source": "/blog/was-ist-liposana3.html",
       "destination": "/blog.html",
       "permanent": true

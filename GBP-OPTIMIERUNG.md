@@ -64,7 +64,7 @@ GBP erlaubt **1 Hauptkategorie + bis zu 9 Zusatzkategorien**. Die Hauptkategorie
 Copy-paste:
 
 ```
-Feminity by Jule ist Dein Beauty Space im Herzen von Düsseldorf-Oberkassel – im Me and All Hotel an der Hansaallee. Inhaberin Julrine Domingos und ihr Team verbinden Friseurhandwerk, Hautpflege und Beauty-Behandlungen unter einem Dach: Schnitt, Coloration und Balayage, Permanent Make-up (Powder Brows, Lip Blush), Green Peel, apparative Kosmetik mit LIPOSANA3, NAD+ Drips sowie dauerhafte Laser-Haarentfernung mit dem Nd:YAG. Wir setzen auf ehrliche Beratung, hochwertige Profiprodukte (u. a. Kérastase, HH Simonsen) und Behandlungen, die wirklich zu Dir passen – ohne Verkaufsdruck. Mittwoch bis Freitag bis 22 Uhr geöffnet. Termine jederzeit online buchbar.
+Feminity by Jule ist Dein Beauty Space im Herzen von Düsseldorf-Oberkassel – im Me and All Hotel an der Hansaallee. Das Team von Feminity Oberkassel verbindet Friseurhandwerk, Hautpflege und Beauty-Behandlungen unter einem Dach: Schnitt, Coloration und Balayage, Permanent Make-up (Powder Brows, Lip Blush), Green Peel, apparative Kosmetik mit LIPOSANA3, NAD+ Drips sowie dauerhafte Laser-Haarentfernung mit dem Nd:YAG. Wir setzen auf ehrliche Beratung, hochwertige Profiprodukte (u. a. Kérastase, HH Simonsen) und Behandlungen, die wirklich zu Dir passen – ohne Verkaufsdruck. Mittwoch bis Freitag bis 22 Uhr geöffnet. Termine jederzeit online buchbar.
 ```
 
 ---
@@ -106,7 +106,6 @@ Im Dashboard unter „Leistungen" — pro Kategorie Services anlegen. Name + Kur
 
 Im Dashboard unter „Attribute" aktivieren, was zutrifft:
 
-- ✅ **Inhaberin: identifiziert sich als Unternehmen in Frauenbesitz** (Jule ist Inhaberin)
 - ✅ Termin erforderlich / Onlinetermine
 - ✅ Barrierefreier Zugang *(prüfen — Lage im Me and All Hotel)*
 - ✅ WLAN *(falls vorhanden)*

@@ -198,16 +198,16 @@
 
   // ── Absenden ───────────────────────────────────────────────────────────
   var FEHLERTEXT = {
-    pflicht: 'Bitte füllen Sie die markierten Pflichtfelder aus.',
-    email: 'Bitte prüfen Sie Ihre E-Mail-Adresse.',
-    einwilligung: 'Bitte bestätigen Sie die Erklärung.',
-    signatur: 'Bitte unterschreiben Sie im dafür vorgesehenen Feld.',
-    aufgegeben: 'Der Versand klappt gerade nicht. Bitte lassen Sie die Seite offen und versuchen Sie es '
-      + 'in ein paar Minuten noch einmal — oder melden Sie sich kurz bei uns.',
-    abgebrochen: 'Abgebrochen. Sie können es erneut versuchen — Ihre Angaben stehen noch.',
-    versand: 'Die Angaben konnten nicht versendet werden. Bitte versuchen Sie es gleich noch einmal.',
-    konfiguration: 'Der Versand ist noch nicht eingerichtet. Bitte melden Sie sich bei uns.',
-    pdf: 'Das Dokument konnte nicht erzeugt werden. Bitte melden Sie sich bei uns.',
+    pflicht: 'Bitte füll die markierten Pflichtfelder aus.',
+    email: 'Bitte prüf deine E-Mail-Adresse.',
+    einwilligung: 'Bitte bestätige die Erklärung.',
+    signatur: 'Bitte unterschreib im dafür vorgesehenen Feld.',
+    aufgegeben: 'Der Versand klappt gerade nicht. Bitte lass die Seite offen und versuch es '
+      + 'in ein paar Minuten noch einmal — oder melde dich kurz bei uns.',
+    abgebrochen: 'Abgebrochen. Du kannst es erneut versuchen — deine Angaben stehen noch.',
+    versand: 'Die Angaben konnten nicht versendet werden. Bitte versuch es gleich noch einmal.',
+    konfiguration: 'Der Versand ist noch nicht eingerichtet. Bitte melde dich bei uns.',
+    pdf: 'Das Dokument konnte nicht erzeugt werden. Bitte melde dich bei uns.',
   };
 
   /**
@@ -235,8 +235,8 @@
         stark.textContent = 'Der Versand klemmt gerade. ';
         text.appendChild(stark);
         text.appendChild(document.createTextNode(
-          'Wir versuchen es automatisch weiter. Bitte lassen Sie diese Seite offen — '
-          + 'Ihre Angaben sind noch da.'));
+          'Wir versuchen es automatisch weiter. Bitte lass diese Seite offen — '
+          + 'deine Angaben sind noch da.'));
         meldung.appendChild(text);
         warteStatus = document.createElement('div');
         warteStatus.className = 'warten-status';

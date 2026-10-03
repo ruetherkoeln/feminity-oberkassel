@@ -67,7 +67,7 @@ const BOEGEN = {
         ? f.position_sonst : K.name(K.POSITIONEN, p)));
       return namen.length ? ` (${namen.join(', ')})` : '';
     },
-    kopieText: 'Ihren Bewerberfragebogen',
+    kopieText: 'deinen Bewerberfragebogen',
   },
 
   einstellungsbogen: {
@@ -96,7 +96,7 @@ const BOEGEN = {
     },
     koerper: koerperEinstellung,
     betreffZusatz: () => '',
-    kopieText: 'Ihren Einstellungsbogen',
+    kopieText: 'deinen Einstellungsbogen',
   },
 };
 
@@ -112,7 +112,7 @@ BOEGEN.ausweispflicht = {
   pruefen: (f) => (f.kenntnis === 'ja' ? null : 'kenntnis'),
   koerper: koerperAusweispflicht,
   betreffZusatz: () => ' — zur Kenntnis genommen',
-  kopieText: 'Ihre Bestätigung zum Merkblatt Ausweispflicht',
+  kopieText: 'deine Bestätigung zum Merkblatt Ausweispflicht',
 };
 
 // ── Felder übernehmen ───────────────────────────────────────────────────────
@@ -449,12 +449,12 @@ async function unterlagenVerarbeiten(d, res, zugang, an, von) {
       von,
       vonName: 'Feminity Oberkassel',
       an: f.email,
-      betreff: 'Ihre Unterlagen sind bei Feminity Oberkassel angekommen',
+      betreff: 'Deine Unterlagen sind bei Feminity Oberkassel angekommen',
       text:
-        `Guten Tag ${f.vorname} ${f.nachname},\n\n` +
+        `Hallo ${f.vorname},\n\n` +
         `vielen Dank — folgende Dateien sind bei uns angekommen:\n\n${liste}\n\n` +
-        'Wir melden uns bei Ihnen.\n\n' +
-        'Herzliche Grüße\nIhr Team von Feminity Oberkassel\n' +
+        'Wir melden uns bei dir.\n\n' +
+        'Herzliche Grüße\nDein Team von Feminity Oberkassel\n' +
         'Hansaallee 1a · 40549 Düsseldorf',
     });
   } catch (e) {
@@ -548,12 +548,12 @@ module.exports = async (req, res) => {
       von,
       vonName: 'Feminity Oberkassel',
       an: f.email,
-      betreff: `Ihr ${bogen.titel} bei Feminity Oberkassel`,
+      betreff: `Dein ${bogen.titel} bei Feminity Oberkassel`,
       text:
-        `Guten Tag ${f.vorname} ${f.nachname},\n\n` +
-        `vielen Dank — wir haben ${bogen.kopieText} erhalten. Anbei Ihr Exemplar als PDF ` +
+        `Hallo ${f.vorname},\n\n` +
+        `vielen Dank — wir haben ${bogen.kopieText} erhalten. Anbei dein Exemplar als PDF ` +
         'zum Nachlesen und Aufbewahren.\n\n' +
-        'Herzliche Grüße\nIhr Team von Feminity Oberkassel\n' +
+        'Herzliche Grüße\nDein Team von Feminity Oberkassel\n' +
         'Hansaallee 1a · 40549 Düsseldorf',
       anhang,
     });

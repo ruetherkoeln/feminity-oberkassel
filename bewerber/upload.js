@@ -193,11 +193,11 @@
   }
 
   var TEXTE = {
-    dateien: 'Bitte wählen Sie mindestens eine Datei aus.',
-    datei: 'Eine der Dateien ist kein PDF, JPG oder PNG. Bitte entfernen Sie sie.',
-    zuviele: 'Das sind zu viele Dateien für einen Durchgang. Bitte schicken Sie den Rest danach.',
-    zugross: 'Die Dateien sind zusammen zu groß. Bitte schicken Sie einen Teil im zweiten Durchgang.',
-    einwilligung: 'Bitte bestätigen Sie, dass Sie den Datenschutzhinweis gelesen haben.',
+    dateien: 'Bitte wähl mindestens eine Datei aus.',
+    datei: 'Eine der Dateien ist kein PDF, JPG oder PNG. Bitte entfern sie.',
+    zuviele: 'Das sind zu viele Dateien für einen Durchgang. Bitte schick den Rest danach.',
+    zugross: 'Die Dateien sind zusammen zu groß. Bitte schick einen Teil im zweiten Durchgang.',
+    einwilligung: 'Bitte bestätige, dass du den Datenschutzhinweis gelesen hast.',
   };
 
   form.addEventListener('submit', function (ev) {

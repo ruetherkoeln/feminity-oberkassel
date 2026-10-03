@@ -24,12 +24,12 @@
 <div class="wrap">
 
   <div id="formular">
-    <div class="eyebrow">Nach Ihrer Zusage</div>
+    <div class="eyebrow">Nach deiner Zusage</div>
     <h1>Einstellungsbogen</h1>
     <p class="lead">
       Willkommen im Team! Für Arbeitsvertrag, Anmeldung bei der Krankenkasse und die
-      erste Lohnabrechnung brauchen wir die folgenden Angaben. Was Sie gerade nicht
-      zur Hand haben, lassen Sie frei — wir klären es beim ersten Arbeitstag.
+      erste Lohnabrechnung brauchen wir die folgenden Angaben. Was du gerade nicht
+      zur Hand hast, lass frei — wir klären es beim ersten Arbeitstag.
     </p>
 
     <form id="bogen" novalidate>
@@ -81,8 +81,8 @@
       <div class="karte">
         <h2><span class="nr">2</span>Steuerliche Angaben</h2>
         <p class="unter">
-          Damit wir Ihre Lohnsteuermerkmale (ELStAM) beim Finanzamt abrufen können. Die
-          Steuer-ID steht auf Ihrem Einkommensteuerbescheid oder Ihrer Lohnsteuerbescheinigung.
+          Damit wir deine Lohnsteuermerkmale (ELStAM) beim Finanzamt abrufen können. Die
+          Steuer-ID steht auf deinem Einkommensteuerbescheid oder deiner Lohnsteuerbescheinigung.
         </p>
         <div class="raster">
           <label class="feld"><span>Steuer-Identifikationsnummer <small>(11 Ziffern)</small></span>
@@ -124,7 +124,7 @@
 
       <div class="karte">
         <h2><span class="nr">4</span>Beschäftigung</h2>
-        <p class="unter">So, wie wir es mit Ihnen vereinbart haben.</p>
+        <p class="unter">So, wie wir es mit dir vereinbart haben.</p>
         <div class="raster">
           <label class="feld"><span>Eintrittsdatum</span>
             <input name="eintritt" type="date"></label>
@@ -183,7 +183,7 @@
 
       <div class="karte">
         <h2><span class="nr">7</span>Arbeitserlaubnis und Aufenthalt</h2>
-        <p class="unter">Nur relevant, wenn Sie keine Staatsangehörigkeit eines EU-Landes haben.</p>
+        <p class="unter">Nur relevant, wenn du keine Staatsangehörigkeit eines EU-Landes hast.</p>
         <div class="gruppe">
           <span class="gruppe-titel">Aufenthaltstitel vorhanden</span>
           <div class="pillen" data-liste="AUFENTHALT" data-name="aufenthalt"></div>
@@ -214,14 +214,14 @@
           <div class="pillen" data-liste="EINSTELLUNGSUNTERLAGEN" data-name="unterlagen" data-mehrfach></div>
         </div>
         <p class="unter" style="margin:1rem 0 0">
-          Kopien laden Sie nach dem Absenden
+          Kopien lädst du nach dem Absenden
           <a href="/bewerber.html#hochladen">auf der Übersicht</a> hoch — ein Foto mit
           dem Handy genügt.
         </p>
       </div>
 
       <div class="karte">
-        <h2>Das erklären Sie mit Ihrer Unterschrift</h2>
+        <h2>Das erklärst du mit deiner Unterschrift</h2>
         <div class="recht" id="erklaerung"></div>
         <label class="wahl" style="margin-top:1.25rem">
           <input type="checkbox" id="einwilligung">
@@ -236,7 +236,7 @@
           <div class="sig-hint">Hier unterschreiben</div>
         </div>
         <div class="sig-leiste">
-          <small>Eine Kopie des Bogens schicken wir an Ihre E-Mail-Adresse.</small>
+          <small>Eine Kopie des Bogens schicken wir an deine E-Mail-Adresse.</small>
           <button type="button" class="btn-klein" id="sigLeeren">Neu zeichnen</button>
         </div>
       </div>
@@ -250,8 +250,8 @@
     <div class="haken">✓</div>
     <h2>Vielen Dank!</h2>
     <p>
-      Ihr Einstellungsbogen ist bei uns angekommen, eine Kopie liegt gleich in Ihrem
-      Postfach. Laden Sie jetzt noch die Kopien Ihrer Unterlagen hoch und bestätigen Sie
+      Dein Einstellungsbogen ist bei uns angekommen, eine Kopie liegt gleich in deinem
+      Postfach. Lade jetzt noch die Kopien deiner Unterlagen hoch und bestätige
       das Merkblatt zur Ausweispflicht.
     </p>
     <div class="knoepfe">
@@ -285,11 +285,11 @@
     document.getElementById('sigRahmen'), document.getElementById('sigLeeren'));
 
   var TEXTE = {
-    iban: 'Die IBAN scheint nicht zu stimmen — bitte prüfen Sie sie noch einmal.',
-    steuerid: 'Die Steuer-ID scheint nicht zu stimmen. Sie hat elf Ziffern; lassen Sie das '
-      + 'Feld frei, wenn Sie sie gerade nicht zur Hand haben.',
-    svnummer: 'Die Sozialversicherungsnummer hat die Form 12 345678 A 123. Lassen Sie das '
-      + 'Feld frei, wenn Sie sie gerade nicht zur Hand haben.',
+    iban: 'Die IBAN scheint nicht zu stimmen — bitte prüf sie noch einmal.',
+    steuerid: 'Die Steuer-ID scheint nicht zu stimmen. Sie hat elf Ziffern; lass das '
+      + 'Feld frei, wenn du sie gerade nicht zur Hand hast.',
+    svnummer: 'Die Sozialversicherungsnummer hat die Form 12 345678 A 123. Lass das '
+      + 'Feld frei, wenn du sie gerade nicht zur Hand hast.',
   };
 
   // Prüfen beim Verlassen des Feldes — ein Zahlendreher fällt so sofort auf,

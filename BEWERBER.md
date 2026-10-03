@@ -70,5 +70,13 @@ im passenden Abschnitt ergänzen, sie erscheint automatisch in Formular und PDF.
 - Rechtstexte (Erklärungen in `katalog.js`, Datenschutzhinweise) sind von Claude
   formuliert, nicht juristisch geprüft. Löschfrist sechs Monate nach Abschluss des
   Verfahrens (AGG), Talentpool zwölf Monate mit Einwilligung.
-- Die Datenschutzerklärung der Website (`impressum.html`) erwähnt den Bewerberbereich
-  noch nicht.
+- Die Datenschutzerklärung (`impressum.html`, Abschnitt „Bewerbungen und
+  Einstellungsunterlagen“) nennt die Verarbeitung auf Vercel-Servern in den USA, aber
+  keine Rechtsgrundlage für die Drittlandübermittlung — prüfen lassen.
+
+## Anrede
+
+Übersicht und Einleitungen sprechen die Gruppe mit „ihr“ an, alles innerhalb eines
+Bogens die ausfüllende Person mit „du“. Ausnahme: der Wortlaut des Merkblatts
+Ausweispflicht bleibt förmlich („Sie“), weil er dem ausdruckbaren PDF entspricht.
+Die Datenschutzerklärung der Website siezt.

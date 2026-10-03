@@ -17,8 +17,9 @@ Das Ergebnis geht als PDF per E-Mail an den Salon; gespeichert wird nichts.
 | `im-salon/merkblatt-hairtalk.html` | Merkblatt zum Lesen, ohne Unterschrift |
 | `im-salon/fragen-massage.js` | Fragenkatalog Massage — ebenso |
 | `im-salon/fragen-hairtalk.js` | Bestätigungen Hairtalk — ebenso |
-| `im-salon/senden.js` | Absenden mit Wiederholung — von allen vier Bögen genutzt |
+| `im-salon/senden.js` | Absenden mit Wiederholung — von allen Bögen genutzt, auch vom Bewerberbereich |
 | `api/fragebogen.js` | Nimmt den Bogen entgegen, baut das PDF, verschickt es |
+| `api/_bogen.js` | Hilfen, die auch `api/bewerbung.js` nutzt (siehe `BEWERBER.md`) |
 | `api/_pdf.js` | PDF-Erzeuger |
 | `api/_smtp.js` | Mailversand über SMTP |
 

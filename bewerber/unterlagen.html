@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Unterlagen hochladen | Feminity Oberkassel</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="format-detection" content="telephone=no">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="/bewerber/bogen.css">
+</head>
+<body>
+
+<header>
+  <div class="cont">
+    <a href="/"><img src="/Logo.png" class="logo-nav" alt="Feminity Oberkassel"></a>
+    <a href="/bewerber" class="zurueck">Alle Bögen</a>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div id="formular">
+    <div class="eyebrow">Bewerbung</div>
+    <h1>Unterlagen hochladen</h1>
+    <p class="lead">
+      Zertifikate, Schulungsnachweise, Zeugnisse — und nach Ihrer Zusage die Kopien für
+      die Personalakte. PDF oder Foto, ein Handyfoto genügt, solange alles lesbar ist.
+    </p>
+
+    <form id="bogen" novalidate>
+      <div class="honig" aria-hidden="true">
+        <label for="webseite">Bitte leer lassen</label>
+        <input id="webseite" name="webseite" type="text" tabindex="-1" autocomplete="off">
+      </div>
+
+      <div class="karte">
+        <h2>Von wem?</h2>
+        <div class="raster">
+          <label class="feld"><span>Vorname *</span>
+            <input name="vorname" type="text" autocomplete="given-name" autocapitalize="words" required></label>
+          <label class="feld"><span>Nachname *</span>
+            <input name="nachname" type="text" autocomplete="family-name" autocapitalize="words" required></label>
+          <label class="feld"><span>E-Mail *</span>
+            <input name="email" type="email" autocomplete="email" inputmode="email" required></label>
+          <label class="feld"><span>Telefon</span>
+            <input name="telefon" type="tel" autocomplete="tel" inputmode="tel"></label>
+        </div>
+        <div class="gruppe">
+          <span class="gruppe-titel">Wofür?</span>
+          <div class="pillen" id="anlass">
+            <label><input type="radio" name="anlass" value="bewerbung" checked><span>Zu meiner Bewerbung</span></label>
+            <label><input type="radio" name="anlass" value="einstellung"><span>Nach meiner Zusage (Personalakte)</span></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="karte">
+        <h2>Dateien</h2>
+        <p class="unter" id="grenzen"></p>
+        <label class="ablage" id="ablage">
+          <input type="file" id="datei" multiple accept="application/pdf,image/*">
+          <strong>Dateien auswählen oder Foto aufnehmen</strong>
+          <small>PDF, JPG oder PNG — am Computer auch hierher ziehen</small>
+        </label>
+        <ul class="dateien" id="liste"></ul>
+        <div class="belegt" id="belegt"></div>
+      </div>
+
+      <div class="karte">
+        <h2>Nachricht <small style="font-weight:400;color:#6E6E6E">(freiwillig)</small></h2>
+        <label class="feld"><span>Möchten Sie uns etwas dazu sagen?</span>
+          <textarea name="nachricht" maxlength="1500"></textarea></label>
+      </div>
+
+      <div class="karte">
+        <h2>Datenschutz</h2>
+        <div class="recht" id="hinweis"></div>
+        <label class="wahl" style="margin-top:1.25rem">
+          <input type="checkbox" id="einwilligung">
+          <span>Ich habe den Hinweis gelesen *</span></label>
+      </div>
+
+      <button type="submit" class="btn-senden" id="senden">Unterlagen absenden</button>
+      <div class="meldung" id="meldung" role="alert"></div>
+    </form>
+  </div>
+
+  <div class="danke" id="danke">
+    <div class="haken">✓</div>
+    <h2>Vielen Dank!</h2>
+    <p>
+      Ihre Unterlagen sind bei uns angekommen. Eine Eingangsbestätigung liegt gleich in
+      Ihrem Postfach. Weitere Dateien können Sie jederzeit nachreichen.
+    </p>
+    <div class="knoepfe">
+      <button type="button" class="btn-klein" id="weitere">Weitere Dateien hochladen</button>
+      <a class="btn-klein" href="/bewerber">Zur Übersicht</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2026 Groom&amp;Glow UG (haftungsbeschränkt) • <a href="/impressum.html">Impressum &amp; Datenschutz</a></p>
+</footer>
+
+<script src="/im-salon/senden.js"></script>
+<script src="/bewerber/katalog.js"></script>
+<script src="/bewerber/bogen.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var K = window.BEWERBER;
+  var GRENZE = K.UPLOAD.MAX_BYTES;
+  var form = document.getElementById('bogen');
+  var meldung = document.getElementById('meldung');
+  var liste = document.getElementById('liste');
+  var belegt = document.getElementById('belegt');
+  var dateiFeld = document.getElementById('datei');
+
+  // Fotos werden verkleinert: Ein Handyfoto hat schnell 4 MB, als
+  // Dokumentenkopie lesbar bleibt es mit 2000 Pixeln an der langen Seite.
+  var BILD_KANTE = 2000;
+  var BILD_QUALITAET = 0.82;
+
+  var dateien = [];   // { name, art, daten (Base64), bytes }
+
+  BOGEN.absaetze(document.getElementById('hinweis'), K.HINWEIS_UNTERLAGEN);
+  document.getElementById('grenzen').textContent =
+    'Bis zu ' + K.UPLOAD.MAX_DATEIEN + ' Dateien und ' + mb(GRENZE) + ' je Durchgang. '
+    + 'Fotos verkleinern wir automatisch. Mehr dabei? Einfach in einem zweiten Durchgang nachreichen.';
+
+  // Aufruf aus dem Einstellungsbogen: gleich den richtigen Anlass wählen
+  if (/[?&]anlass=einstellung/.test(location.search)) {
+    form.querySelector('input[name="anlass"][value="einstellung"]').checked = true;
+  }
+
+  function mb(bytes) {
+    return bytes < 1024 * 1024
+      ? Math.max(1, Math.round(bytes / 1024)) + ' KB'
+      : (bytes / 1024 / 1024).toFixed(1).replace('.', ',') + ' MB';
+  }
+
+  function summe() {
+    return dateien.reduce(function (s, d) { return s + d.bytes; }, 0);
+  }
+
+  // Vorschlag für die Dokumentart — nur eine Vorbelegung, wählbar bleibt alles.
+  function artRaten(name) {
+    var n = name.toLowerCase();
+    if (/lebenslauf|\bcv\b|resume/.test(n)) return 'lebenslauf';
+    if (/zeugnis|abschluss|meister|gesellen/.test(n)) return 'zeugnis';
+    if (/zertifikat|certificate|schulung|seminar/.test(n)) return 'zertifikat';
+    if (/sozialversicherung|sv-ausweis/.test(n)) return 'svausweis';
+    if (/ausweis|pass/.test(n)) return 'ausweis';
+    if (/krankenkasse|mitglied/.test(n)) return 'krankenkasse';
+    return form.querySelector('input[name="anlass"]:checked').value === 'einstellung' ? 'sonstiges' : 'zertifikat';
+  }
+
+  function alsBase64(blob) {
+    return new Promise(function (fertig, fehler) {
+      var r = new FileReader();
+      r.onload = function () { fertig(String(r.result).split(',')[1] || ''); };
+      r.onerror = fehler;
+      r.readAsDataURL(blob);
+    });
+  }
+
+  // Das <img>-Element beachtet die EXIF-Drehung von Handyfotos — ein Weg
+  // über createImageBitmap tut das nicht in jedem Browser.
+  function bildVerkleinern(datei) {
+    return new Promise(function (fertig, fehler) {
+      var url = URL.createObjectURL(datei);
+      var img = new Image();
+      img.onload = function () {
+        var faktor = Math.min(1, BILD_KANTE / Math.max(img.naturalWidth, img.naturalHeight));
+        var c = document.createElement('canvas');
+        c.width = Math.round(img.naturalWidth * faktor);
+        c.height = Math.round(img.naturalHeight * faktor);
+        var ctx = c.getContext('2d');
+        ctx.fillStyle = '#FFFFFF';          // transparente PNGs nicht schwarz werden lassen
+        ctx.fillRect(0, 0, c.width, c.height);
+        ctx.drawImage(img, 0, 0, c.width, c.height);
+        URL.revokeObjectURL(url);
+        fertig(c.toDataURL('image/jpeg', BILD_QUALITAET).split(',')[1]);
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); fehler(new Error('bild')); };
+      img.src = url;
+    });
+  }
+
+  function aufnehmen(auswahl) {
+    meldung.className = 'meldung';
+    var neue = Array.prototype.slice.call(auswahl);
+    var arbeit = neue.map(function (datei) {
+      var istPdf = datei.type === 'application/pdf' || /\.pdf$/i.test(datei.name);
+      var istBild = /^image\//.test(datei.type) || /\.(jpe?g|png|heic|heif)$/i.test(datei.name);
+      if (!istPdf && !istBild) return Promise.resolve({ fehler: datei.name + ': nur PDF, JPG oder PNG.' });
+      return (istPdf ? alsBase64(datei) : bildVerkleinern(datei))
+        .then(function (daten) {
+          var name = istPdf ? datei.name : datei.name.replace(/\.[^.]+$/, '') + '.jpg';
+          return { name: name, art: artRaten(datei.name), daten: daten,
+                   bytes: Math.floor(daten.length * 3 / 4) };
+        })
+        .catch(function () {
+          return { fehler: datei.name + ': konnte nicht gelesen werden. Bitte als JPG oder PDF versuchen.' };
+        });
+    });
+
+    Promise.all(arbeit).then(function (ergebnisse) {
+      var probleme = [];
+      ergebnisse.forEach(function (e) {
+        if (e.fehler) return probleme.push(e.fehler);
+        if (dateien.length >= K.UPLOAD.MAX_DATEIEN) {
+          return probleme.push(e.name + ': mehr als ' + K.UPLOAD.MAX_DATEIEN + ' Dateien — bitte im zweiten Durchgang.');
+        }
+        if (summe() + e.bytes > GRENZE) {
+          return probleme.push(e.name + ' (' + mb(e.bytes) + '): passt nicht mehr hinein — bitte im zweiten Durchgang.');
+        }
+        dateien.push(e);
+      });
+      zeichnen();
+      if (probleme.length) BOGEN.hinweisen(meldung, probleme.join(' '));
+    });
+  }
+
+  function zeichnen() {
+    liste.textContent = '';
+    dateien.forEach(function (d, i) {
+      var li = document.createElement('li');
+      var name = document.createElement('div');
+      name.className = 'name';
+      name.textContent = d.name;
+      var klein = document.createElement('small');
+      klein.textContent = mb(d.bytes);
+      name.appendChild(klein);
+
+      var weg = document.createElement('button');
+      weg.type = 'button';
+      weg.className = 'weg';
+      weg.textContent = '×';
+      weg.setAttribute('aria-label', d.name + ' entfernen');
+      weg.addEventListener('click', function () { dateien.splice(i, 1); zeichnen(); });
+
+      var art = document.createElement('select');
+      art.setAttribute('aria-label', 'Art des Dokuments');
+      K.DOKUMENTARTEN.forEach(function (x) {
+        var o = document.createElement('option');
+        o.value = x.id;
+        o.textContent = x.name;
+        art.appendChild(o);
+      });
+      art.value = d.art;
+      art.addEventListener('change', function () { d.art = art.value; });
+
+      li.appendChild(name);
+      li.appendChild(weg);
+      li.appendChild(art);
+      liste.appendChild(li);
+    });
+    var s = summe();
+    belegt.textContent = dateien.length
+      ? dateien.length + ' von ' + K.UPLOAD.MAX_DATEIEN + ' Dateien · ' + mb(s) + ' von ' + mb(GRENZE)
+      : '';
+    belegt.className = 'belegt' + (s > GRENZE * 0.9 ? ' voll' : '');
+  }
+
+  dateiFeld.addEventListener('change', function () {
+    aufnehmen(dateiFeld.files);
+    dateiFeld.value = '';   // dieselbe Datei soll erneut wählbar sein
+  });
+
+  // Ziehen und Ablegen am Computer
+  var ablage = document.getElementById('ablage');
+  ['dragenter', 'dragover'].forEach(function (art) {
+    ablage.addEventListener(art, function (ev) { ev.preventDefault(); ablage.classList.add('drueber'); });
+  });
+  ['dragleave', 'drop'].forEach(function (art) {
+    ablage.addEventListener(art, function () { ablage.classList.remove('drueber'); });
+  });
+  ablage.addEventListener('drop', function (ev) {
+    ev.preventDefault();
+    aufnehmen(ev.dataTransfer.files);
+  });
+
+  BOGEN.aufbauen(form);
+
+  var TEXTE = {
+    dateien: 'Bitte wählen Sie mindestens eine Datei aus.',
+    datei: 'Eine der Dateien ist kein PDF, JPG oder PNG. Bitte entfernen Sie sie.',
+    zuviele: 'Das sind zu viele Dateien für einen Durchgang. Bitte schicken Sie den Rest danach.',
+    zugross: 'Die Dateien sind zusammen zu groß. Bitte schicken Sie einen Teil im zweiten Durchgang.',
+    einwilligung: 'Bitte bestätigen Sie, dass Sie den Datenschutzhinweis gelesen haben.',
+  };
+
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    meldung.className = 'meldung';
+
+    var luecke = BOGEN.lueckenFinden(form);
+    if (luecke) return BOGEN.hinweisen(meldung, BOGEN.FEHLERTEXT.pflicht, luecke);
+    var daten = BOGEN.sammeln(form);
+    if (!/^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/.test(daten.email)) {
+      return BOGEN.hinweisen(meldung, BOGEN.FEHLERTEXT.email, form.elements.email);
+    }
+    if (!dateien.length) return BOGEN.hinweisen(meldung, TEXTE.dateien, ablage);
+    if (!document.getElementById('einwilligung').checked) {
+      return BOGEN.hinweisen(meldung, TEXTE.einwilligung);
+    }
+
+    daten.bogen = 'unterlagen';
+    daten.webseite = document.getElementById('webseite').value;
+    daten.einwilligung = true;
+    daten.dateien = dateien.map(function (d) { return { name: d.name, art: d.art, daten: d.daten }; });
+
+    BOGEN.senden({
+      meldung: meldung,
+      knopf: document.getElementById('senden'),
+      knopfText: 'Unterlagen absenden',
+      daten: daten,
+      texte: TEXTE,
+      erfolg: BOGEN.dankeZeigen,
+    });
+  });
+
+  // Zweiter Durchgang: Name und E-Mail bleiben stehen, nur die Dateien gehen.
+  document.getElementById('weitere').addEventListener('click', function () {
+    dateien = [];
+    zeichnen();
+    form.elements.nachricht.value = '';
+    document.getElementById('danke').classList.remove('an');
+    document.getElementById('formular').style.display = '';
+    window.scrollTo({ top: 0 });
+  });
+})();
+</script>
+
+</body>
+</html>

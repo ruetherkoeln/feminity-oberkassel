@@ -16,8 +16,10 @@ Handy ausgefüllt, nicht am Salon-Tablet.
 | `bewerber.html` | Übersicht mit drei Kacheln |
 | `bewerber/bewerberfragebogen.html` | Bogen nach der Papiervorlage „Bewerberfragebogen“ (10 Abschnitte) |
 | `bewerber/einstellungsbogen.html` | Bogen nach der Papiervorlage „Einstellungsbogen“ — erst nach Zusage |
+| `bewerber/ausweispflicht.html` | Merkblatt Ausweispflicht (§ 2a SchwarzArbG) lesen und Kenntnisnahme unterschreiben |
+| `bewerber/merkblatt-ausweispflicht.pdf` | Das Papier-Merkblatt zum Ausdrucken (verlinkt von der Seite) |
 | `bewerber/unterlagen.html` | Upload: Zertifikate, Nachweise, Zeugnisse, Kopien für die Personalakte |
-| `bewerber/katalog.js` | Positionen, Skills, Fragen, Rechtstexte, Prüfungen (IBAN, Steuer-ID) — von Browser **und** Server geladen |
+| `bewerber/katalog.js` | Positionen, Skills, Fragen, Rechtstexte, Merkblatt-Wortlaut, Prüfungen (IBAN, Steuer-ID) — von Browser **und** Server geladen |
 | `bewerber/bogen.js` | Gemeinsame Bausteine der drei Seiten (Auswahlknöpfe, Einsammeln, Pflichtprüfung, Unterschrift, Versandanzeige) |
 | `bewerber/bogen.css` | Gemeinsames Aussehen |
 | `api/bewerbung.js` | Serverfunktion für alle drei |

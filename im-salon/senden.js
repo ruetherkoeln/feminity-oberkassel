@@ -28,7 +28,7 @@
     'mobil', 'kontaktweg', 'konfiguration', 'pdf',
     // Bewerberbereich (/api/bewerbung)
     'position', 'email', 'iban', 'steuerid', 'svnummer',
-    'dateien', 'datei', 'zuviele', 'zugross',
+    'dateien', 'datei', 'zuviele', 'zugross', 'kenntnis',
   ];
 
   /**

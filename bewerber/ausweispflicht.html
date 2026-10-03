@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Merkblatt Ausweispflicht | Feminity Oberkassel</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="format-detection" content="telephone=no">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="/bewerber/bogen.css">
+<style>
+/* Merkblatt-Text wie auf dem Papierbogen: Ausweispapiere als Kasten,
+   Bußgeld als umrandeter Hinweis. */
+.merkblatt p{font-size:.95rem;line-height:1.75;color:#3B3B3B}
+.merkblatt .anrede{font-weight:600;color:var(--black);margin-bottom:.75rem}
+.papiere{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));gap:.6rem 1.5rem;
+  background:var(--cream);border-left:3px solid var(--gold);border-radius:6px;padding:1.1rem 1.25rem;margin:1.1rem 0 1.5rem}
+.papiere li{font-weight:600;font-size:.95rem}
+.papiere li::before{content:'◆';color:var(--gold);font-size:.75rem;margin-right:.6rem;vertical-align:.1em}
+.merkblatt h3{font-family:'Open Sans',sans-serif;text-transform:uppercase;letter-spacing:.16em;font-size:.72rem;
+  font-weight:700;color:var(--gold);margin:0 0 .6rem}
+.alltag{padding-left:1.15rem;margin-bottom:1.5rem}
+.alltag li{font-size:.95rem;line-height:1.7;color:#3B3B3B;margin-bottom:.35rem}
+.alltag li::marker{color:var(--gold)}
+.bussgeld{border:1.5px solid var(--gold);border-radius:8px;padding:1rem 1.2rem;font-size:.95rem;line-height:1.7}
+.download{margin-top:1.25rem;font-size:.85rem;color:#6E6E6E}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="cont">
+    <a href="/"><img src="/Logo.png" class="logo-nav" alt="Feminity Oberkassel"></a>
+    <a href="/bewerber" class="zurueck">Alle Bögen</a>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div id="formular">
+    <div class="eyebrow">Merkblatt für Mitarbeiterinnen und Mitarbeiter</div>
+    <h1>Mitführungs- und Vorlagepflicht von Ausweispapieren</h1>
+    <p class="lead">
+      Bitte lesen Sie das Merkblatt und bestätigen Sie mit Ihrer Unterschrift, dass Sie es
+      zur Kenntnis genommen haben. Die Bestätigung kommt in Ihre Personalakte.
+    </p>
+
+    <form id="bogen" novalidate>
+      <div class="honig" aria-hidden="true">
+        <label for="webseite">Bitte leer lassen</label>
+        <input id="webseite" name="webseite" type="text" tabindex="-1" autocomplete="off">
+      </div>
+
+      <div class="karte merkblatt">
+        <p class="anrede">Liebe Mitarbeiter!</p>
+        <p id="einleitung"></p>
+        <ul class="papiere" id="papiere"></ul>
+        <h3>Was das im Salonalltag bedeutet</h3>
+        <ul class="alltag" id="alltag"></ul>
+        <div class="bussgeld"><strong>Bußgeld:</strong> <span id="bussgeld"></span></div>
+        <p class="download">
+          Das Merkblatt gibt es auch
+          <a href="/bewerber/merkblatt-ausweispflicht.pdf" target="_blank" rel="noopener">als PDF zum Ausdrucken</a>.
+        </p>
+      </div>
+
+      <div class="karte">
+        <h2>Ihre Angaben</h2>
+        <div class="raster">
+          <label class="feld"><span>Vorname *</span>
+            <input name="vorname" type="text" autocomplete="given-name" autocapitalize="words" required></label>
+          <label class="feld"><span>Nachname *</span>
+            <input name="nachname" type="text" autocomplete="family-name" autocapitalize="words" required></label>
+        </div>
+        <label class="feld"><span>E-Mail * <small>(für Ihre Kopie)</small></span>
+          <input name="email" type="email" autocomplete="email" inputmode="email" required></label>
+      </div>
+
+      <div class="karte">
+        <h2>Zur Kenntnis genommen</h2>
+        <label class="wahl" id="kenntnisWahl">
+          <input type="checkbox" id="kenntnis">
+          <span id="bestaetigung"></span></label>
+      </div>
+
+      <div class="karte">
+        <h2>Unterschrift</h2>
+        <p class="unter">Bitte mit dem Finger oder der Maus im Feld unterschreiben.</p>
+        <div class="sig-rahmen" id="sigRahmen">
+          <canvas id="sig"></canvas>
+          <div class="sig-hint">Hier unterschreiben</div>
+        </div>
+        <div class="sig-leiste">
+          <small>Eine Kopie schicken wir an Ihre E-Mail-Adresse.</small>
+          <button type="button" class="btn-klein" id="sigLeeren">Neu zeichnen</button>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-senden" id="senden">Kenntnisnahme bestätigen</button>
+      <div class="meldung" id="meldung" role="alert"></div>
+    </form>
+  </div>
+
+  <div class="danke" id="danke">
+    <div class="haken">✓</div>
+    <h2>Vielen Dank!</h2>
+    <p>
+      Ihre Bestätigung ist bei uns angekommen, eine Kopie liegt gleich in Ihrem Postfach.
+      Denken Sie ab Ihrem ersten Arbeitstag an Ihren Ausweis.
+    </p>
+    <div class="knoepfe">
+      <a class="btn-klein" href="/bewerber">Zur Übersicht</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2026 Groom&amp;Glow UG (haftungsbeschränkt) • <a href="/impressum.html">Impressum &amp; Datenschutz</a></p>
+</footer>
+
+<script src="/im-salon/senden.js"></script>
+<script src="/bewerber/katalog.js"></script>
+<script src="/bewerber/bogen.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var A = window.BEWERBER.AUSWEISPFLICHT;
+  var form = document.getElementById('bogen');
+  var meldung = document.getElementById('meldung');
+
+  // Text aus dem Katalog — derselbe Wortlaut landet im PDF.
+  document.getElementById('einleitung').textContent = A.einleitung;
+  document.getElementById('bussgeld').textContent = A.bussgeld;
+  document.getElementById('bestaetigung').textContent = A.bestaetigung + ' *';
+  [['papiere', A.papiere], ['alltag', A.alltag]].forEach(function (paar) {
+    var liste = document.getElementById(paar[0]);
+    paar[1].forEach(function (text) {
+      var li = document.createElement('li');
+      li.textContent = text;
+      liste.appendChild(li);
+    });
+  });
+
+  BOGEN.aufbauen(form);
+  var sig = BOGEN.unterschrift(document.getElementById('sig'),
+    document.getElementById('sigRahmen'), document.getElementById('sigLeeren'));
+
+  var TEXTE = { kenntnis: 'Bitte bestätigen Sie, dass Sie das Merkblatt zur Kenntnis genommen haben.' };
+
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    meldung.className = 'meldung';
+
+    var luecke = BOGEN.lueckenFinden(form);
+    if (luecke) return BOGEN.hinweisen(meldung, BOGEN.FEHLERTEXT.pflicht, luecke);
+    var daten = BOGEN.sammeln(form);
+    if (!/^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/.test(daten.email)) {
+      return BOGEN.hinweisen(meldung, BOGEN.FEHLERTEXT.email, form.elements.email);
+    }
+    var wahl = document.getElementById('kenntnisWahl');
+    if (!document.getElementById('kenntnis').checked) {
+      wahl.classList.add('offen');
+      return BOGEN.hinweisen(meldung, TEXTE.kenntnis, wahl);
+    }
+    if (!sig.gezeichnet()) return BOGEN.hinweisen(meldung, BOGEN.FEHLERTEXT.signatur);
+
+    daten.bogen = 'ausweispflicht';
+    daten.webseite = document.getElementById('webseite').value;
+    daten.kenntnis = 'ja';
+    daten.unterschriftsort = 'Düsseldorf';
+    daten.einwilligung = true;
+    daten.signatur = sig.bild();
+
+    BOGEN.senden({
+      meldung: meldung,
+      knopf: document.getElementById('senden'),
+      knopfText: 'Kenntnisnahme bestätigen',
+      daten: daten,
+      texte: TEXTE,
+      erfolg: BOGEN.dankeZeigen,
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

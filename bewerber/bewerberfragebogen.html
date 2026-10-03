@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Bewerberfragebogen | Feminity Oberkassel</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="format-detection" content="telephone=no">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="/bewerber/bogen.css">
+</head>
+<body>
+
+<header>
+  <div class="cont">
+    <a href="/"><img src="/Logo.png" class="logo-nav" alt="Feminity Oberkassel"></a>
+    <a href="/bewerber" class="zurueck">Alle Bögen</a>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div id="formular">
+    <div class="eyebrow">Bewerbung</div>
+    <h1>Bewerberfragebogen</h1>
+    <p class="lead">
+      Erzählen Sie uns, wer Sie sind, was Sie können und was Sie suchen. Das dauert
+      etwa 15 Minuten. Pflichtfelder sind mit * markiert — alles Weitere hilft uns,
+      Sie besser kennenzulernen. Zeugnisse und Zertifikate laden Sie anschließend
+      separat hoch.
+    </p>
+
+    <form id="bogen" novalidate>
+      <div class="honig" aria-hidden="true">
+        <label for="webseite">Bitte leer lassen</label>
+        <input id="webseite" name="webseite" type="text" tabindex="-1" autocomplete="off">
+      </div>
+
+      <div class="karte">
+        <h2><span class="nr">1</span>Persönliche Angaben</h2>
+        <div class="raster">
+          <label class="feld"><span>Vorname *</span>
+            <input name="vorname" type="text" autocomplete="given-name" autocapitalize="words" required></label>
+          <label class="feld"><span>Nachname *</span>
+            <input name="nachname" type="text" autocomplete="family-name" autocapitalize="words" required></label>
+          <label class="feld"><span>Telefon *</span>
+            <input name="telefon" type="tel" autocomplete="tel" inputmode="tel" required></label>
+          <label class="feld"><span>E-Mail *</span>
+            <input name="email" type="email" autocomplete="email" inputmode="email" required></label>
+        </div>
+        <label class="feld"><span>Straße und Hausnummer</span>
+          <input name="strasse" type="text" autocomplete="street-address"></label>
+        <div class="raster plz">
+          <label class="feld"><span>PLZ</span>
+            <input name="plz" type="text" autocomplete="postal-code" inputmode="numeric" maxlength="5"></label>
+          <label class="feld"><span>Ort</span>
+            <input name="ort" type="text" autocomplete="address-level2" autocapitalize="words"></label>
+        </div>
+        <div class="raster" style="margin-top:1rem">
+          <label class="feld"><span>Geburtsdatum <small>(freiwillig)</small></span>
+            <input name="geburtsdatum" type="date"></label>
+          <label class="feld"><span>Staatsangehörigkeit <small>(freiwillig)</small></span>
+            <input name="staatsangehoerigkeit" type="text"></label>
+        </div>
+      </div>
+
+      <div class="karte">
+        <h2><span class="nr">2</span>Wunschposition und Verfügbarkeit</h2>
+        <div class="gruppe" data-pflicht>
+          <span class="gruppe-titel">Gewünschte Position * <small>(mehrere möglich)</small></span>
+          <div class="pillen" data-liste="POSITIONEN" data-name="positionen" data-mehrfach></div>
+        </div>
+        <label class="feld zusatz" data-wenn="positionen=sonstiges"><span>Welche Position?</span>
+          <input name="position_sonst" type="text"></label>
+        <div class="gruppe">
+          <span class="gruppe-titel">Bevorzugtes Beschäftigungsmodell</span>
+          <div class="pillen" data-liste="MODELLE" data-name="modelle" data-mehrfach></div>
+        </div>
+        <div class="raster" style="margin-top:1.25rem">
+          <label class="feld"><span>Frühester Eintrittstermin</span>
+            <input name="eintritt" type="date"></label>
+          <label class="feld"><span>Gewünschte Wochenstunden</span>
+            <input name="stunden" type="text" inputmode="numeric"></label>
+        </div>
+        <label class="feld"><span>Bevorzugte Arbeitstage und Zeiten</span>
+          <input name="tage" type="text"></label>
+        <div class="raster" style="margin-top:1rem">
+          <label class="feld"><span>Gehaltsvorstellung <small>(brutto, pro Stunde oder Monat)</small></span>
+            <input name="gehalt" type="text"></label>
+          <label class="feld"><span>Kündigungsfrist beim aktuellen Arbeitgeber</span>
+            <input name="kuendigung" type="text"></label>
+        </div>
+      </div>
+
+      <div class="karte">
+        <h2><span class="nr">3</span>Ausbildung und Qualifikationen</h2>
+        <div class="gruppe">
+          <span class="gruppe-titel">Abschlüsse</span>
+          <div class="pillen" data-liste="ABSCHLUESSE" data-name="abschluesse" data-mehrfach></div>
+        </div>
+        <label class="feld zusatz" data-wenn="abschluesse=sonstiges"><span>Welcher Abschluss?</span>
+          <input name="abschluss_sonst" type="text"></label>
+        <div data-texte="ausbildung" style="margin-top:1.25rem"></div>
+      </div>
+
+      <div class="karte">
+        <h2><span class="nr">4</span>Berufserfahrung</h2>
+        <div data-texte="erfahrung"></div>
+      </div>
+
+      <div class="karte">
+        <h2><span class="nr">5</span>Fachliche Skills</h2>
+        <p class="unter">
+          Ihre Selbsteinschätzung. Lassen Sie leer, was Sie nicht anbieten. Im Feld darunter
+          ist Platz für Jahre oder eine kurze Notiz.
+        </p>
+        <div id="skills"></div>
+      </div>
+
+      <div class="karte">
+        <h2><span class="nr">6</span>Serviceverständnis und Kundenumgang</h2>
+        <div data-texte="service"></div>
+      </div>
+
+      <div class="karte">
+        <h2><span class="nr">7</span>Arbeitsweise und Team</h2>
+        <p class="unter">Bitte bei jeder Aussage eine Zahl wählen: 1 = trifft nicht zu, 5 = trifft zu.</p>
+        <div id="aussagen"></div>
+      </div>
+
+      <div class="karte">
+        <h2><span class="nr">8</span>Organisation, Digitalisierung und Social Media</h2>
+        <div data-texte="organisation"></div>
+      </div>
+
+      <div class="karte">
+        <h2><span class="nr">9</span>Motivation</h2>
+        <div data-texte="motivation"></div>
+        <div class="gruppe">
+          <span class="gruppe-titel">Sind Sie bereit für einen Probetag?</span>
+          <div class="pillen" data-liste="JA_NEIN" data-name="probetag"></div>
+        </div>
+        <label class="feld zusatz" data-wenn="probetag=ja"><span>Wunschtermine</span>
+          <input name="probetag_termine" type="text"></label>
+      </div>
+
+      <div class="karte">
+        <h2><span class="nr">10</span>Unterlagen</h2>
+        <div class="gruppe">
+          <span class="gruppe-titel">Diese Unterlagen reiche ich ein</span>
+          <div class="pillen" data-liste="BEWERBUNGSUNTERLAGEN" data-name="unterlagen" data-mehrfach></div>
+        </div>
+        <label class="feld" style="margin-top:1.25rem"><span>Portfolio- oder Instagram-Link</span>
+          <input name="portfolio" type="text" inputmode="url" autocapitalize="off"></label>
+        <p class="unter" style="margin:1rem 0 0">
+          Dateien laden Sie nach dem Absenden unter
+          <a href="/bewerber/unterlagen.html">Unterlagen hochladen</a> hoch.
+        </p>
+      </div>
+
+      <div class="karte">
+        <h2>Das erklären Sie mit Ihrer Unterschrift</h2>
+        <div class="recht" id="erklaerung"></div>
+        <label class="wahl" style="margin-top:1.25rem">
+          <input type="checkbox" id="einwilligung">
+          <span>Ich habe das gelesen und bestätige es *</span></label>
+        <label class="wahl">
+          <input type="checkbox" id="talentpool">
+          <span id="talentpoolText"><small>Freiwillig</small></span></label>
+      </div>
+
+      <div class="karte">
+        <h2>Unterschrift</h2>
+        <p class="unter">Bitte mit dem Finger oder der Maus im Feld unterschreiben.</p>
+        <div class="sig-rahmen" id="sigRahmen">
+          <canvas id="sig"></canvas>
+          <div class="sig-hint">Hier unterschreiben</div>
+        </div>
+        <div class="sig-leiste">
+          <small>Eine Kopie des Bogens schicken wir an Ihre E-Mail-Adresse.</small>
+          <button type="button" class="btn-klein" id="sigLeeren">Neu zeichnen</button>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-senden" id="senden">Bewerberfragebogen absenden</button>
+      <div class="meldung" id="meldung" role="alert"></div>
+    </form>
+  </div>
+
+  <div class="danke" id="danke">
+    <div class="haken">✓</div>
+    <h2>Vielen Dank!</h2>
+    <p>
+      Ihr Bewerberfragebogen ist bei uns angekommen, eine Kopie liegt gleich in Ihrem
+      Postfach. Haben Sie Zeugnisse oder Zertifikate? Die können Sie jetzt hochladen.
+    </p>
+    <div class="knoepfe">
+      <a class="btn-klein" href="/bewerber/unterlagen.html">Unterlagen hochladen</a>
+      <a class="btn-klein" href="/bewerber">Zur Übersicht</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2026 Groom&amp;Glow UG (haftungsbeschränkt) • <a href="/impressum.html">Impressum &amp; Datenschutz</a></p>
+</footer>
+
+<script src="/im-salon/senden.js"></script>
+<script src="/bewerber/katalog.js"></script>
+<script src="/bewerber/bogen.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var K = window.BEWERBER;
+  var form = document.getElementById('bogen');
+  var meldung = document.getElementById('meldung');
+
+  // Skill-Matrix: eine Zeile je Technik, Stufe als Knöpfe, Notiz darunter
+  var skills = document.getElementById('skills');
+  K.SKILLS.forEach(function (s) {
+    var zeile = document.createElement('div');
+    zeile.className = 'zeile';
+    zeile.innerHTML = '<div class="frage"></div><div class="pillen"></div>'
+      + '<label class="notiz"><input type="text" placeholder="Jahre / Notiz"></label>';
+    zeile.querySelector('.frage').textContent = s.name;
+    K.LEVEL.forEach(function (l) {
+      var label = document.createElement('label');
+      label.innerHTML = '<input type="radio"><span></span>';
+      label.querySelector('input').name = 'skills.' + s.id;
+      label.querySelector('input').value = l.id;
+      label.querySelector('span').textContent = l.name;
+      zeile.querySelector('.pillen').appendChild(label);
+    });
+    var notiz = zeile.querySelector('.notiz input');
+    notiz.name = 'notizen.' + s.id;
+    notiz.setAttribute('aria-label', 'Jahre oder Notiz zu ' + s.name);
+    notiz.maxLength = 160;
+    skills.appendChild(zeile);
+  });
+
+  // Aussagen zur Arbeitsweise: 1 bis 5, jede Pflicht
+  var aussagen = document.getElementById('aussagen');
+  K.AUSSAGEN.forEach(function (a) {
+    var zeile = document.createElement('div');
+    zeile.className = 'zeile';
+    zeile.setAttribute('data-pflicht', '');
+    zeile.innerHTML = '<div class="frage"></div><div class="pillen"></div>';
+    zeile.querySelector('.frage').textContent = a.text;
+    ['1', '2', '3', '4', '5'].forEach(function (stufe) {
+      var label = document.createElement('label');
+      label.innerHTML = '<input type="radio"><span></span>';
+      label.querySelector('input').name = 'aussagen.' + a.id;
+      label.querySelector('input').value = stufe;
+      label.querySelector('span').textContent = stufe;
+      zeile.querySelector('.pillen').appendChild(label);
+    });
+    aussagen.appendChild(zeile);
+  });
+
+  BOGEN.absaetze(document.getElementById('erklaerung'), K.ERKLAERUNG_BEWERBUNG);
+  document.getElementById('talentpoolText').insertBefore(
+    document.createTextNode(K.TALENTPOOL), document.getElementById('talentpoolText').firstChild);
+  BOGEN.aufbauen(form);
+
+  var sig = BOGEN.unterschrift(document.getElementById('sig'),
+    document.getElementById('sigRahmen'), document.getElementById('sigLeeren'));
+
+  var TEXTE = {
+    position: 'Bitte wählen Sie mindestens eine Position.',
+    unvollstaendig: 'Bitte wählen Sie bei jeder Aussage unter 7 eine Zahl.',
+  };
+
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    meldung.className = 'meldung';
+
+    var luecke = BOGEN.lueckenFinden(form);
+    if (luecke) {
+      var text = luecke.closest('#aussagen') ? TEXTE.unvollstaendig
+        : luecke.hasAttribute('data-pflicht') ? TEXTE.position : BOGEN.FEHLERTEXT.pflicht;
+      return BOGEN.hinweisen(meldung, text, luecke);
+    }
+    var daten = BOGEN.sammeln(form);
+    if (!/^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/.test(daten.email)) {
+      return BOGEN.hinweisen(meldung, BOGEN.FEHLERTEXT.email, form.elements.email);
+    }
+    if (!document.getElementById('einwilligung').checked) {
+      return BOGEN.hinweisen(meldung, BOGEN.FEHLERTEXT.einwilligung);
+    }
+    if (!sig.gezeichnet()) return BOGEN.hinweisen(meldung, BOGEN.FEHLERTEXT.signatur);
+
+    daten.bogen = 'bewerberfragebogen';
+    daten.webseite = document.getElementById('webseite').value;
+    daten.talentpool = document.getElementById('talentpool').checked ? 'ja' : 'nein';
+    daten.unterschriftsort = daten.ort || 'Düsseldorf';
+    daten.einwilligung = true;
+    daten.signatur = sig.bild();
+
+    BOGEN.senden({
+      meldung: meldung,
+      knopf: document.getElementById('senden'),
+      knopfText: 'Bewerberfragebogen absenden',
+      daten: daten,
+      texte: TEXTE,
+      erfolg: BOGEN.dankeZeigen,
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

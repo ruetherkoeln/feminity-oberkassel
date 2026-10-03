@@ -6,6 +6,10 @@
 
 const { Pdf } = require('./_pdf.js');
 const { senden } = require('./_smtp.js');
+const {
+  kuerzen, koerperLesen, unterschriftLesen, deutschesDatum, datumAusFormular, deutscheZeit,
+  sendenMitZweitversuch, smtpZugang, EMAIL_MUSTER,
+} = require('./_bogen.js');
 
 const MAX_KOERPER = 3 * 1024 * 1024;   // 3 MB — die Unterschrift wiegt wenige KB
 const MAX_FELD = 400;                   // Zeichen pro Textfeld
@@ -197,46 +201,7 @@ const GESUNDHEIT_ERKLAERUNG = [
 ];
 
 // ── Hilfen ──────────────────────────────────────────────────────────────────
-const txt = (wert) => String(wert === undefined || wert === null ? '' : wert).trim().slice(0, MAX_FELD);
-
-function koerperLesen(req) {
-  if (req.body && typeof req.body === 'object') return Promise.resolve(req.body);
-  return new Promise((fertig, fehler) => {
-    let roh = '';
-    req.on('data', (stueck) => {
-      roh += stueck;
-      if (roh.length > MAX_KOERPER) {
-        fehler(new Error('Anfrage zu groß'));
-        req.destroy();
-      }
-    });
-    req.on('end', () => {
-      try { fertig(roh ? JSON.parse(roh) : {}); } catch { fehler(new Error('Ungültiges JSON')); }
-    });
-    req.on('error', fehler);
-  });
-}
-
-function unterschriftLesen(datenUrl) {
-  const treffer = /^data:image\/jpeg;base64,([A-Za-z0-9+/=]+)$/.exec(String(datenUrl || ''));
-  if (!treffer) return null;
-  const buf = Buffer.from(treffer[1], 'base64');
-  // Eine leere Fläche ergibt ein winziges JPEG — das wäre eine fehlende Unterschrift.
-  if (buf.length < 900) return null;
-  return buf;
-}
-
-const deutschesDatum = (d) =>
-  d.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric', timeZone: 'Europe/Berlin' });
-
-// <input type="date"> liefert immer JJJJ-MM-TT. Im PDF soll TT.MM.JJJJ stehen.
-function datumAusFormular(wert) {
-  const t = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(wert || ''));
-  return t ? `${t[3]}.${t[2]}.${t[1]}` : String(wert || '');
-}
-
-const deutscheZeit = (d) =>
-  d.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Berlin' });
+const txt = (wert) => kuerzen(wert, MAX_FELD);
 
 // ── PDF ─────────────────────────────────────────────────────────────────────
 // Zielformat: eine A4-Seite je Bogen. Die Blaetter werden im Salon abgeheftet
@@ -471,27 +436,6 @@ function pdfBauen(bogen, d, unterschrift, jetzt) {
   return pdf.bauen();
 }
 
-// Ein 4xx von SMTP ist voruebergehend — Greylisting oder Ratenlimit. Dem Gast
-// als endgueltigen Fehler zu zeigen, was Sekunden spaeter durchginge, waere im
-// Salon aergerlich: ausgefuellt, unterschrieben, und dann eine Fehlermeldung.
-// Wiederholt wird nur, wenn dafuer noch Zeit im Budget der Funktion ist; ein
-// langsam gelaufener Zeitablauf soll den zweiten Versuch nicht erzwingen.
-const WIEDERHOLUNG_MS = 1500;
-const BUDGET_MS = 4000;
-
-async function sendenMitZweitversuch(zugang, mail) {
-  const start = Date.now();
-  try {
-    return await senden(zugang, mail);
-  } catch (e) {
-    const verbraucht = Date.now() - start;
-    if (!e.voruebergehend || verbraucht > BUDGET_MS) throw e;
-    console.error(`Fragebogen: ${e.message} — zweiter Versuch`);
-    await new Promise((f) => setTimeout(f, WIEDERHOLUNG_MS));
-    return senden(zugang, mail);
-  }
-}
-
 // ── Handler ─────────────────────────────────────────────────────────────────
 module.exports = async (req, res) => {
   if (req.method !== 'POST') {
@@ -501,7 +445,7 @@ module.exports = async (req, res) => {
 
   let d;
   try {
-    d = await koerperLesen(req);
+    d = await koerperLesen(req, MAX_KOERPER);
   } catch (e) {
     return res.status(400).json({ ok: false, fehler: e.message });
   }
@@ -542,18 +486,13 @@ module.exports = async (req, res) => {
   const unterschrift = unterschriftLesen(d.signatur);
   if (!unterschrift) return res.status(400).json({ ok: false, fehler: 'signatur' });
 
-  const zugang = {
-    host: process.env.SMTP_HOST || 'smtp.ionos.de',
-    port: Number(process.env.SMTP_PORT || 465),
-    benutzer: process.env.SMTP_BENUTZER,
-    passwort: process.env.SMTP_PASSWORT,
-  };
-  const an = process.env.MAIL_AN || 'fragebogen@feminity-oberkassel.com';
-  const von = process.env.MAIL_VON || zugang.benutzer;
-  if (!zugang.benutzer || !zugang.passwort) {
+  const zugang = smtpZugang();
+  if (!zugang) {
     console.error('Fragebogen: SMTP-Zugangsdaten fehlen');
     return res.status(500).json({ ok: false, fehler: 'konfiguration' });
   }
+  const an = process.env.MAIL_AN || 'fragebogen@feminity-oberkassel.com';
+  const von = process.env.MAIL_VON || zugang.benutzer;
 
   const jetzt = new Date();
   let pdf;
@@ -591,7 +530,7 @@ module.exports = async (req, res) => {
 
   // Kopie an die einwilligende Person, damit sie ihre Erklärung belegen kann.
   // Scheitert sie, ist der Bogen trotzdem angekommen — kein Fehler nach außen.
-  if (felder.email && /^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/.test(felder.email)) {
+  if (felder.email && EMAIL_MUSTER.test(felder.email)) {
     try {
       await senden(zugang, {
         von,

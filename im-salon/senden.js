@@ -26,15 +26,19 @@
   var ENDGUELTIG = [
     'pflicht', 'signatur', 'einwilligung', 'unvollstaendig', 'vertreter',
     'mobil', 'kontaktweg', 'konfiguration', 'pdf',
+    // Bewerberbereich (/api/bewerbung)
+    'position', 'email', 'iban', 'steuerid', 'svnummer',
+    'dateien', 'datei', 'zuviele', 'zugross',
   ];
 
   /**
    * daten: die Nutzlast des Bogens
    * rueck: { erfolg(), wartet(sekundenBisVersuch, verbleibendeSekunden, versuch),
    *          fehler(code, fristAbgelaufen) }
+   * ziel:  Adresse der Serverfunktion, Standard /api/fragebogen
    * Rueckgabe: { abbrechen() }
    */
-  function absenden(daten, rueck) {
+  function absenden(daten, rueck, ziel) {
     var start = Date.now();
     var versuch = 0;
     var uhr = null;      // Sekundentakt fuer die Anzeige
@@ -48,7 +52,7 @@
     function einVersuch() {
       if (abgebrochen) return;
       versuch++;
-      fetch('/api/fragebogen', {
+      fetch(ziel || '/api/fragebogen', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(daten),

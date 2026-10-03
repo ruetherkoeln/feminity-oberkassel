@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Einstellungsbogen | Feminity Oberkassel</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="format-detection" content="telephone=no">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="/bewerber/bogen.css">
+</head>
+<body>
+
+<header>
+  <div class="cont">
+    <a href="/"><img src="/Logo.png" class="logo-nav" alt="Feminity Oberkassel"></a>
+    <a href="/bewerber" class="zurueck">Alle Bögen</a>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div id="formular">
+    <div class="eyebrow">Nach Ihrer Zusage</div>
+    <h1>Einstellungsbogen</h1>
+    <p class="lead">
+      Willkommen im Team! Für Arbeitsvertrag, Anmeldung bei der Krankenkasse und die
+      erste Lohnabrechnung brauchen wir die folgenden Angaben. Was Sie gerade nicht
+      zur Hand haben, lassen Sie frei — wir klären es beim ersten Arbeitstag.
+    </p>
+
+    <form id="bogen" novalidate>
+      <div class="honig" aria-hidden="true">
+        <label for="webseite">Bitte leer lassen</label>
+        <input id="webseite" name="webseite" type="text" tabindex="-1" autocomplete="off">
+      </div>
+
+      <div class="karte">
+        <h2><span class="nr">1</span>Persönliche Daten</h2>
+        <div class="raster">
+          <label class="feld"><span>Vorname *</span>
+            <input name="vorname" type="text" autocomplete="given-name" autocapitalize="words" required></label>
+          <label class="feld"><span>Nachname *</span>
+            <input name="nachname" type="text" autocomplete="family-name" autocapitalize="words" required></label>
+          <label class="feld"><span>Geburtsdatum *</span>
+            <input name="geburtsdatum" type="date" required></label>
+          <label class="feld"><span>Geburtsort</span>
+            <input name="geburtsort" type="text" autocapitalize="words"></label>
+          <label class="feld"><span>Staatsangehörigkeit</span>
+            <input name="staatsangehoerigkeit" type="text"></label>
+        </div>
+        <label class="feld"><span>Straße und Hausnummer *</span>
+          <input name="strasse" type="text" autocomplete="street-address" required></label>
+        <div class="raster plz">
+          <label class="feld"><span>PLZ *</span>
+            <input name="plz" type="text" autocomplete="postal-code" inputmode="numeric" maxlength="5" required></label>
+          <label class="feld"><span>Ort *</span>
+            <input name="ort" type="text" autocomplete="address-level2" autocapitalize="words" required></label>
+        </div>
+        <div class="raster" style="margin-top:1rem">
+          <label class="feld"><span>Telefon *</span>
+            <input name="telefon" type="tel" autocomplete="tel" inputmode="tel" required></label>
+          <label class="feld"><span>E-Mail *</span>
+            <input name="email" type="email" autocomplete="email" inputmode="email" required></label>
+        </div>
+        <div class="gruppe">
+          <span class="gruppe-titel">Familienstand</span>
+          <div class="pillen" data-liste="FAMILIENSTAND" data-name="familienstand"></div>
+        </div>
+        <div class="raster" style="margin-top:1.25rem">
+          <label class="feld"><span>Kinder (Anzahl)</span>
+            <input name="kinder" type="text" inputmode="numeric" maxlength="2"></label>
+          <label class="feld"><span>Geburtsdaten der Kinder <small>(falls Kinder)</small></span>
+            <input name="kinder_geburtsdaten" type="text"></label>
+        </div>
+      </div>
+
+      <div class="karte">
+        <h2><span class="nr">2</span>Steuerliche Angaben</h2>
+        <p class="unter">
+          Damit wir Ihre Lohnsteuermerkmale (ELStAM) beim Finanzamt abrufen können. Die
+          Steuer-ID steht auf Ihrem Einkommensteuerbescheid oder Ihrer Lohnsteuerbescheinigung.
+        </p>
+        <div class="raster">
+          <label class="feld"><span>Steuer-Identifikationsnummer <small>(11 Ziffern)</small></span>
+            <input name="steuerid" id="steuerid" type="text" inputmode="numeric" maxlength="14"></label>
+          <label class="feld"><span>Steuerklasse <small>(falls bekannt)</small></span>
+            <input name="steuerklasse" type="text" maxlength="5"></label>
+        </div>
+        <div class="gruppe">
+          <span class="gruppe-titel">Konfession / Kirchensteuer</span>
+          <div class="pillen" data-liste="KONFESSION" data-name="konfession"></div>
+        </div>
+        <label class="feld zusatz" data-wenn="konfession=sonstige"><span>Welche?</span>
+          <input name="konfession_sonst" type="text"></label>
+        <div class="gruppe">
+          <span class="gruppe-titel">Freibeträge oder Faktorverfahren</span>
+          <div class="pillen" data-liste="FREIBETRAEGE" data-name="freibetraege"></div>
+        </div>
+      </div>
+
+      <div class="karte">
+        <h2><span class="nr">3</span>Sozialversicherung</h2>
+        <div class="raster">
+          <label class="feld"><span>Sozialversicherungsnummer</span>
+            <input name="svnummer" id="svnummer" type="text" maxlength="16" autocapitalize="characters" placeholder="z. B. 65 170839 J 003"></label>
+          <label class="feld"><span>Krankenkasse</span>
+            <input name="krankenkasse" type="text"></label>
+          <label class="feld"><span>Mitgliedsnummer der Krankenkasse</span>
+            <input name="kvnummer" type="text" autocapitalize="characters"></label>
+        </div>
+        <div class="gruppe">
+          <span class="gruppe-titel">Rentenversicherungspflicht</span>
+          <div class="pillen" data-liste="RV_PFLICHT" data-name="rvpflicht"></div>
+        </div>
+        <div class="gruppe">
+          <span class="gruppe-titel">Pflegeversicherung</span>
+          <div class="pillen" data-liste="PFLEGE" data-name="pflege"></div>
+        </div>
+      </div>
+
+      <div class="karte">
+        <h2><span class="nr">4</span>Beschäftigung</h2>
+        <p class="unter">So, wie wir es mit Ihnen vereinbart haben.</p>
+        <div class="raster">
+          <label class="feld"><span>Eintrittsdatum</span>
+            <input name="eintritt" type="date"></label>
+          <label class="feld"><span>Position / Tätigkeit</span>
+            <input name="position" type="text"></label>
+        </div>
+        <div class="gruppe">
+          <span class="gruppe-titel">Arbeitszeitmodell</span>
+          <div class="pillen" data-liste="ARBEITSZEIT" data-name="arbeitszeit"></div>
+        </div>
+        <div class="raster" style="margin-top:1.25rem">
+          <label class="feld"><span>Wochenstunden</span>
+            <input name="stunden" type="text" inputmode="decimal"></label>
+          <label class="feld"><span>Probezeit <small>(Monate)</small></span>
+            <input name="probezeit" type="text" inputmode="numeric"></label>
+          <label class="feld"><span>Vergütung <small>(brutto)</small></span>
+            <input name="gehalt" type="text"></label>
+        </div>
+      </div>
+
+      <div class="karte">
+        <h2><span class="nr">5</span>Bankverbindung für die Lohnzahlung</h2>
+        <div class="raster">
+          <label class="feld"><span>Kontoinhaber *</span>
+            <input name="kontoinhaber" type="text" autocapitalize="words" required></label>
+          <label class="feld"><span>BIC <small>(freiwillig)</small></span>
+            <input name="bic" type="text" autocapitalize="characters" maxlength="11"></label>
+        </div>
+        <label class="feld"><span>IBAN *</span>
+          <input name="iban" id="iban" type="text" autocapitalize="characters" autocomplete="off" maxlength="42" required></label>
+      </div>
+
+      <div class="karte">
+        <h2><span class="nr">6</span>Weitere Beschäftigungen</h2>
+        <div class="gruppe">
+          <span class="gruppe-titel">Nebenbeschäftigung</span>
+          <div class="pillen" data-liste="JA_NEIN" data-name="neben"></div>
+        </div>
+        <label class="feld zusatz" data-wenn="neben=ja"><span>Art und Umfang</span>
+          <input name="neben_art" type="text"></label>
+        <div class="gruppe">
+          <span class="gruppe-titel">Weitere sozialversicherungspflichtige Beschäftigung</span>
+          <div class="pillen" data-liste="JA_NEIN" data-name="weitere_sv"></div>
+        </div>
+        <div class="gruppe">
+          <span class="gruppe-titel">Minijob parallel</span>
+          <div class="pillen" data-liste="JA_NEIN" data-name="minijob"></div>
+        </div>
+        <div class="gruppe">
+          <span class="gruppe-titel">Studium, Ausbildung, Praktikum o. ä.</span>
+          <div class="pillen" data-liste="JA_NEIN" data-name="status"></div>
+        </div>
+        <label class="feld zusatz" data-wenn="status=ja"><span>Einzelheiten</span>
+          <input name="status_details" type="text"></label>
+      </div>
+
+      <div class="karte">
+        <h2><span class="nr">7</span>Arbeitserlaubnis und Aufenthalt</h2>
+        <p class="unter">Nur relevant, wenn Sie keine Staatsangehörigkeit eines EU-Landes haben.</p>
+        <div class="gruppe">
+          <span class="gruppe-titel">Aufenthaltstitel vorhanden</span>
+          <div class="pillen" data-liste="AUFENTHALT" data-name="aufenthalt"></div>
+        </div>
+        <div class="gruppe">
+          <span class="gruppe-titel">Arbeitserlaubnis / Nebenbestimmungen</span>
+          <div class="pillen" data-liste="ERLAUBNIS" data-name="erlaubnis"></div>
+        </div>
+        <label class="feld" data-wenn="aufenthalt=ja" style="margin-top:1.25rem">
+          <span>Aufenthaltstitel gültig bis</span>
+          <input name="aufenthalt_bis" type="date"></label>
+      </div>
+
+      <div class="karte">
+        <h2><span class="nr">8</span>Notfallkontakt</h2>
+        <div class="raster">
+          <label class="feld"><span>Name und Beziehung</span>
+            <input name="notfall_name" type="text" placeholder="z. B. Anna Muster (Schwester)"></label>
+          <label class="feld"><span>Telefon</span>
+            <input name="notfall_telefon" type="tel" inputmode="tel"></label>
+        </div>
+      </div>
+
+      <div class="karte">
+        <h2><span class="nr">9</span>Unterlagen</h2>
+        <div class="gruppe">
+          <span class="gruppe-titel">Diese Unterlagen habe ich bzw. reiche ich ein</span>
+          <div class="pillen" data-liste="EINSTELLUNGSUNTERLAGEN" data-name="unterlagen" data-mehrfach></div>
+        </div>
+        <p class="unter" style="margin:1rem 0 0">
+          Kopien laden Sie nach dem Absenden unter
+          <a href="/bewerber/unterlagen.html">Unterlagen hochladen</a> hoch — ein Foto mit
+          dem Handy genügt.
+        </p>
+      </div>
+
+      <div class="karte">
+        <h2>Das erklären Sie mit Ihrer Unterschrift</h2>
+        <div class="recht" id="erklaerung"></div>
+        <label class="wahl" style="margin-top:1.25rem">
+          <input type="checkbox" id="einwilligung">
+          <span>Ich habe das gelesen und bestätige es *</span></label>
+      </div>
+
+      <div class="karte">
+        <h2>Unterschrift</h2>
+        <p class="unter">Bitte mit dem Finger oder der Maus im Feld unterschreiben.</p>
+        <div class="sig-rahmen" id="sigRahmen">
+          <canvas id="sig"></canvas>
+          <div class="sig-hint">Hier unterschreiben</div>
+        </div>
+        <div class="sig-leiste">
+          <small>Eine Kopie des Bogens schicken wir an Ihre E-Mail-Adresse.</small>
+          <button type="button" class="btn-klein" id="sigLeeren">Neu zeichnen</button>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-senden" id="senden">Einstellungsbogen absenden</button>
+      <div class="meldung" id="meldung" role="alert"></div>
+    </form>
+  </div>
+
+  <div class="danke" id="danke">
+    <div class="haken">✓</div>
+    <h2>Vielen Dank!</h2>
+    <p>
+      Ihr Einstellungsbogen ist bei uns angekommen, eine Kopie liegt gleich in Ihrem
+      Postfach. Laden Sie jetzt noch die Kopien Ihrer Unterlagen hoch.
+    </p>
+    <div class="knoepfe">
+      <a class="btn-klein" href="/bewerber/unterlagen.html?anlass=einstellung">Unterlagen hochladen</a>
+      <a class="btn-klein" href="/bewerber">Zur Übersicht</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2026 Groom&amp;Glow UG (haftungsbeschränkt) • <a href="/impressum.html">Impressum &amp; Datenschutz</a></p>
+</footer>
+
+<script src="/im-salon/senden.js"></script>
+<script src="/bewerber/katalog.js"></script>
+<script src="/bewerber/bogen.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var K = window.BEWERBER;
+  var form = document.getElementById('bogen');
+  var meldung = document.getElementById('meldung');
+
+  BOGEN.absaetze(document.getElementById('erklaerung'), K.ERKLAERUNG_EINSTELLUNG);
+  BOGEN.aufbauen(form);
+
+  var sig = BOGEN.unterschrift(document.getElementById('sig'),
+    document.getElementById('sigRahmen'), document.getElementById('sigLeeren'));
+
+  var TEXTE = {
+    iban: 'Die IBAN scheint nicht zu stimmen — bitte prüfen Sie sie noch einmal.',
+    steuerid: 'Die Steuer-ID scheint nicht zu stimmen. Sie hat elf Ziffern; lassen Sie das '
+      + 'Feld frei, wenn Sie sie gerade nicht zur Hand haben.',
+    svnummer: 'Die Sozialversicherungsnummer hat die Form 12 345678 A 123. Lassen Sie das '
+      + 'Feld frei, wenn Sie sie gerade nicht zur Hand haben.',
+  };
+
+  // Prüfen beim Verlassen des Feldes — ein Zahlendreher fällt so sofort auf,
+  // nicht erst nach der Unterschrift.
+  [['iban', K.PRUEFEN.iban, true], ['steuerid', K.PRUEFEN.steuerid], ['svnummer', K.PRUEFEN.svnummer]]
+    .forEach(function (p) {
+      var feld = document.getElementById(p[0]);
+      feld.addEventListener('blur', function () {
+        var wert = feld.value.trim();
+        if (wert && !p[1](wert)) {
+          feld.closest('.feld').classList.add('offen');
+          BOGEN.hinweisen(meldung, TEXTE[p[0]], feld);
+        }
+      });
+    });
+
+  // IBAN in Vierergruppen zeigen — leichter abzugleichen mit der Bankkarte
+  var iban = document.getElementById('iban');
+  iban.addEventListener('blur', function () {
+    iban.value = K.PRUEFEN.nurZeichen(iban.value).replace(/(.{4})/g, '$1 ').trim();
+  });
+
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    meldung.className = 'meldung';
+
+    var luecke = BOGEN.lueckenFinden(form);
+    if (luecke) return BOGEN.hinweisen(meldung, BOGEN.FEHLERTEXT.pflicht, luecke);
+
+    var daten = BOGEN.sammeln(form);
+    if (!/^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/.test(daten.email)) {
+      return BOGEN.hinweisen(meldung, BOGEN.FEHLERTEXT.email, form.elements.email);
+    }
+    if (!K.PRUEFEN.iban(daten.iban)) return BOGEN.hinweisen(meldung, TEXTE.iban, iban);
+    if (daten.steuerid && !K.PRUEFEN.steuerid(daten.steuerid)) {
+      return BOGEN.hinweisen(meldung, TEXTE.steuerid, document.getElementById('steuerid'));
+    }
+    if (daten.svnummer && !K.PRUEFEN.svnummer(daten.svnummer)) {
+      return BOGEN.hinweisen(meldung, TEXTE.svnummer, document.getElementById('svnummer'));
+    }
+    if (!document.getElementById('einwilligung').checked) {
+      return BOGEN.hinweisen(meldung, BOGEN.FEHLERTEXT.einwilligung);
+    }
+    if (!sig.gezeichnet()) return BOGEN.hinweisen(meldung, BOGEN.FEHLERTEXT.signatur);
+
+    daten.bogen = 'einstellungsbogen';
+    daten.webseite = document.getElementById('webseite').value;
+    daten.unterschriftsort = daten.ort || 'Düsseldorf';
+    daten.einwilligung = true;
+    daten.signatur = sig.bild();
+
+    BOGEN.senden({
+      meldung: meldung,
+      knopf: document.getElementById('senden'),
+      knopfText: 'Einstellungsbogen absenden',
+      daten: daten,
+      texte: TEXTE,
+      erfolg: BOGEN.dankeZeigen,
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

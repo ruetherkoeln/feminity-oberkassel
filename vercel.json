@@ -50,11 +50,30 @@
       "source": "/im-salon/",
       "destination": "/im-salon.html",
       "permanent": true
+    },
+    {
+      "source": "/bewerber",
+      "destination": "/bewerber.html",
+      "permanent": true
+    },
+    {
+      "source": "/bewerber/",
+      "destination": "/bewerber.html",
+      "permanent": true
     }
   ],
   "headers": [
     {
       "source": "/im-salon(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/bewerber(.*)",
       "headers": [
         {
           "key": "X-Robots-Tag",

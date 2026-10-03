@@ -83,12 +83,15 @@ class Verbindung {
 }
 
 /**
- * Verschickt eine Nachricht mit genau einem Anhang.
+ * Verschickt eine Nachricht mit beliebig vielen Anhängen (auch keinem).
  *
  * zugang: { host, port, benutzer, passwort }
- * mail:   { von, vonName, an, betreff, text, anhang: { name, typ, daten } }
+ * mail:   { von, vonName, an, betreff, text,
+ *           anhang: { name, typ, daten }  — ein einzelner Anhang, oder
+ *           anhaenge: [{ name, typ, daten }, …] }
  */
 async function senden(zugang, mail) {
+  const anhaenge = mail.anhaenge || (mail.anhang ? [mail.anhang] : []);
   const socket = tls.connect({
     host: zugang.host,
     port: zugang.port || 465,
@@ -127,12 +130,14 @@ async function senden(zugang, mail) {
       'Content-Transfer-Encoding: base64',
       '',
       base64Bloecke(Buffer.from(mail.text, 'utf8')),
-      `--${grenze}`,
-      `Content-Type: ${mail.anhang.typ}; name="${mail.anhang.name}"`,
-      `Content-Disposition: attachment; filename="${mail.anhang.name}"`,
-      'Content-Transfer-Encoding: base64',
-      '',
-      base64Bloecke(mail.anhang.daten),
+      ...anhaenge.flatMap((a) => [
+        `--${grenze}`,
+        `Content-Type: ${a.typ}; name="${a.name}"`,
+        `Content-Disposition: attachment; filename="${a.name}"`,
+        'Content-Transfer-Encoding: base64',
+        '',
+        base64Bloecke(a.daten),
+      ]),
       `--${grenze}--`,
       '',
     ].join('\r\n');

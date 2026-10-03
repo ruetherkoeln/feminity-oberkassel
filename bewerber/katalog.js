@@ -94,11 +94,11 @@
       { id: 'premium', frage: 'Erfahrung mit Premium- oder Laufkundschaft (ja/nein, Beispiele)', lang: true },
     ],
     service: [
-      { id: 'service', frage: 'Was bedeutet für Sie exzellenter Service im Salon?', lang: true },
-      { id: 'reklamation', frage: 'Wie gehen Sie mit Reklamationen um? (kurzes Beispiel)', lang: true },
-      { id: 'qualitaet', frage: 'Wie sichern Sie Qualität und Beratung ab? (Ablauf)', lang: true },
-      { id: 'verkauf', frage: 'Wie stehen Sie zu Produktberatung und Verkauf im Salon?', lang: true },
-      { id: 'staerken', frage: 'Ihre zwei bis drei größten Stärken im Kundenkontakt', lang: true },
+      { id: 'service', frage: 'Was bedeutet für dich exzellenter Service im Salon?', lang: true },
+      { id: 'reklamation', frage: 'Wie gehst du mit Reklamationen um? (kurzes Beispiel)', lang: true },
+      { id: 'qualitaet', frage: 'Wie sicherst du Qualität und Beratung ab? (Ablauf)', lang: true },
+      { id: 'verkauf', frage: 'Wie stehst du zu Produktberatung und Verkauf im Salon?', lang: true },
+      { id: 'staerken', frage: 'Deine zwei bis drei größten Stärken im Kundenkontakt', lang: true },
     ],
     organisation: [
       { id: 'kasse', frage: 'Erfahrung mit Termin- und Kassensystemen (z. B. Treatwell, Shore, Planity)' },
@@ -107,9 +107,9 @@
       { id: 'kundenfotos', frage: 'Datenschutz: Erfahrung im Umgang mit Kundenfotos (ja/nein)' },
     ],
     motivation: [
-      { id: 'warum', frage: 'Warum möchten Sie bei Feminity Oberkassel arbeiten?', lang: true },
-      { id: 'kunden', frage: 'Welche Kunden und Services liegen Ihnen besonders?', lang: true },
-      { id: 'ziele', frage: 'Welche Ziele haben Sie für die nächsten zwölf Monate?', lang: true },
+      { id: 'warum', frage: 'Warum möchtest du bei Feminity Oberkassel arbeiten?', lang: true },
+      { id: 'kunden', frage: 'Welche Kunden und Services liegen dir besonders?', lang: true },
+      { id: 'ziele', frage: 'Welche Ziele hast du für die nächsten zwölf Monate?', lang: true },
     ],
   };
 
@@ -238,7 +238,7 @@
   ];
 
   var HINWEIS_UNTERLAGEN = [
-    'Die hochgeladenen Dateien gehen per E-Mail an den Salon und werden dort zu Ihrer Bewerbung ' +
+    'Die hochgeladenen Dateien gehen per E-Mail an den Salon und werden dort zu deiner Bewerbung ' +
       'bzw. Personalakte genommen. Auf dem Server der Website wird nichts gespeichert.',
     'Für Bewerbungsunterlagen gilt dasselbe wie für den Bewerberfragebogen: Löschung sechs Monate ' +
       'nach Abschluss des Verfahrens, wenn keine Einstellung erfolgt. ' + VERANTWORTLICH,

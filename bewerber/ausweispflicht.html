@@ -44,8 +44,8 @@
     <div class="eyebrow">Merkblatt für Mitarbeiterinnen und Mitarbeiter</div>
     <h1>Mitführungs- und Vorlagepflicht von Ausweispapieren</h1>
     <p class="lead">
-      Bitte lesen Sie das Merkblatt und bestätigen Sie mit Ihrer Unterschrift, dass Sie es
-      zur Kenntnis genommen haben. Die Bestätigung kommt in Ihre Personalakte.
+      Bitte lies das Merkblatt und bestätige mit deiner Unterschrift, dass du es
+      zur Kenntnis genommen hast. Die Bestätigung kommt in deine Personalakte.
     </p>
 
     <form id="bogen" novalidate>
@@ -68,14 +68,14 @@
       </div>
 
       <div class="karte">
-        <h2>Ihre Angaben</h2>
+        <h2>Deine Angaben</h2>
         <div class="raster">
           <label class="feld"><span>Vorname *</span>
             <input name="vorname" type="text" autocomplete="given-name" autocapitalize="words" required></label>
           <label class="feld"><span>Nachname *</span>
             <input name="nachname" type="text" autocomplete="family-name" autocapitalize="words" required></label>
         </div>
-        <label class="feld"><span>E-Mail * <small>(für Ihre Kopie)</small></span>
+        <label class="feld"><span>E-Mail * <small>(für deine Kopie)</small></span>
           <input name="email" type="email" autocomplete="email" inputmode="email" required></label>
       </div>
 
@@ -94,7 +94,7 @@
           <div class="sig-hint">Hier unterschreiben</div>
         </div>
         <div class="sig-leiste">
-          <small>Eine Kopie schicken wir an Ihre E-Mail-Adresse.</small>
+          <small>Eine Kopie schicken wir an deine E-Mail-Adresse.</small>
           <button type="button" class="btn-klein" id="sigLeeren">Neu zeichnen</button>
         </div>
       </div>
@@ -108,8 +108,8 @@
     <div class="haken">✓</div>
     <h2>Vielen Dank!</h2>
     <p>
-      Ihre Bestätigung ist bei uns angekommen, eine Kopie liegt gleich in Ihrem Postfach.
-      Denken Sie ab Ihrem ersten Arbeitstag an Ihren Ausweis.
+      Deine Bestätigung ist bei uns angekommen, eine Kopie liegt gleich in deinem Postfach.
+      Denk ab deinem ersten Arbeitstag an deinen Ausweis.
     </p>
     <div class="knoepfe">
       <a class="btn-klein" href="/bewerber">Zur Übersicht</a>
@@ -150,7 +150,7 @@
   var sig = BOGEN.unterschrift(document.getElementById('sig'),
     document.getElementById('sigRahmen'), document.getElementById('sigLeeren'));
 
-  var TEXTE = { kenntnis: 'Bitte bestätigen Sie, dass Sie das Merkblatt zur Kenntnis genommen haben.' };
+  var TEXTE = { kenntnis: 'Bitte bestätige, dass du das Merkblatt zur Kenntnis genommen hast.' };
 
   form.addEventListener('submit', function (ev) {
     ev.preventDefault();

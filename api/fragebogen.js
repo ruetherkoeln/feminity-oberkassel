@@ -240,6 +240,9 @@ function unterschriftBauen(pdf, d, jetzt) {
     pdf.text(d.vertreter || '—', { groesse: 9.5, fett: true, abstand: 4 });
   }
   pdf.bild(d._unterschrift, 200, 62);
+  // Unterschriften reichen oft bis an den unteren Rand des Feldes; ohne
+  // diese Lücke berührt der Strich die Datumszeile.
+  pdf.luecke(8);
   pdf.text(`${d.unterschriftsort || 'Düsseldorf'}, ${deutschesDatum(jetzt)}`, { groesse: 9, abstand: 1 });
   pdf.text(
     d.minderjaehrig ? `${d.vertreter || ''} für ${d.vorname} ${d.nachname}` : `${d.vorname} ${d.nachname}`,

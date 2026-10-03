@@ -30,14 +30,12 @@ alle 30 Sekunden) — mit `/api/bewerbung` als Ziel.
 
 ## Empfänger
 
-| Variable | Wirkung |
-|---|---|
-| `MAIL_AN_BEWERBUNG` | Postfach für alles aus dem Bewerberbereich |
-| sonst `MAIL_AN` | wie die Salon-Bögen |
-| sonst | `fragebogen@feminity-oberkassel.com` |
+Alles aus dem Bewerberbereich geht an **fragebogen@feminity-oberkassel.com** — dasselbe
+Postfach wie die Salon-Bögen, so vom Salon gewünscht. Wie dort lässt es sich über
+`MAIL_AN` in Vercel ändern; das gilt dann für beide Bereiche.
 
-Der Einstellungsbogen enthält Gehalt, IBAN, Steuer-ID und Konfession. Wer das
-Salon-Postfach liest, liest ohne eigene Variable also auch das mit.
+Gut zu wissen: Der Einstellungsbogen enthält Gehalt, IBAN, Steuer-ID und Konfession.
+Wer das Postfach liest, liest das mit.
 
 Bewerber bekommen eine Kopie ihres PDFs an die angegebene Adresse; beim Upload
 eine Eingangsbestätigung mit der Dateiliste (ohne Anhänge).

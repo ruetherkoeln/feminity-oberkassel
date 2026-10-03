@@ -490,9 +490,8 @@ module.exports = async (req, res) => {
     console.error('Bewerbung: SMTP-Zugangsdaten fehlen');
     return res.status(500).json({ ok: false, fehler: 'konfiguration' });
   }
-  // Bewerberdaten gehören nicht zwingend ins selbe Postfach wie die Salon-Bögen
-  // — Gehaltsangaben und Bankdaten sollte nicht jeder im Team lesen.
-  const an = process.env.MAIL_AN_BEWERBUNG || process.env.MAIL_AN || 'fragebogen@feminity-oberkassel.com';
+  // Dasselbe Postfach wie die Salon-Bögen — so vom Salon gewünscht (03.10.2026).
+  const an = process.env.MAIL_AN || 'fragebogen@feminity-oberkassel.com';
   const von = process.env.MAIL_VON || zugang.benutzer;
 
   if (art === 'unterlagen') return unterlagenVerarbeiten(d, res, zugang, an, von);

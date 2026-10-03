@@ -60,6 +60,11 @@
       "source": "/bewerber/",
       "destination": "/bewerber.html",
       "permanent": true
+    },
+    {
+      "source": "/bewerber/unterlagen.html",
+      "destination": "/bewerber.html#hochladen",
+      "permanent": true
     }
   ],
   "headers": [

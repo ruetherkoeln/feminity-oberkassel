@@ -15,6 +15,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@300;400;500;600;700&display=swap">
 
+<!-- Formular-Bausteine für den Upload-Abschnitt. Vor dem eigenen <style>
+     eingebunden: Wo beide dasselbe regeln (Kopf, Überschrift, Breite), gilt
+     das Layout dieser Seite. -->
+<link rel="stylesheet" href="/bewerber/bogen.css">
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--cream:#F9F7F4;--gold:#C9A74A;--black:#0A0A0A}
@@ -49,6 +54,11 @@ a.bogen:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 1
 .hinweis h3{font-size:1.05rem;font-weight:500;margin-bottom:.6rem}
 .hinweis p{font-size:.9rem;line-height:1.7;color:#5A5A5A}
 .hinweis p + p{margin-top:.7rem}
+
+/* Upload-Abschnitt */
+.hochladen{margin-top:4.5rem;scroll-margin-top:1.5rem}
+.hochladen > h2{font-size:clamp(1.6rem,4vw,2.25rem);font-weight:300;line-height:1.2;max-width:40rem;margin:.6rem 0 .9rem}
+.hochladen .inhalt{max-width:820px}
 
 footer{background:var(--black);color:var(--cream);padding:2rem;text-align:center;font-size:.8rem}
 footer a{color:var(--gold);text-decoration:none}
@@ -96,16 +106,6 @@ footer a:hover{text-decoration:underline}
       <span class="status offen">Jetzt ausfüllen</span>
     </a>
 
-    <a class="bogen" href="/bewerber/unterlagen.html">
-      <div class="schritt">Jederzeit</div>
-      <h2>Zertifikate &amp; Nachweise</h2>
-      <p>
-        Zertifikate, Schulungsnachweise, Zeugnisse und Lebenslauf hochladen — als PDF
-        oder einfach als Foto. Nach der Zusage auch die Kopien für die Personalakte.
-      </p>
-      <span class="status offen">Hochladen</span>
-    </a>
-
     <a class="bogen" href="/bewerber/einstellungsbogen.html">
       <div class="schritt">Schritt 2 · Nach Ihrer Zusage</div>
       <h2>Einstellungsbogen</h2>
@@ -128,6 +128,90 @@ footer a:hover{text-decoration:underline}
 
   </div>
 
+  <section class="hochladen" id="hochladen">
+    <div class="eyebrow">Dateien hochladen</div>
+    <h2>Hier könnt ihr Bilder, einen Lebenslauf, Zeugnisse oder mehr hochladen</h2>
+    <p class="lead">
+      PDF oder Foto — ein Handyfoto genügt, solange alles lesbar ist. Die Dateien gehen
+      direkt per E-Mail an uns.
+    </p>
+    <div class="inhalt">
+    <div id="formular">
+        <form id="bogen" novalidate>
+          <div class="honig" aria-hidden="true">
+            <label for="webseite">Bitte leer lassen</label>
+            <input id="webseite" name="webseite" type="text" tabindex="-1" autocomplete="off">
+          </div>
+
+          <div class="karte">
+            <h2>Von wem?</h2>
+            <div class="raster">
+              <label class="feld"><span>Vorname *</span>
+                <input name="vorname" type="text" autocomplete="given-name" autocapitalize="words" required></label>
+              <label class="feld"><span>Nachname *</span>
+                <input name="nachname" type="text" autocomplete="family-name" autocapitalize="words" required></label>
+              <label class="feld"><span>E-Mail *</span>
+                <input name="email" type="email" autocomplete="email" inputmode="email" required></label>
+              <label class="feld"><span>Telefon</span>
+                <input name="telefon" type="tel" autocomplete="tel" inputmode="tel"></label>
+            </div>
+            <div class="gruppe">
+              <span class="gruppe-titel">Wofür?</span>
+              <div class="pillen" id="anlass">
+                <label><input type="radio" name="anlass" value="bewerbung" checked><span>Zu meiner Bewerbung</span></label>
+                <label><input type="radio" name="anlass" value="einstellung"><span>Nach meiner Zusage (Personalakte)</span></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="karte">
+            <h2>Dateien</h2>
+            <p class="unter" id="grenzen"></p>
+            <label class="ablage" id="ablage">
+              <input type="file" id="datei" multiple accept="application/pdf,image/*">
+              <strong>Dateien auswählen oder Foto aufnehmen</strong>
+              <small>PDF, JPG oder PNG — am Computer auch hierher ziehen</small>
+            </label>
+            <ul class="dateien" id="liste"></ul>
+            <div class="belegt" id="belegt"></div>
+          </div>
+
+          <div class="karte">
+            <h2>Nachricht <small style="font-weight:400;color:#6E6E6E">(freiwillig)</small></h2>
+            <label class="feld"><span>Möchten Sie uns etwas dazu sagen?</span>
+              <textarea name="nachricht" maxlength="1500"></textarea></label>
+          </div>
+
+          <div class="karte">
+            <h2>Datenschutz</h2>
+            <div class="recht" id="hinweis"></div>
+            <label class="wahl" style="margin-top:1.25rem">
+              <input type="checkbox" id="einwilligung">
+              <span>Ich habe den Hinweis gelesen *</span></label>
+          </div>
+
+          <button type="submit" class="btn-senden" id="senden">Unterlagen absenden</button>
+          <div class="meldung" id="meldung" role="alert"></div>
+        </form>
+      </div>
+
+      <div class="danke" id="danke">
+        <div class="haken">✓</div>
+        <h2>Vielen Dank!</h2>
+        <p>
+          Ihre Unterlagen sind bei uns angekommen. Eine Eingangsbestätigung liegt gleich in
+          Ihrem Postfach. Weitere Dateien können Sie jederzeit nachreichen.
+        </p>
+        <div class="knoepfe">
+          <button type="button" class="btn-klein" id="weitere">Weitere Dateien hochladen</button>
+          <a class="btn-klein" href="/bewerber">Zur Übersicht</a>
+        </div>
+      </div>
+
+    </div>
+    </div>
+  </section>
+
   <div class="hinweis">
     <h3>Was mit Ihren Angaben passiert</h3>
     <p>
@@ -148,6 +232,11 @@ footer a:hover{text-decoration:underline}
 <footer>
   <p>© 2026 Groom&amp;Glow UG (haftungsbeschränkt) • <a href="/impressum.html">Impressum &amp; Datenschutz</a></p>
 </footer>
+
+<script src="/im-salon/senden.js"></script>
+<script src="/bewerber/katalog.js"></script>
+<script src="/bewerber/bogen.js"></script>
+<script src="/bewerber/upload.js"></script>
 
 </body>
 </html>

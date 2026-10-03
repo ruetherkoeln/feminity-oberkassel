@@ -33,6 +33,9 @@ h1{font-size:clamp(1.9rem,5vw,2.75rem);font-weight:300;margin:.5rem 0 1rem;line-
 .raster{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
 .raster.plz{grid-template-columns:minmax(7rem,1fr) 2fr;margin-top:1rem}
 .raster + .feld,.feld + .feld,.feld + .raster{margin-top:1rem}
+/* Im Raster stehen Felder nebeneinander — der Abstand nach oben gilt nur für
+   Felder untereinander, sonst rutscht jedes Feld nach dem ersten tiefer. */
+.raster > .feld{margin-top:0}
 label.feld,div.feld{display:block}
 .feld > span,.gruppe-titel{display:block;font-size:.82rem;font-weight:600;margin-bottom:.4rem;line-height:1.45}
 .feld > span small{font-weight:400;color:#6E6E6E}

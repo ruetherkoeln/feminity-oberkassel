@@ -1,117 +1,10 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Unterlagen hochladen | Feminity Oberkassel</title>
-<meta name="robots" content="noindex, nofollow">
-<meta name="format-detection" content="telephone=no">
+// Upload von Dateien im Bewerberbereich — sitzt als Abschnitt #hochladen auf
+// der Übersicht /bewerber.html. Schickt PDFs und Fotos an /api/bewerbung
+// (bogen: 'unterlagen'); der Server mailt sie als Anhänge an den Salon.
+//
+// Braucht vorher: /im-salon/senden.js, /bewerber/katalog.js, /bewerber/bogen.js
+// und im HTML die Elemente mit den ids unten (bogen, datei, liste, …).
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@300;400;500;600;700&display=swap">
-<link rel="stylesheet" href="/bewerber/bogen.css">
-</head>
-<body>
-
-<header>
-  <div class="cont">
-    <a href="/"><img src="/Logo.png" class="logo-nav" alt="Feminity Oberkassel"></a>
-    <a href="/bewerber" class="zurueck">Alle Bögen</a>
-  </div>
-</header>
-
-<div class="wrap">
-
-  <div id="formular">
-    <div class="eyebrow">Bewerbung</div>
-    <h1>Unterlagen hochladen</h1>
-    <p class="lead">
-      Zertifikate, Schulungsnachweise, Zeugnisse — und nach Ihrer Zusage die Kopien für
-      die Personalakte. PDF oder Foto, ein Handyfoto genügt, solange alles lesbar ist.
-    </p>
-
-    <form id="bogen" novalidate>
-      <div class="honig" aria-hidden="true">
-        <label for="webseite">Bitte leer lassen</label>
-        <input id="webseite" name="webseite" type="text" tabindex="-1" autocomplete="off">
-      </div>
-
-      <div class="karte">
-        <h2>Von wem?</h2>
-        <div class="raster">
-          <label class="feld"><span>Vorname *</span>
-            <input name="vorname" type="text" autocomplete="given-name" autocapitalize="words" required></label>
-          <label class="feld"><span>Nachname *</span>
-            <input name="nachname" type="text" autocomplete="family-name" autocapitalize="words" required></label>
-          <label class="feld"><span>E-Mail *</span>
-            <input name="email" type="email" autocomplete="email" inputmode="email" required></label>
-          <label class="feld"><span>Telefon</span>
-            <input name="telefon" type="tel" autocomplete="tel" inputmode="tel"></label>
-        </div>
-        <div class="gruppe">
-          <span class="gruppe-titel">Wofür?</span>
-          <div class="pillen" id="anlass">
-            <label><input type="radio" name="anlass" value="bewerbung" checked><span>Zu meiner Bewerbung</span></label>
-            <label><input type="radio" name="anlass" value="einstellung"><span>Nach meiner Zusage (Personalakte)</span></label>
-          </div>
-        </div>
-      </div>
-
-      <div class="karte">
-        <h2>Dateien</h2>
-        <p class="unter" id="grenzen"></p>
-        <label class="ablage" id="ablage">
-          <input type="file" id="datei" multiple accept="application/pdf,image/*">
-          <strong>Dateien auswählen oder Foto aufnehmen</strong>
-          <small>PDF, JPG oder PNG — am Computer auch hierher ziehen</small>
-        </label>
-        <ul class="dateien" id="liste"></ul>
-        <div class="belegt" id="belegt"></div>
-      </div>
-
-      <div class="karte">
-        <h2>Nachricht <small style="font-weight:400;color:#6E6E6E">(freiwillig)</small></h2>
-        <label class="feld"><span>Möchten Sie uns etwas dazu sagen?</span>
-          <textarea name="nachricht" maxlength="1500"></textarea></label>
-      </div>
-
-      <div class="karte">
-        <h2>Datenschutz</h2>
-        <div class="recht" id="hinweis"></div>
-        <label class="wahl" style="margin-top:1.25rem">
-          <input type="checkbox" id="einwilligung">
-          <span>Ich habe den Hinweis gelesen *</span></label>
-      </div>
-
-      <button type="submit" class="btn-senden" id="senden">Unterlagen absenden</button>
-      <div class="meldung" id="meldung" role="alert"></div>
-    </form>
-  </div>
-
-  <div class="danke" id="danke">
-    <div class="haken">✓</div>
-    <h2>Vielen Dank!</h2>
-    <p>
-      Ihre Unterlagen sind bei uns angekommen. Eine Eingangsbestätigung liegt gleich in
-      Ihrem Postfach. Weitere Dateien können Sie jederzeit nachreichen.
-    </p>
-    <div class="knoepfe">
-      <button type="button" class="btn-klein" id="weitere">Weitere Dateien hochladen</button>
-      <a class="btn-klein" href="/bewerber">Zur Übersicht</a>
-    </div>
-  </div>
-
-</div>
-
-<footer>
-  <p>© 2026 Groom&amp;Glow UG (haftungsbeschränkt) • <a href="/impressum.html">Impressum &amp; Datenschutz</a></p>
-</footer>
-
-<script src="/im-salon/senden.js"></script>
-<script src="/bewerber/katalog.js"></script>
-<script src="/bewerber/bogen.js"></script>
-<script>
 (function () {
   'use strict';
 
@@ -151,7 +44,7 @@
   }
 
   // Vorschlag für die Dokumentart — nur eine Vorbelegung, wählbar bleibt alles.
-  function artRaten(name) {
+  function artRaten(name, istBild) {
     var n = name.toLowerCase();
     if (/lebenslauf|\bcv\b|resume/.test(n)) return 'lebenslauf';
     if (/zeugnis|abschluss|meister|gesellen/.test(n)) return 'zeugnis';
@@ -159,7 +52,7 @@
     if (/sozialversicherung|sv-ausweis/.test(n)) return 'svausweis';
     if (/ausweis|pass/.test(n)) return 'ausweis';
     if (/krankenkasse|mitglied/.test(n)) return 'krankenkasse';
-    return form.querySelector('input[name="anlass"]:checked').value === 'einstellung' ? 'sonstiges' : 'zertifikat';
+    return istBild ? 'bild' : 'sonstiges';
   }
 
   function alsBase64(blob) {
@@ -204,7 +97,7 @@
       return (istPdf ? alsBase64(datei) : bildVerkleinern(datei))
         .then(function (daten) {
           var name = istPdf ? datei.name : datei.name.replace(/\.[^.]+$/, '') + '.jpg';
-          return { name: name, art: artRaten(datei.name), daten: daten,
+          return { name: name, art: artRaten(datei.name, istBild), daten: daten,
                    bytes: Math.floor(daten.length * 3 / 4) };
         })
         .catch(function () {
@@ -290,6 +183,15 @@
 
   BOGEN.aufbauen(form);
 
+  // Der Upload sitzt mitten auf der Übersicht — nach dem Absenden bleibt der
+  // Blick im Abschnitt, statt an den Seitenanfang zu springen.
+  var abschnitt = document.getElementById('hochladen');
+  function dankeZeigen() {
+    document.getElementById('formular').hidden = true;
+    document.getElementById('danke').classList.add('an');
+    abschnitt.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
   var TEXTE = {
     dateien: 'Bitte wählen Sie mindestens eine Datei aus.',
     datei: 'Eine der Dateien ist kein PDF, JPG oder PNG. Bitte entfernen Sie sie.',
@@ -324,7 +226,7 @@
       knopfText: 'Unterlagen absenden',
       daten: daten,
       texte: TEXTE,
-      erfolg: BOGEN.dankeZeigen,
+      erfolg: dankeZeigen,
     });
   });
 
@@ -334,11 +236,7 @@
     zeichnen();
     form.elements.nachricht.value = '';
     document.getElementById('danke').classList.remove('an');
-    document.getElementById('formular').style.display = '';
-    window.scrollTo({ top: 0 });
+    document.getElementById('formular').hidden = false;
+    abschnitt.scrollIntoView({ block: 'start' });
   });
 })();
-</script>
-
-</body>
-</html>

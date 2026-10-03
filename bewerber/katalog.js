@@ -191,6 +191,7 @@
     { id: 'zertifikat', name: 'Zertifikat / Schulungsnachweis' },
     { id: 'zeugnis', name: 'Zeugnis / Abschluss' },
     { id: 'lebenslauf', name: 'Lebenslauf' },
+    { id: 'bild', name: 'Bild / Arbeitsprobe' },
     { id: 'ausweis', name: 'Ausweis / Reisepass' },
     { id: 'svausweis', name: 'Sozialversicherungsausweis' },
     { id: 'krankenkasse', name: 'Bescheinigung der Krankenkasse' },

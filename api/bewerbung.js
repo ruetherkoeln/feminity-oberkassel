@@ -3,6 +3,7 @@
 // Nimmt die Bögen des Bewerberbereichs entgegen (/bewerber.html):
 //   - bewerberfragebogen  → PDF mit Unterschrift
 //   - einstellungsbogen   → PDF mit Unterschrift
+//   - ausweispflicht      → Kenntnisnahme des Merkblatts, PDF mit Unterschrift
 //   - unterlagen          → hochgeladene Dateien als Anhänge, ohne PDF
 // und schickt alles per E-Mail an den Salon. Wie /api/fragebogen wird nichts
 // gespeichert — die Daten leben nur für die Dauer dieser Anfrage.
@@ -99,6 +100,21 @@ const BOEGEN = {
   },
 };
 
+BOEGEN.ausweispflicht = {
+  titel: 'Merkblatt Ausweispflicht',
+  dateiname: 'Merkblatt-Ausweispflicht',
+  pflicht: ['vorname', 'nachname', 'email'],
+  text: ['vorname', 'nachname', 'email', 'unterschriftsort'],
+  auswahl: { kenntnis: K.JA_NEIN },
+  listen: {},
+  karten: {},
+  // Ohne ausdrückliche Kenntnisnahme ist die Unterschrift wertlos.
+  pruefen: (f) => (f.kenntnis === 'ja' ? null : 'kenntnis'),
+  koerper: koerperAusweispflicht,
+  betreffZusatz: () => ' — zur Kenntnis genommen',
+  kopieText: 'Ihre Bestätigung zum Merkblatt Ausweispflicht',
+};
+
 // ── Felder übernehmen ───────────────────────────────────────────────────────
 // Nur, was der Bogen deklariert — alles andere wird verworfen.
 function felderLesen(bogen, d) {
@@ -161,6 +177,9 @@ function unterschriftBauen(pdf, f, jetzt) {
   pdf.linie(0.6, 0.75, 9);
   pdf.ueberschrift('Unterschrift', H, 3);
   pdf.bild(f._unterschrift, 200, 62);
+  // Unterschriften reichen oft bis an den unteren Rand des Feldes; ohne
+  // diese Lücke berührt der Strich die Datumszeile.
+  pdf.luecke(8);
   pdf.text(`${f.unterschriftsort || 'Düsseldorf'}, ${deutschesDatum(jetzt)}`, { groesse: 9, abstand: 1 });
   pdf.text(`${f.vorname} ${f.nachname}`, { groesse: 9, abstand: 8 });
   pdf.linie(0.4, 0.85, 8);
@@ -308,6 +327,28 @@ function koerperEinstellung(pdf, f) {
   erklaerungBauen(pdf, K.ERKLAERUNG_EINSTELLUNG);
 }
 
+// ── Rumpf: Merkblatt Ausweispflicht ─────────────────────────────────────────
+function koerperAusweispflicht(pdf, f) {
+  const A = K.AUSWEISPFLICHT;
+  abschnitt(pdf, 'Mitarbeiterin / Mitarbeiter');
+  feld(pdf, 'Name', `${f.vorname} ${f.nachname}`);
+  feld(pdf, 'E-Mail', f.email);
+
+  abschnitt(pdf, 'Mitführungs- und Vorlagepflicht von Ausweispapieren');
+  pdf.text('Liebe Mitarbeiter!', { groesse: 9.5, fett: true, abstand: 4 });
+  pdf.text(A.einleitung, { groesse: 9, abstand: 4 });
+  pdf.text(A.papiere.join(' · '), { groesse: 9.5, fett: true, abstand: 6, einzug: 14 });
+
+  abschnitt(pdf, 'Was das im Salonalltag bedeutet');
+  for (const punkt of A.alltag) pdf.text(`•  ${punkt}`, { groesse: 9, abstand: 3, einzug: 6 });
+  pdf.luecke(4);
+  pdf.text(`Bußgeld: ${A.bussgeld}`, { groesse: 9, fett: true, abstand: 6 });
+
+  abschnitt(pdf, 'Zur Kenntnis genommen');
+  pdf.text(`[x]  ${A.bestaetigung}`, { groesse: 9, abstand: 6 });
+  pdf.text(A.aufbewahrung, { groesse: 7.5, abstand: 0 });
+}
+
 function pdfBauen(bogen, f, unterschrift, jetzt) {
   const pdf = new Pdf();
   f._unterschrift = unterschrift;
@@ -449,9 +490,8 @@ module.exports = async (req, res) => {
     console.error('Bewerbung: SMTP-Zugangsdaten fehlen');
     return res.status(500).json({ ok: false, fehler: 'konfiguration' });
   }
-  // Bewerberdaten gehören nicht zwingend ins selbe Postfach wie die Salon-Bögen
-  // — Gehaltsangaben und Bankdaten sollte nicht jeder im Team lesen.
-  const an = process.env.MAIL_AN_BEWERBUNG || process.env.MAIL_AN || 'fragebogen@feminity-oberkassel.com';
+  // Dasselbe Postfach wie die Salon-Bögen — so vom Salon gewünscht (03.10.2026).
+  const an = process.env.MAIL_AN || 'fragebogen@feminity-oberkassel.com';
   const von = process.env.MAIL_VON || zugang.benutzer;
 
   if (art === 'unterlagen') return unterlagenVerarbeiten(d, res, zugang, an, von);
@@ -490,7 +530,7 @@ module.exports = async (req, res) => {
         `${bogen.titel}\n\n` +
         `Name:      ${f.vorname} ${f.nachname}\n` +
         `E-Mail:    ${f.email}\n` +
-        `Telefon:   ${f.telefon}\n` +
+        (f.telefon ? `Telefon:   ${f.telefon}\n` : '') +
         `Eingang:   ${deutschesDatum(jetzt)} um ${deutscheZeit(jetzt)} Uhr\n\n` +
         'Der unterschriebene Bogen liegt als PDF im Anhang.',
       anhang,

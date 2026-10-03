@@ -243,6 +243,29 @@
       'nach Abschluss des Verfahrens, wenn keine Einstellung erfolgt. ' + VERANTWORTLICH,
   ];
 
+  // ── Merkblatt Ausweispflicht ────────────────────────────────────────────
+  // Wortlaut des Papier-Merkblatts (bewerber/merkblatt-ausweispflicht.pdf).
+  var AUSWEISPFLICHT = {
+    einleitung: 'Wir weisen Sie hiermit darauf hin, dass Sie gemäß § 2a Abs. 1 des ' +
+      'Schwarzarbeitsbekämpfungsgesetzes (SchwarzArbG) verpflichtet sind, während der Arbeitszeit ' +
+      'stets eines der folgenden Ausweispapiere mitzuführen und den Behörden der Zollverwaltung ' +
+      'auf Verlangen vorzulegen:',
+    papiere: ['Personalausweis', 'Pass', 'Passersatz', 'Ausweisersatz'],
+    alltag: [
+      'Das Ausweispapier ist an jedem Arbeitstag im Original mitzuführen; eine Kopie oder ein ' +
+        'Foto auf dem Smartphone genügt nicht.',
+      'Die Pflicht gilt für die gesamte Arbeitszeit, auch bei Einsätzen außerhalb des Salons.',
+      'Bei einer Prüfung durch die Finanzkontrolle Schwarzarbeit (Zoll) ist das Dokument auf ' +
+        'Verlangen unmittelbar vorzulegen.',
+    ],
+    bussgeld: 'Sollten Sie Ihrer Mitführungs- und Vorlagepflicht nicht nachkommen, kann gegen Sie ' +
+      'persönlich ein Bußgeld von bis zu 5.000 Euro verhängt werden.',
+    bestaetigung: 'Ich habe das Merkblatt zur Mitführungs- und Vorlagepflicht von Ausweispapieren ' +
+      'gelesen und zur Kenntnis genommen.',
+    aufbewahrung: 'Aufbewahrung in der Personalakte für die Dauer des Beschäftigungsverhältnisses ' +
+      '(§ 2a Abs. 2 SchwarzArbG).',
+  };
+
   // ── Prüfungen ───────────────────────────────────────────────────────────
   // Im Browser, damit ein Tippfehler sofort auffällt, und auf dem Server,
   // damit keine falsche Bankverbindung in der Lohnabrechnung landet.
@@ -310,7 +333,7 @@
     DOKUMENTARTEN: DOKUMENTARTEN, UPLOAD: UPLOAD,
     ERKLAERUNG_BEWERBUNG: ERKLAERUNG_BEWERBUNG, TALENTPOOL: TALENTPOOL,
     ERKLAERUNG_EINSTELLUNG: ERKLAERUNG_EINSTELLUNG, HINWEIS_UNTERLAGEN: HINWEIS_UNTERLAGEN,
-    PRUEFEN: PRUEFEN, name: name,
+    AUSWEISPFLICHT: AUSWEISPFLICHT, PRUEFEN: PRUEFEN, name: name,
   };
 
   if (typeof module !== 'undefined' && module.exports) {

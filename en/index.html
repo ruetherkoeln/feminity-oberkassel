@@ -210,7 +210,9 @@ footer a:hover{color:var(--gold)}
 }
 @media(max-width:600px){
   nav{padding:.75rem 1.25rem}
-  .logo-nav{height:32px}
+  /* Das Logo ist breit (Schwung des y) — auf schmalen Handys an der
+     Bildschirmbreite ausrichten, damit es die Sprachflaggen nicht berührt. */
+  .logo-nav{height:auto;width:min(147px,36vw)}
   .hero-logo{max-width:240px}
   .hero-content{padding:1rem;padding-bottom:10vh}
   .hero-line1{font-size:1.5rem}

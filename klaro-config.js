@@ -4,14 +4,17 @@ var klaroConfig = {
   version: 1,
   elementID: 'klaro',
   styling: {
-    theme: ['light', 'top', 'wide']
+    theme: ['light', 'bottom', 'wide']
   },
   noAutoLoad: false,
   htmlTexts: true,
   embedded: false,
   groupByPurpose: true,
   storageMethod: 'cookie',
-  cookieName: 'klaro-feminity',
+  // Neuer Name seit der Umstellung auf Google Analytics (2026-10-05): Wer
+  // frueher "Google Ads" zugestimmt hat, hat nicht in Analytics eingewilligt —
+  // mit dem neuen Namen wird jede Besucherin einmal neu gefragt.
+  cookieName: 'klaro-feminity-2',
   cookieExpiresAfterDays: 180,
   default: false,
   mustConsent: false,
@@ -25,7 +28,7 @@ var klaroConfig = {
     de: {
       privacyPolicyUrl: '/impressum.html',
       consentNotice: {
-        description: 'Wir nutzen Drittanbieter-Dienste, um die Wirksamkeit unserer Werbung zu messen (Google Ads). Sie koennen Ihre Auswahl jederzeit aendern oder widerrufen.',
+        description: 'Mit Ihrer Einwilligung nutzen wir Google Analytics, um zu verstehen, wie unsere Website genutzt wird, und um die Wirkung unserer Werbung zu messen. Sie koennen Ihre Auswahl jederzeit aendern oder widerrufen.',
         learnMore: 'Einstellungen anpassen'
       },
       consentModal: {
@@ -60,6 +63,10 @@ var klaroConfig = {
         purpose: 'Zweck'
       },
       purposes: {
+        statistik: {
+          title: 'Statistik',
+          description: 'Dienste, die anonym bzw. pseudonym auswerten, wie Besucher unsere Website nutzen.'
+        },
         marketing: {
           title: 'Marketing',
           description: 'Dienste, die zur Messung und Optimierung von Werbekampagnen eingesetzt werden.'
@@ -70,13 +77,13 @@ var klaroConfig = {
 
   services: [
     {
-      name: 'google-ads',
-      title: 'Google Ads Conversion Tracking',
-      purposes: ['marketing'],
-      cookies: [/^_gcl_/i, /^_gac_/i, /^_gads/i],
+      name: 'google-analytics',
+      title: 'Google Analytics',
+      purposes: ['statistik', 'marketing'],
+      cookies: [/^_ga/i, /^_gid/i, /^_gcl_/i, /^_gac_/i],
       required: false,
       default: false,
-      description: 'Google Ads (Google Ireland Limited) misst, wie viele Besucher nach einem Klick auf eine Anzeige eine Buchung oder Kontaktaufnahme starten.'
+      description: 'Google Analytics 4 (Google Ireland Limited) wertet pseudonym aus, welche Seiten besucht und wie oft z. B. „Termin buchen“ geklickt wird; bei verknuepftem Google-Ads-Konto auch, wie viele Besucher nach einem Klick auf eine Anzeige buchen. Daten koennen an Google LLC in den USA uebermittelt werden.'
     }
   ]
 };

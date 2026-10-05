@@ -52,15 +52,16 @@ a:hover{text-decoration:underline}
 </style>
 <!-- Klaro Consent Manager -->
 <link rel="stylesheet" href="/klaro/klaro.min.css">
-<script defer src="/klaro/klaro-no-css.js"></script>
+<!-- Konfiguration zuerst: Klaro liest window.klaroConfig beim Start. -->
 <script defer src="/klaro-config.js"></script>
-<!-- Google Tag (gtag.js) via Klaro Consent Manager -->
-<script type="text/plain" data-type="application/javascript" data-name="google-ads" data-src="https://www.googletagmanager.com/gtag/js?id=G-V5ZLVNKNZG" async></script>
-<script type="text/plain" data-type="application/javascript" data-name="google-ads">
+<script defer src="/klaro/klaro-no-css.js"></script>
+<!-- Google Analytics 4 (gtag.js), lädt erst nach Einwilligung im Klaro-Banner -->
+<script type="text/plain" data-type="application/javascript" data-name="google-analytics" data-src="https://www.googletagmanager.com/gtag/js?id=G-JG5S4HM1JT" async></script>
+<script type="text/plain" data-type="application/javascript" data-name="google-analytics">
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', 'G-V5ZLVNKNZG');
+gtag('config', 'G-JG5S4HM1JT');
 </script>
 </head>
 <body>
@@ -149,11 +150,11 @@ gtag('config', 'G-V5ZLVNKNZG');
   <p>Sie können der künftigen Verarbeitung der Sie betreffenden Daten nach Maßgabe des Art. 21 DSGVO jederzeit widersprechen, insbesondere gegen die Verarbeitung für Zwecke der Direktwerbung.</p>
 
   <h3>Cookies und Einwilligungsverwaltung (Klaro)</h3>
-  <p>Wir setzen auf dieser Website das Open-Source-Consent-Tool Klaro (KIProtect GmbH, Berlin) ein, um Cookies und externe Dienste nur nach Ihrer ausdrücklichen Einwilligung zu laden. Beim ersten Besuch der Website erscheint ein Banner, in dem Sie zustimmen, ablehnen oder einzelne Dienste granular auswählen können. Ihre Auswahl wird in einem first-party Cookie (Name: <code>klaro-feminity</code>, Laufzeit: 180 Tage) gespeichert.</p>
+  <p>Wir setzen auf dieser Website das Open-Source-Consent-Tool Klaro (KIProtect GmbH, Berlin) ein, um Cookies und externe Dienste nur nach Ihrer ausdrücklichen Einwilligung zu laden. Beim ersten Besuch der Website erscheint ein Banner, in dem Sie zustimmen, ablehnen oder einzelne Dienste granular auswählen können. Ihre Auswahl wird in einem first-party Cookie (Name: <code>klaro-feminity-2</code>, Laufzeit: 180 Tage) gespeichert.</p>
   <p>Sie können Ihre Einwilligung jederzeit ändern oder widerrufen, indem Sie auf folgenden Link klicken: <a href="#" onclick="if(typeof klaro!=='undefined'){klaro.show(klaroConfig);}return false;">Datenschutz-Einstellungen öffnen</a>.</p>
   <p>Folgende Dienste werden über Klaro gesteuert:</p>
   <ul>
-    <li><strong>Google Ads Conversion Tracking</strong> (Google Ireland Limited) – misst die Wirksamkeit von Werbekampagnen; Cookies <code>_gcl_*</code>, <code>_gac_*</code>. Zweck: Marketing.</li>
+    <li><strong>Google Analytics</strong> (Google Ireland Limited) – Reichweitenmessung und, bei verknüpftem Google-Ads-Konto, Messung von Anzeigen-Conversions; Cookies <code>_ga</code>, <code>_ga_*</code>, ggf. <code>_gcl_*</code>. Zwecke: Statistik, Marketing. Einzelheiten im Abschnitt „Google Analytics“.</li>
   </ul>
   <p><strong>Treatwell Online-Buchung</strong> (Wahanda Ltd., London) wird auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung / Terminbuchung) eingebunden und ist daher nicht Teil der Klaro-Einwilligungsverwaltung. Das Buchungs-Widget öffnet sich nur, wenn Sie aktiv auf "Jetzt Termin buchen" klicken. Erst dann werden Daten an Treatwell übertragen.</p>
   <p>Falls Sie nicht möchten, dass Cookies auf Ihrem Rechner gespeichert werden, können Sie die entsprechende Option in den Systemeinstellungen Ihres Browsers deaktivieren. Der Ausschluss von Cookies kann zu Funktionseinschränkungen dieses Onlineangebotes führen.</p>
@@ -181,6 +182,11 @@ gtag('config', 'G-V5ZLVNKNZG');
 
   <h3>Erhebung von Zugriffsdaten und Logfiles</h3>
   <p>Wir bzw. unser Hostinganbieter erhebt auf Grundlage unserer berechtigten Interessen Daten über jeden Zugriff auf den Server (Serverlogfiles). Zu den Zugriffsdaten gehören Name der abgerufenen Webseite, Datum und Uhrzeit, übertragene Datenmenge, Browsertyp, Betriebssystem, Referrer URL und IP-Adresse. Logfile-Informationen werden aus Sicherheitsgründen für maximal 7 Tage gespeichert.</p>
+
+  <h3>Google Analytics</h3>
+  <p>Mit Ihrer Einwilligung setzen wir Google Analytics 4 ein, einen Webanalysedienst der Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Google Analytics erfasst, welche Seiten Sie aufrufen, wie lange Sie bleiben, von welcher Seite Sie kommen und ob Sie z. B. auf „Termin buchen“ klicken, außerdem Angaben zu Gerät, Browser und ungefährem Standort (Stadt). Dazu werden Cookies (<code>_ga</code>, <code>_ga_*</code>, Laufzeit bis zu 2 Jahre) auf Ihrem Gerät gespeichert. IP-Adressen werden von Google Analytics 4 nicht gespeichert.</p>
+  <p>Wir nutzen die Auswertungen, um unsere Website und unsere Werbung zu verbessern. Rechtsgrundlage ist Ihre Einwilligung (Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG), die Sie im Cookie-Banner erteilen und jederzeit über „Datenschutz-Einstellungen öffnen“ widerrufen können. Ohne Einwilligung wird Google Analytics nicht geladen.</p>
+  <p>Die Daten können an die Google LLC in den USA übermittelt werden. Google LLC ist unter dem EU-US Data Privacy Framework zertifiziert, für das ein Angemessenheitsbeschluss der EU-Kommission besteht. Mit Google besteht ein Vertrag zur Auftragsverarbeitung. Die Ereignisdaten werden nach der in Google Analytics eingestellten Aufbewahrungsdauer automatisch gelöscht. Weitere Informationen: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Datenschutzerklärung von Google</a>.</p>
 
   <h3>Google AdWords und Conversion-Messung</h3>
   <p>Wir nutzen auf Grundlage unserer berechtigten Interessen die Dienste der Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA. Weitere Informationen: <a href="https://policies.google.com/technologies/ads" target="_blank">Google Datenschutzerklärung</a> sowie <a href="https://adssettings.google.com/authenticated" target="_blank">Google Werbeeinstellungen</a>.</p>

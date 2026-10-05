@@ -489,13 +489,18 @@ module.exports = async (req, res) => {
   const unterschrift = unterschriftLesen(d.signatur);
   if (!unterschrift) return res.status(400).json({ ok: false, fehler: 'signatur' });
 
+  // Rueckfallweg fuers Team (im-salon/senden.js): klemmt der Versand, gibt die
+  // Funktion das PDF direkt zurueck statt es zu mailen. Dann braucht es weder
+  // SMTP-Zugang noch Postfach — genau die beiden koennen ja das Problem sein.
+  const nurPdf = d.nurPdf === true;
+
   const zugang = smtpZugang();
-  if (!zugang) {
+  if (!zugang && !nurPdf) {
     console.error('Fragebogen: SMTP-Zugangsdaten fehlen');
     return res.status(500).json({ ok: false, fehler: 'konfiguration' });
   }
   const an = process.env.MAIL_AN || 'fragebogen@feminity-oberkassel.com';
-  const von = process.env.MAIL_VON || zugang.benutzer;
+  const von = process.env.MAIL_VON || (zugang && zugang.benutzer);
 
   const jetzt = new Date();
   let pdf;
@@ -508,6 +513,13 @@ module.exports = async (req, res) => {
 
   const name = `${felder.nachname}-${felder.vorname}`.replace(/[^A-Za-zÀ-ÿ0-9-]/g, '_');
   const datei = `${bogen.dateiname}_${name}_${jetzt.toISOString().slice(0, 10)}.pdf`;
+
+  if (nurPdf) {
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', `inline; filename="${datei}"`);
+    res.setHeader('Cache-Control', 'no-store');
+    return res.status(200).send(pdf);
+  }
 
   try {
     await sendenMitZweitversuch(zugang, {

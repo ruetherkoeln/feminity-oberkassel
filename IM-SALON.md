@@ -119,8 +119,17 @@ Konfiguration) wird **nicht** wiederholt — die beheben sich durch Warten nicht
 
 Die Angaben liegen währenddessen ausschließlich im Arbeitsspeicher der offenen Seite.
 Bewusst nicht in `sessionStorage`: Das Tablet geht von Hand zu Hand. Preis dafür: Wird
-die Seite geschlossen, ist der Bogen weg. Ein Rückfallweg, der das PDF stattdessen zum
-Sichern anbietet, ist besprochen, aber noch nicht gebaut.
+die Seite geschlossen, ist der Bogen weg — deshalb die dritte Stufe:
+
+3. **Team-Rückfallweg** (`rueckfallAnbieten` in `im-salon/senden.js`, seit 06.10.2026):
+   Ist der Versand nach den drei Minuten endgültig gescheitert (oder fehlt die
+   SMTP-Konfiguration), erscheint nach **zwei Sekunden Drücken auf die Fehlermeldung**
+   ein Bereich „Nur fürs Team“. „PDF erzeugen“ schickt den Bogen mit `nurPdf: true` an
+   `/api/fragebogen`; die Funktion baut das PDF wie sonst, gibt es aber zurück statt es
+   zu mailen (ohne SMTP-Zugang). „PDF öffnen“ zeigt es in einem neuen Fenster zum
+   Drucken oder Weiterleiten; „Formular leeren“ lädt die Seite neu. Für Gäste unsichtbar,
+   weil ein Gast das PDF sonst arglos auf dem Tablet ablegen könnte. Das Team muss den
+   Handgriff kennen — er gehört ins Handbuch.
 
 ## Datenschutz
 

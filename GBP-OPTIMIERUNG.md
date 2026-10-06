@@ -1,7 +1,7 @@
 # Google Business Profile — Optimierungs-Paket
 
-**Feminity by Jule · Düsseldorf-Oberkassel**
-Stand: 2026-05-18 · Bearbeitung im Dashboard: [business.google.com](https://business.google.com)
+**Feminity Oberkassel · Düsseldorf-Oberkassel**
+Stand: 2026-05-18, aktualisiert 2026-10-06 (Name, Öffnungszeiten, Leistungen, Team, Logo) · Bearbeitung im Dashboard: [business.google.com](https://business.google.com)
 
 Dieses Dokument ist copy-paste-fertig. Jeder Abschnitt entspricht einem Feld im GBP-Dashboard.
 
@@ -13,13 +13,15 @@ Diese Angaben müssen **wortgleich** mit der Website übereinstimmen (Name, Adre
 
 | Feld | Wert |
 |---|---|
-| **Name** | `Feminity by Jule` |
+| **Name** | `Feminity Oberkassel` |
 | **Adresse** | `Hansaallee 1a, 40549 Düsseldorf` |
 | **Telefon** | `+49 176 87438736` |
 | **Website** | `https://feminity-oberkassel.de` |
 | **Buchungslink** | Treatwell-Profil verlinken (siehe Abschnitt 5) |
 
-> ⚠️ **Wichtig:** Der Name muss exakt „Feminity by Jule" lauten — **keine** Keywords anhängen (kein „Feminity by Jule – Friseur & Beauty Oberkassel"). Google sperrt/abwertet keyword-gestopfte Namen.
+> ⚠️ **Wichtig:** Der Name muss exakt „Feminity Oberkassel" lauten — **keine** Keywords anhängen (kein „Feminity Oberkassel – Friseur & Beauty Düsseldorf"). Google sperrt/abwertet keyword-gestopfte Namen.
+>
+> Steht im Profil noch der alte Name „Feminity by Jule", im Dashboard umbenennen. Google prüft Namensänderungen und kann eine erneute Bestätigung des Unternehmens verlangen — das Profil bleibt dabei bestehen, Bewertungen gehen nicht verloren.
 
 ---
 
@@ -29,11 +31,11 @@ Diese Angaben müssen **wortgleich** mit der Website übereinstimmen (Name, Adre
 |---|---|
 | Montag | 10:00 – 19:00 |
 | Dienstag | 10:00 – 19:00 |
-| Mittwoch | 10:00 – 22:00 |
-| Donnerstag | 10:00 – 22:00 |
-| Freitag | 10:00 – 22:00 |
+| Mittwoch | 10:00 – 20:00 |
+| Donnerstag | 10:00 – 20:00 |
+| Freitag | 10:00 – 20:00 |
 | Samstag | 10:00 – 18:00 |
-| Sonntag | Geschlossen |
+| Sonntag | 11:00 – 16:30 (nur Massagen und Beauty) |
 
 Sonderöffnungszeiten (Feiertage) jeweils im Voraus im Dashboard pflegen — fehlende Feiertagsangaben kosten Vertrauen und Ranking.
 
@@ -64,7 +66,7 @@ GBP erlaubt **1 Hauptkategorie + bis zu 9 Zusatzkategorien**. Die Hauptkategorie
 Copy-paste:
 
 ```
-Feminity by Jule ist Dein Beauty Space im Herzen von Düsseldorf-Oberkassel – im Me and All Hotel an der Hansaallee. Das Team von Feminity Oberkassel verbindet Friseurhandwerk, Hautpflege und Beauty-Behandlungen unter einem Dach: Schnitt, Coloration und Balayage, Permanent Make-up (Powder Brows, Lip Blush), Green Peel, apparative Kosmetik mit LIPOSANA3, NAD+ Drips sowie dauerhafte Laser-Haarentfernung mit dem Nd:YAG. Wir setzen auf ehrliche Beratung, hochwertige Profiprodukte (u. a. Kérastase, HH Simonsen) und Behandlungen, die wirklich zu Dir passen – ohne Verkaufsdruck. Mittwoch bis Freitag bis 22 Uhr geöffnet. Termine jederzeit online buchbar.
+Feminity Oberkassel ist Dein Beauty Space im Herzen von Düsseldorf-Oberkassel – im Me and All Hotel an der Hansaallee. Unser Team verbindet Friseurhandwerk, Hautpflege und Beauty-Behandlungen unter einem Dach: Schnitt, Coloration und Balayage, Hairtalk Tape-In Extensions, Permanent Make-up (Powder Brows, Lip Blush), Green Peel, Beauty Drips, Massagen sowie dauerhafte Laser-Haarentfernung mit dem Nd:YAG. Wir setzen auf ehrliche Beratung, hochwertige Profiprodukte (u. a. Kérastase, HH Simonsen) und Behandlungen, die wirklich zu Dir passen – ohne Verkaufsdruck. Mittwoch bis Freitag bis 20 Uhr, sonntags Massagen und Beauty. Termine jederzeit online buchbar.
 ```
 
 ---
@@ -79,12 +81,11 @@ Im Dashboard unter „Leistungen" — pro Kategorie Services anlegen. Name + Kur
 - Glossing — Glanztönung für sichtbar gepflegtes, glänzendes Haar
 - Geometric Bob — Präzisions-Schnitttechnik
 - Curl Cutting — Schnitt & Pflege speziell für lockiges Haar
-- Tape Extensions — Premium-Extensions inkl. Beratung und Styling
+- Hairtalk Tape-In Extensions — Beratung, exklusive Bestellung und Einsetzen durch Evelin
 - Intensive Haarpflege / Treatments
 
 **Beauty & Haut**
 - Green Peel® — natürliche Kräuterschälkur für ein frisches Hautbild
-- LIPOSANA3 — apparative Körperformung per Frequenztechnologie
 - Apparative Kosmetik & Gesichtsbehandlungen
 - Neovita Naturkosmetik — Pflege auch für Allergiker und sensible Haut
 
@@ -95,10 +96,12 @@ Im Dashboard unter „Leistungen" — pro Kategorie Services anlegen. Name + Kur
 
 **Weitere Behandlungen**
 - Laser-Haarentfernung (Nd:YAG) — dauerhafte Haarreduktion für alle Hauttypen
-- NAD+ Drip — Infusion für Zellschutz, Energie und Anti-Aging
+- Beauty Drips — NAD+, Vitamin- und Aufbau-Infusionen
+- Massagen — Aroma, Hot Stone, Kräuterstempel und klassisch; auch sonntags
 
 **Buchungslink:** Treatwell-Profil als Termin-/Buchungslink hinterlegen
 `https://www.treatwell.de/ort/feminity-by-jule-oberkassel/`
+(Die Adresse enthält noch den alten Namen. Sie ändert sich nur, wenn Treatwell das Profil umbenennt — dann hier und auf der Website anpassen.)
 
 ---
 
@@ -121,11 +124,11 @@ Im Dashboard unter „Attribute" aktivieren, was zutrifft:
 
 Fotos sind ein direkter Conversion-Hebel — Profile mit guten Fotos werden deutlich häufiger geklickt. Empfohlene Reihenfolge & Inhalte:
 
-1. **Logo** — `Logo.png`
+1. **Logo** — `Logo-3D.png` (vollständig; `Logo.png` ist rechts beschnitten)
 2. **Titelbild (Cover)** — der Salon-Innenraum (`Salon.jpg`) oder ein starkes Team-Foto
 3. **Außenansicht** — Eingang Me and All Hotel / Hansaallee 1a (hilft beim Wiederfinden vor Ort)
 4. **Innenräume** — Behandlungsraum, Friseurbereich, Wartebereich
-5. **Team** — Jule, Nicky, Cosmina, Zahra (Gesichter schaffen Vertrauen)
+5. **Team** — aktuelle Teamfotos, z. B. Nicky, Jacky und das Gruppenbild `Team2026.webp` (Gesichter schaffen Vertrauen)
 6. **Behandlungen / Vorher-Nachher** — Balayage, PMU, Green Peel (mit Einverständnis der Kundinnen)
 7. **Produkte** — Kérastase, HH Simonsen, Neovita
 
@@ -139,9 +142,9 @@ Posts laufen ~7 Tage prominent — Ziel: alle 1–2 Wochen ein Post. Vier fertig
 
 **Post A — Abendtermine (Alleinstellungsmerkmal!)**
 ```
-Keine Zeit am Tag? Bei Feminity by Jule habt Ihr Mittwoch bis Freitag
-bis 22 Uhr Zeit für Euren Termin – Haare, Beauty oder PMU nach
-Feierabend, mitten in Oberkassel. Jetzt online buchen.
+Keine Zeit am Tag? Bei Feminity Oberkassel habt Ihr Mittwoch bis Freitag
+bis 20 Uhr Zeit für Euren Termin – Haare, Beauty oder PMU nach
+Feierabend, mitten in Oberkassel. Massagen auch am Wochenende. Jetzt online buchen.
 ```
 → Button: „Termin buchen"
 
@@ -178,13 +181,13 @@ Im GBP kann der Inhaber selbst Fragen stellen UND beantworten. Diese 6 vorab anl
 A: Ja – Termine sind jederzeit online über unser Treatwell-Profil buchbar. Den Link findet Ihr direkt hier im Profil und auf feminity-oberkassel.de.
 
 **F: Habt Ihr auch Abendtermine?**
-A: Ja, Mittwoch bis Freitag haben wir bis 22 Uhr geöffnet – ideal für Termine nach der Arbeit.
+A: Ja, Mittwoch bis Freitag haben wir bis 20 Uhr geöffnet – ideal für Termine nach der Arbeit. Massagen und Beauty-Behandlungen sind auch sonntags von 11 bis 16:30 Uhr buchbar.
 
 **F: Bietet Ihr dauerhafte Laser-Haarentfernung an?**
 A: Ja, wir arbeiten mit dem Nd:YAG-Laser (1064 nm), der für alle Hauttypen geeignet ist – auch für gebräunte und dunkle Haut. Vorab gibt es immer ein ehrliches Beratungsgespräch.
 
 **F: Macht Ihr sowohl Friseur- als auch Beauty-Behandlungen?**
-A: Ja, Feminity by Jule vereint Haare, Haut und Beauty unter einem Dach – von Schnitt und Coloration über Permanent Make-up bis zu apparativer Kosmetik.
+A: Ja, Feminity Oberkassel vereint Haare, Haut und Beauty unter einem Dach – von Schnitt und Coloration über Permanent Make-up bis zu apparativer Kosmetik.
 
 **F: Wo genau befindet Ihr Euch?**
 A: Im Me and All Hotel, Hansaallee 1a, 40549 Düsseldorf – mitten in Oberkassel.

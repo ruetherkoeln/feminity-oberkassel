@@ -477,6 +477,8 @@ footer a{color:var(--gold);text-decoration:none}
         lauf = null;
         zuruecksetzen();
         fehlerZeigen(fristAbgelaufen ? FEHLERTEXT.aufgegeben : (FEHLERTEXT[code] || FEHLERTEXT.versand));
+        // Versand endgültig gescheitert: Team kann das PDF sichern (langes Drücken)
+        if (fristAbgelaufen || code === 'konfiguration') window.ABSENDEN.rueckfallAnbieten(meldung, daten);
       }
     });
   });

@@ -323,6 +323,8 @@ nav .cont{max-width:1400px;margin:0 auto;display:flex;justify-content:space-betw
 .hero-full::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(to top,rgba(0,0,0,.68) 0%,rgba(0,0,0,.5) 15%,rgba(0,0,0,.3) 30%,rgba(0,0,0,.12) 45%,rgba(0,0,0,.03) 55%,rgba(0,0,0,0) 65%)}
 .hero-content{text-shadow:0 2px 12px rgba(0,0,0,.55)}
 @media (prefers-reduced-motion:reduce){.hero-video{display:none}}
+/* Schwebende Hinweise (Massagen, Hairtalk) nur auf größeren Bildschirmen. */
+@media (max-width:768px){.fab-badge{display:none!important}}
 .hero-content{position:relative;z-index:2;text-align:center;color:var(--cream);padding:2rem;padding-bottom:4vh;width:100%}
 .hero-logo{max-width:400px;margin:0 auto 1.25rem}
 .hero-content p{margin-bottom:2.5rem;text-shadow:0 2px 10px rgba(0,0,0,.8)}
@@ -875,7 +877,7 @@ document.addEventListener('click',function(e){
 
 
 <!-- Floating Action Button: Massagen online buchbar -->
-<a href='#' onclick="return handleBookingClick();" style="
+<a class="fab-badge" href='#' onclick="return handleBookingClick();" style="
   position:fixed;
   bottom:47vh;
   right:-10px;
@@ -902,7 +904,7 @@ document.addEventListener('click',function(e){
 </a>
 
 <!-- Floating Action Button: Hairtalk Tape-In Extensions -->
-<a href="blog/hairtalk-extensions.html" style="
+<a class="fab-badge" href="blog/hairtalk-extensions.html" style="
   position:fixed;
   bottom:30vh;
   right:-10px;

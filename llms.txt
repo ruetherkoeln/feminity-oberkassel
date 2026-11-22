@@ -1,6 +1,6 @@
 # Feminity Oberkassel – Friseur & Beauty Salon in Düsseldorf-Oberkassel
 
-> Feminity Oberkassel ist ein exklusiver Friseur- und Beauty-Salon in Düsseldorf-Oberkassel, Hansaallee 1a, im Me&All Hotel. Betreiberin ist die Groom&Glow UG (haftungsbeschränkt). Der Salon bietet Haarschnitt, Haarfarbe (u. a. Balayage), Locken-Styling, Brautstyling, Gesichts- und Hautbehandlungen (u. a. Green Peel®), Permanent Make-up (PMU) sowie Beauty Drips (NAD+ und Vitamin-Infusionen). Geöffnet Mo/Di 10–19 Uhr, Mi 10–20 Uhr, Do/Fr 10–20 Uhr, Sa 10–18 Uhr, So 11–16:30 Uhr (nur Massagen und Beauty) – donnerstags und freitags bis 20 Uhr buchbar.
+> Feminity Oberkassel ist ein exklusiver Friseur- und Beauty-Salon in Düsseldorf-Oberkassel, Hansaallee 1a, im Me&All Hotel. Betreiberin ist die Groom&Glow UG (haftungsbeschränkt). Der Salon bietet Haarschnitt, Haarfarbe (u. a. Balayage), Locken-Styling, Brautstyling, Gesichts- und Hautbehandlungen (u. a. Green Peel®), Permanent Make-up (PMU) sowie Beauty Drips (NAD+ und Vitamin-Infusionen). Termine werden online gebucht.
 
 ## Eckdaten
 - **Name:** Feminity Oberkassel
@@ -8,7 +8,6 @@
 - **Adresse:** Hansaallee 1a, 40549 Düsseldorf-Oberkassel (im Me&All Hotel)
 - **Telefon:** +49 151 14994870
 - **E-Mail:** termin@feminity-oberkassel.de
-- **Öffnungszeiten:** Mo–Di 10–19 Uhr, Mi 10–20 Uhr, Do–Fr 10–20 Uhr, Sa 10–18 Uhr, So 11–16:30 Uhr oder nach Vereinbarung (nur Massagen und Beauty)
 - **Terminbuchung:** online über Treatwell (Massagen ausschließlich über Treatwell) oder telefonisch
 - **Sprachen:** Deutsch, Englisch
 
@@ -19,7 +18,7 @@
 - **Augenbrauen:** Brow Lamination / Browlifting
 - **Beauty Drips:** NAD+ Infusion, Vitamin- und Aufbau-Infusionen
 - **Laser-Haarentfernung:** Nd:YAG, alle Hauttypen
-- **Massagen:** Aromamassage, Hot-Stone-Massage, Kräuterstempelmassage sowie klassische Formen (Rücken, Nacken/Schultern, Ganzkörper); auch sonntags buchbar
+- **Massagen:** Aromamassage, Hot-Stone-Massage, Kräuterstempelmassage sowie klassische Formen (Rücken, Nacken/Schultern, Ganzkörper)
 
 ## Team
 - **Nicky Rouge** – Master Hair Stylist; Balayage, Color, English Cut, Locken-Styling
@@ -27,7 +26,7 @@
 - **Masseurin** – 16 Jahre Erfahrung, zuvor verantwortlich für den Massagebereich eines 5-Sterne-Hotels in Köln
 
 ## Wichtige Seiten
-- [Startseite](https://feminity-oberkassel.de/): Überblick, Leistungen, Team, Standort, Öffnungszeiten, FAQ
+- [Startseite](https://feminity-oberkassel.de/): Überblick, Leistungen, Team, Standort, FAQ
 - [English version](https://feminity-oberkassel.de/en/): English overview of services
 - [Beauty Drips Düsseldorf](https://feminity-oberkassel.de/beauty-drips-duesseldorf.html): NAD+ & Vitamin-Infusionen
 - [Massagen Düsseldorf-Oberkassel](https://feminity-oberkassel.de/blog/massagen-duesseldorf.html): Aroma-, Hot-Stone- und Kräuterstempelmassage

@@ -514,11 +514,25 @@ gtag('config', 'G-V5ZLVNKNZG');
   </picture>
   <!-- Desktop: 1920×1080 quer, Mobil/Hochkant: 720×1280. Ohne Ton, läuft in Schleife. -->
   <video class="hero-video" autoplay muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1" disablepictureinpicture>
-    <source media="(orientation: portrait)" src="video/hero-720.webm" type="video/webm">
     <source media="(orientation: portrait)" src="video/hero-720.mp4" type="video/mp4">
-    <source src="video/hero-1080.webm" type="video/webm">
+    <source media="(orientation: portrait)" src="video/hero-720.webm" type="video/webm">
     <source src="video/hero-1080.mp4" type="video/mp4">
+    <source src="video/hero-1080.webm" type="video/webm">
   </video>
+  <script>
+  /* MP4 steht vorn: Safari auf dem iPhone wählt sonst WebM (VP9), lädt es
+     aber nicht automatisch. Zusätzlich play() anstoßen; blockiert das Gerät
+     Autoplay (z. B. Stromsparmodus), beim ersten Antippen/Scrollen erneut. */
+  (function(){
+    var v=document.querySelector('.hero-video');
+    if(!v||(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches))return;
+    v.muted=true;v.defaultMuted=true;v.setAttribute('muted','');v.playsInline=true;
+    function go(){var p=v.play();if(p&&p.catch)p.catch(function(){});}
+    go();
+    v.addEventListener('loadedmetadata',go,{once:true});
+    ['touchstart','scroll','click'].forEach(function(e){window.addEventListener(e,go,{once:true,passive:true});});
+  })();
+  </script>
   <div class="hero-content">
     <h1>
       <span class="hero-line1">Haare, Haut &amp; Körper</span>

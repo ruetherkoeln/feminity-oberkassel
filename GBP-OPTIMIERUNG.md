@@ -128,7 +128,7 @@ Fotos sind ein direkter Conversion-Hebel — Profile mit guten Fotos werden deut
 2. **Titelbild (Cover)** — der Salon-Innenraum (`Salon.jpg`) oder ein starkes Team-Foto
 3. **Außenansicht** — Eingang Me and All Hotel / Hansaallee 1a (hilft beim Wiederfinden vor Ort)
 4. **Innenräume** — Behandlungsraum, Friseurbereich, Wartebereich
-5. **Team** — aktuelle Teamfotos, z. B. Nicky, Jacky und das Gruppenbild `Team2026.webp` (Gesichter schaffen Vertrauen)
+5. **Team** — aktuelle Teamfotos, z. B. Nicky, Jacky und das Gruppenbild `Team4.webp` (Gesichter schaffen Vertrauen)
 6. **Behandlungen / Vorher-Nachher** — Balayage, PMU, Green Peel (mit Einverständnis der Kundinnen)
 7. **Produkte** — Kérastase, HH Simonsen, Neovita
 

@@ -298,17 +298,34 @@ gtag('config', 'G-V5ZLVNKNZG');
     <source src="../video/hero-1080.webm" type="video/webm">
   </video>
   <script>
-  /* MP4 steht vorn: Safari auf dem iPhone wählt sonst WebM (VP9), lädt es
-     aber nicht automatisch. Zusätzlich play() anstoßen; blockiert das Gerät
-     Autoplay (z. B. Stromsparmodus), beim ersten Antippen/Scrollen erneut. */
+  /* MP4 steht vorn: Safari auf dem iPhone wählt sonst WebM (VP9).
+     play() wird angestoßen; blockiert das Gerät Autoplay, startet das Video
+     beim ersten Antippen (touchend/click zählen auf iOS als Nutzergeste,
+     touchstart und scroll nicht). Mit #video-debug in der Adresse erscheint
+     eine Diagnose-Anzeige. */
   (function(){
-    var v=document.querySelector('.hero-video');
-    if(!v||(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches))return;
+    var v=document.querySelector('.hero-video'); if(!v)return;
+    var dbg=location.hash.indexOf('video-debug')>-1, log=[];
+    var rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function note(t){log.push(t);}
+    if(dbg){
+      var d=document.createElement('pre');
+      d.style.cssText='position:fixed;left:8px;right:8px;top:80px;z-index:99999;background:rgba(0,0,0,.85);color:#0f0;font:12px/1.4 monospace;padding:10px;white-space:pre-wrap;border-radius:6px';
+      document.body.appendChild(d);
+      setInterval(function(){
+        var c=navigator.connection||{};
+        d.textContent='reduced-motion: '+rm+'\nsrc: '+(v.currentSrc||'-').split('/').pop()+'\npaused: '+v.paused+'  t='+v.currentTime.toFixed(1)+
+          '\nreadyState: '+v.readyState+'  network: '+v.networkState+'  error: '+(v.error?v.error.code:'-')+
+          '\nmuted: '+v.muted+'  display: '+getComputedStyle(v).display+'\nsaveData: '+(c.saveData||'-')+
+          '\n'+navigator.userAgent.replace(/^Mozilla\/5.0 /,'')+'\n--\n'+log.join('\n');
+      },500);
+    }
+    if(rm){note('Bewegung reduzieren aktiv: nur Standbild');return;}
     v.muted=true;v.defaultMuted=true;v.setAttribute('muted','');v.playsInline=true;
-    function go(){var p=v.play();if(p&&p.catch)p.catch(function(){});}
-    go();
-    v.addEventListener('loadedmetadata',go,{once:true});
-    ['touchstart','scroll','click'].forEach(function(e){window.addEventListener(e,go,{once:true,passive:true});});
+    function go(w){var p=v.play();if(p&&p.then)p.then(function(){note(w+': play ok');},function(e){note(w+': '+e.name);});}
+    go('start');
+    v.addEventListener('loadedmetadata',function(){go('metadata');},{once:true});
+    ['touchend','click','keydown'].forEach(function(e){window.addEventListener(e,function(){if(v.paused)go(e);},{once:true,passive:true});});
   })();
   </script>
   <div class="hero-content">

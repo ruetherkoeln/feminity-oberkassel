@@ -143,7 +143,6 @@ nav .cont{max-width:1400px;margin:0 auto;display:flex;justify-content:space-betw
 /* Video beginnt und endet hell (Logo auf Creme) — der Verlauf hält den weißen Text unten lesbar. */
 .hero-full::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(to top,rgba(0,0,0,.68) 0%,rgba(0,0,0,.5) 15%,rgba(0,0,0,.3) 30%,rgba(0,0,0,.12) 45%,rgba(0,0,0,.03) 55%,rgba(0,0,0,0) 65%)}
 .hero-content{text-shadow:0 2px 12px rgba(0,0,0,.55)}
-@media (prefers-reduced-motion:reduce){.hero-video{display:none}}
 .hero-content{position:relative;z-index:2;text-align:center;color:var(--cream);padding:2rem;padding-bottom:4vh;width:100%}
 .hero-logo{max-width:400px;margin:0 auto 1.25rem}
 .hero-content p{margin-bottom:2.5rem;text-shadow:0 2px 10px rgba(0,0,0,.8)}
@@ -298,17 +297,33 @@ gtag('config', 'G-V5ZLVNKNZG');
     <source src="../video/hero-1080.webm" type="video/webm">
   </video>
   <script>
-  /* MP4 steht vorn: Safari auf dem iPhone wählt sonst WebM (VP9), lädt es
-     aber nicht automatisch. Zusätzlich play() anstoßen; blockiert das Gerät
-     Autoplay (z. B. Stromsparmodus), beim ersten Antippen/Scrollen erneut. */
+  /* MP4 steht vorn: Safari auf dem iPhone wählt sonst WebM (VP9).
+     play() wird angestoßen; blockiert das Gerät Autoplay, startet das Video
+     beim ersten Antippen (touchend/click zählen auf iOS als Nutzergeste,
+     touchstart und scroll nicht). Mit #video-debug in der Adresse erscheint
+     eine Diagnose-Anzeige. */
   (function(){
-    var v=document.querySelector('.hero-video');
-    if(!v||(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches))return;
+    var v=document.querySelector('.hero-video'); if(!v)return;
+    var dbg=location.hash.indexOf('video-debug')>-1, log=[];
+    var rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function note(t){log.push(t);}
+    if(dbg){
+      var d=document.createElement('pre');
+      d.style.cssText='position:fixed;left:8px;right:8px;top:80px;z-index:99999;background:rgba(0,0,0,.85);color:#0f0;font:12px/1.4 monospace;padding:10px;white-space:pre-wrap;border-radius:6px';
+      document.body.appendChild(d);
+      setInterval(function(){
+        var c=navigator.connection||{};
+        d.textContent='reduced-motion: '+rm+'\nsrc: '+(v.currentSrc||'-').split('/').pop()+'\npaused: '+v.paused+'  t='+v.currentTime.toFixed(1)+
+          '\nreadyState: '+v.readyState+'  network: '+v.networkState+'  error: '+(v.error?v.error.code:'-')+
+          '\nmuted: '+v.muted+'  display: '+getComputedStyle(v).display+'\nsaveData: '+(c.saveData||'-')+
+          '\n'+navigator.userAgent.replace(/^Mozilla\/5.0 /,'')+'\n--\n'+log.join('\n');
+      },500);
+    }
     v.muted=true;v.defaultMuted=true;v.setAttribute('muted','');v.playsInline=true;
-    function go(){var p=v.play();if(p&&p.catch)p.catch(function(){});}
-    go();
-    v.addEventListener('loadedmetadata',go,{once:true});
-    ['touchstart','scroll','click'].forEach(function(e){window.addEventListener(e,go,{once:true,passive:true});});
+    function go(w){var p=v.play();if(p&&p.then)p.then(function(){note(w+': play ok');},function(e){note(w+': '+e.name);});}
+    go('start');
+    v.addEventListener('loadedmetadata',function(){go('metadata');},{once:true});
+    ['touchend','click','keydown'].forEach(function(e){window.addEventListener(e,function(){if(v.paused)go(e);},{once:true,passive:true});});
   })();
   </script>
   <div class="hero-content">
